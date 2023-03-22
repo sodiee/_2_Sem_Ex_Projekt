@@ -114,18 +114,16 @@ public class RegFadWindow extends Stage {
             dialog.setTitle("Error");
             dialog.setHeaderText("Angiv noget i alle felter");
             dialog.showAndWait();
-            else if (brugt == 0 || nr == 0 || liter == 0) {
+        }else if (brugt == 0 || nr == 0 || liter == 0) {
                 Alert dialog1 = new Alert(Alert.AlertType.INFORMATION);
                 dialog1.setTitle("Error");
                 dialog1.setHeaderText("Brugt, nummer og liter må ikke være 0");
                 dialog1.showAndWait();
             }
+        else{
+            Controller.createFad(leverandør,tidligere,brugt,nr,liter,lager);
         }
 
-        //Controller.createFad(leverandør,tidligere,brugt,nr,liter,lager);
-
     }
-
-
 }
 
