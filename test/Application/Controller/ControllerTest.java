@@ -29,7 +29,7 @@ class ControllerTest {
         //Arrange
 
         //Act
-        Lager lager = new Lager(2, 3, 3, "Sønderhøj 30");
+        Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
 
         //Assert
         Boolean actualBoolean = Storage.getLagerArrayList().contains(lager);
