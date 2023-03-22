@@ -12,10 +12,13 @@ class ControllerTest {
     @Test
     void createFad() {
 
+        //Arrange
         Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
 
+        //Act
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
 
+        //Assert
         Boolean actualBoolean = Storage.getFadArrayList().contains(fad);
         assertTrue(actualBoolean);
     }
