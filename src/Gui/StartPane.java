@@ -65,6 +65,10 @@ public class StartPane extends GridPane {
 
     public void updateControls() {
 
+        Lager lager = lvwLager.getSelectionModel().getSelectedItem();
+        if (lager != null){
+            lvwFad.getItems().setAll(lager.getFade());
+        }
 
     }
 
