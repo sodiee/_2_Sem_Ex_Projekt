@@ -94,5 +94,8 @@ public class regFadWindow extends Stage {
 
 
     }
+
+
+
 }
 
