@@ -37,7 +37,7 @@ public class StartWindow extends Application {
     private void initTabPane(TabPane tabPane) {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        Tab tabStart = new Tab("Konference");
+        Tab tabStart = new Tab("Lager Status");
         tabPane.getTabs().add(tabStart);
 
         StartPane startPane = new StartPane();

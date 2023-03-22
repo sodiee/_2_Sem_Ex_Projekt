@@ -22,4 +22,8 @@ public class Lager {
             fadArrayList.add(fad);
         }
     }
+
+    public String toString(){
+        return adresse;
+    }
 }
