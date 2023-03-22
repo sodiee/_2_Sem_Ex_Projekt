@@ -103,21 +103,26 @@ public class RegFadWindow extends Stage {
         int nr = Integer.parseInt(txfNr.getText());
         int liter = Integer.parseInt(txfLiter.getText());
         Lager lager = cbbLager.getSelectionModel().getSelectedItem();
-        if (leverandør.length() == 0 || tidligere.length() == 0 || txfBrugt.getText().length() == 0 || txfNr.getText().length() == 0 || txfLiter.getText().length() ==0) {
+        if (leverandør.length() == 0 || tidligere.length() == 0 || txfBrugt.getText().length() == 0 || txfNr.getText().length() == 0 || txfLiter.getText().length() == 0) {
             Alert dialog = new Alert(Alert.AlertType.INFORMATION);
             dialog.setTitle("Error");
             dialog.setHeaderText("Angiv noget i alle felter");
             dialog.showAndWait();
-        }else if (brugt == 0 || nr == 0 || liter == 0) {
-                Alert dialog1 = new Alert(Alert.AlertType.INFORMATION);
-                dialog1.setTitle("Error");
-                dialog1.setHeaderText("Brugt, nummer og liter må ikke være 0");
-                dialog1.showAndWait();
-            }
-        else{
-            Controller.createFad(leverandør,tidligere,brugt,nr,liter,lager);
+        } else if (brugt == 0 || nr == 0 || liter == 0) {
+            Alert dialog1 = new Alert(Alert.AlertType.INFORMATION);
+            dialog1.setTitle("Error");
+            dialog1.setHeaderText("Brugt, nummer og liter må ikke være 0");
+            dialog1.showAndWait();
+        } else if (lager == null) {
+            Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+            dialog.setTitle("Error");
+            dialog.setHeaderText("Du skal vælge et lager");
+            dialog.showAndWait();
+        } else {
+            Controller.createFad(leverandør, tidligere, brugt, nr, liter, lager);
+            hide();
         }
-        hide();
+
 
     }
 }
