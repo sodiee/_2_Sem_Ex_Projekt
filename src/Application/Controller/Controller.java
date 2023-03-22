@@ -12,7 +12,7 @@ public class Controller {
         //TODO: tjek om det er sådan her man sørger for at lageret ikke er null
 
         if (lager == null){
-            System.out.println("Fejl: Lager er null");
+            throw new IllegalArgumentException("Lager må ikke være null");
         }
         else{
             Fad fad = new Fad(leverandør, tidligereIndhold, antalGangeBrugt, nummer, størrelseLiter, lager);
@@ -20,7 +20,6 @@ public class Controller {
             return fad;
         }
 
-        return null;
     }
 
     public static Lager createLager(int reoler, int hylder, int pladsPåHylde, String adresse) {
