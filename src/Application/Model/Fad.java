@@ -22,4 +22,8 @@ public class Fad {
         lager.addToList(this);
     }
 
+    public String toString(){
+        return "Nr:" + nummer + " " + " fra " + leverandør;
+    }
+
 }
