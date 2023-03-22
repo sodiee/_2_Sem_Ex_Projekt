@@ -3,6 +3,7 @@ package Gui;
 import Application.Model.Fad;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -18,6 +19,8 @@ public class regFadWindow extends Stage {
     private TextField txfLev, txfTidligere, txfBrugt, txfNr, txfLiter, txfLager;
 
     private Label lblLev, lblTidligere, lblBrugt, lblNr, lblLiter, lblLager;
+
+    private Button okBut, canBut;
     public regFadWindow(String title, Fad fad) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -69,6 +72,25 @@ public class regFadWindow extends Stage {
         txfNr = new TextField();
         pane.add(txfNr,1,3);
 
+        lblLiter= new Label("Antal Liter");
+        pane.add(lblNr,4,0);
+
+        txfLiter = new TextField();
+        pane.add(txfNr,1,4);
+
+        lblLager = new Label("Lager");
+        pane.add(lblLager,5,0);
+
+        txfLager = new TextField();
+        pane.add(txfLager,1,5);
+
+        okBut = new Button("Ok");
+        pane.add(okBut,0,6);
+
+
+
+        canBut = new Button("Cancel");
+        pane.add(canBut,1,6);
 
 
     }
