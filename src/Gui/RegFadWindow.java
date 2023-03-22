@@ -1,6 +1,5 @@
 package Gui;
 
-import Application.Controller.Controller;
 import Application.Model.Fad;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -14,7 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-public class regFadWindow extends Stage {
+public class RegFadWindow extends Stage {
 
     private Fad fad;
 
@@ -23,14 +22,14 @@ public class regFadWindow extends Stage {
     private Label lblLev, lblTidligere, lblBrugt, lblNr, lblLiter, lblLager;
 
     private Button okBut, canBut;
-    public regFadWindow(String title, Fad fad) {
+    public RegFadWindow() {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
 
         this.fad = fad;
 
-        this.setTitle(title);
+        this.setTitle("Opret fad");
         GridPane pane = new GridPane();
         this.initContent(pane);
 
@@ -38,10 +37,6 @@ public class regFadWindow extends Stage {
         this.setScene(scene);
 
         this.setHeight(260);
-    }
-
-    public regFadWindow(String title) {
-        this(title, null);
     }
 
     private void initContent(GridPane pane) {
@@ -115,7 +110,7 @@ public class regFadWindow extends Stage {
             dialog.showAndWait();
         }
 
-        Controller.createFad(leverandør,tidligere,brugt,nr,liter,)
+
 
     }
 
