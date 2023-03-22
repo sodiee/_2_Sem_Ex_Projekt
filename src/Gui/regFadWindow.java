@@ -4,6 +4,7 @@ import Application.Controller.Controller;
 import Application.Model.Fad;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -87,18 +88,38 @@ public class regFadWindow extends Stage {
 
         okBut = new Button("Ok");
         pane.add(okBut,0,6);
-
+        okBut.setOnAction(event -> this.okAction());
 
 
         canBut = new Button("Cancel");
         pane.add(canBut,1,6);
+        canBut.setOnAction(event -> this.canAction());
 
 
     }
 
-    private void registerFad() {
-        Controller.createFad(txfLev, txfTidligere, txfBrugt, txfNr, txfLiter, )
+    private void canAction(){
+        this.hide();
     }
+
+    private void okAction(){
+        String leverandør = txfLev.getText().trim();
+        String tidligere = txfTidligere.getText().trim();
+        String brugt = txfBrugt.getText().trim();
+        String nr = txfNr.getText().trim();
+        String liter = txfNr.getText().trim();
+        if(leverandør.length() == 0 || tidligere.length() == 0 || brugt.length() == 0 || nr.length() == 0 || liter.length() == 0){
+            Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+            dialog.setTitle("Error");
+            dialog.setHeaderText("Angiv noget i alle felter");
+            dialog.showAndWait();
+        }
+
+        Controller.createFad(leverandør,tidligere,brugt,nr,liter,)
+
+    }
+
+
 
 
 
