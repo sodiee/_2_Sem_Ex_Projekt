@@ -8,9 +8,19 @@ import java.util.ArrayList;
 
 public class Controller {
     public static Fad createFad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
-        Fad fad = new Fad(leverandør, tidligereIndhold, antalGangeBrugt, nummer, størrelseLiter, lager);
-        Storage.addFad(fad);
-        return fad;
+
+        //TODO: tjek om det er sådan her man sørger for at lageret ikke er null
+
+        if (lager == null){
+            System.out.println("Fejl: Lager er null");
+        }
+        else{
+            Fad fad = new Fad(leverandør, tidligereIndhold, antalGangeBrugt, nummer, størrelseLiter, lager);
+            Storage.addFad(fad);
+            return fad;
+        }
+
+        return null;
     }
 
     public static Lager createLager(int reoler, int hylder, int pladsPåHylde, String adresse) {
