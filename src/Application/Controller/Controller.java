@@ -4,6 +4,8 @@ import Application.Model.Fad;
 import Application.Model.Lager;
 import Storage.Storage;
 
+import java.util.ArrayList;
+
 public class Controller {
     public static Fad createFad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
         Fad fad = new Fad(leverandør, tidligereIndhold, antalGangeBrugt, nummer, størrelseLiter, lager);
@@ -15,6 +17,14 @@ public class Controller {
         Lager lager = new Lager(reoler, hylder, pladsPåHylde, adresse);
         Storage.addLager(lager);
         return lager;
+    }
+
+    public static ArrayList<Fad> getFad(){
+        return Storage.getFadArrayList();
+    }
+
+    public static ArrayList<Lager> getLager(){
+        return Storage.getLagerArrayList();
     }
 
     public static void initStorage() {
