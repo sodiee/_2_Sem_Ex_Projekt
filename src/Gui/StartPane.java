@@ -35,7 +35,6 @@ public class StartPane extends GridPane {
 
         lvwFad = new ListView<>();
         this.add(lvwFad, 1, 1);
-        lvwFad.getItems().setAll(Controller.getFad());
         ChangeListener<Fad> listener1 = (ov, oldCompny, newCompany) -> this.selectedFadChanged();
         lvwFad.getSelectionModel().selectedItemProperty().addListener(listener1);
 

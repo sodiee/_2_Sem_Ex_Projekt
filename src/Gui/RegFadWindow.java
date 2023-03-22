@@ -117,6 +117,7 @@ public class RegFadWindow extends Stage {
         else{
             Controller.createFad(leverandør,tidligere,brugt,nr,liter,lager);
         }
+        hide();
 
     }
 }
