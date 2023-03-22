@@ -58,9 +58,22 @@ public class regFadWindow extends Stage {
         pane.add(txfTidligere,1,1);
 
         lblBrugt = new Label("Antal gange brugt");
+        pane.add(lblBrugt,2,0);
+
+        txfBrugt = new TextField();
+        pane.add(txfBrugt,1,2);
+
+        lblNr = new Label("Nummer");
+        pane.add(lblNr,3,0);
+
+        txfNr = new TextField();
+        pane.add(txfNr,1,3);
 
 
 
     }
+
+
+
 }
 
