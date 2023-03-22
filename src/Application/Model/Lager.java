@@ -21,5 +21,6 @@ public class Lager {
         if (!fadArrayList.contains(fad)) {
             fadArrayList.add(fad);
         }
+        fad.setLager(this);
     }
 }
