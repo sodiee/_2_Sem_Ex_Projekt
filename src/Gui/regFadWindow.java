@@ -66,6 +66,9 @@ public class regFadWindow extends Stage {
         lblNr = new Label("Nummer");
         pane.add(lblNr,3,0);
 
+        txfNr = new TextField();
+        pane.add(txfNr,1,3);
+
 
 
     }
