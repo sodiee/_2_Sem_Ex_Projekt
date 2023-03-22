@@ -2,12 +2,10 @@ package Gui;
 
 import Application.Controller.Controller;
 import Application.Model.Fad;
+import Application.Model.Lager;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,6 +21,8 @@ public class regFadWindow extends Stage {
     private Label lblLev, lblTidligere, lblBrugt, lblNr, lblLiter, lblLager;
 
     private Button okBut, canBut;
+
+    private ComboBox<Lager> cbbLager;
     public regFadWindow(String title, Fad fad) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -95,6 +95,10 @@ public class regFadWindow extends Stage {
         pane.add(canBut,1,6);
         canBut.setOnAction(event -> this.canAction());
 
+        cbbLager = new ComboBox<>();
+        pane.add(cbbLager,1,5);
+        cbbLager.getItems().addAll(Controller.getLager());
+
 
     }
 
@@ -108,6 +112,7 @@ public class regFadWindow extends Stage {
         String brugt = txfBrugt.getText().trim();
         String nr = txfNr.getText().trim();
         String liter = txfNr.getText().trim();
+        Lager lager = cbbLager.getSelectionModel().getSelectedItem();
         if(leverandør.length() == 0 || tidligere.length() == 0 || brugt.length() == 0 || nr.length() == 0 || liter.length() == 0){
             Alert dialog = new Alert(Alert.AlertType.INFORMATION);
             dialog.setTitle("Error");
@@ -115,7 +120,7 @@ public class regFadWindow extends Stage {
             dialog.showAndWait();
         }
 
-        Controller.createFad(leverandør,tidligere,brugt,nr,liter,)
+        //Controller.createFad(leverandør,tidligere,brugt,nr,liter,)
 
     }
 
