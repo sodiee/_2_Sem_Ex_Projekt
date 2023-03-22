@@ -1,5 +1,6 @@
 package Gui;
 
+import Application.Controller.Controller;
 import Application.Model.Fad;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -93,6 +94,10 @@ public class regFadWindow extends Stage {
         pane.add(canBut,1,6);
 
 
+    }
+
+    private void registerFad() {
+        Controller.createFad(txfLev, txfTidligere, txfBrugt, txfNr, txfLiter, )
     }
 
 
