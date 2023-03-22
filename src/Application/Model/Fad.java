@@ -21,4 +21,5 @@ public class Fad {
         this.lager = lager;
         lager.addToList(this);
     }
+
 }
