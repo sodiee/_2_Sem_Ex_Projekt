@@ -1,7 +1,6 @@
 package Gui;
 
 import Application.Controller.Controller;
-import Application.Model.Fad;
 import Application.Model.Lager;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -14,9 +13,7 @@ import javafx.stage.StageStyle;
 
 public class RegFadWindow extends Stage {
 
-    private Fad fad;
-
-    private TextField txfLev, txfTidligere, txfBrugt, txfNr, txfLiter, txfLager;
+    private TextField txfLev, txfTidligere, txfBrugt, txfNr, txfLiter;
 
     private Label lblLev, lblTidligere, lblBrugt, lblNr, lblLiter, lblLager;
 
@@ -37,7 +34,7 @@ public class RegFadWindow extends Stage {
         Scene scene = new Scene(pane);
         this.setScene(scene);
 
-        this.setHeight(260);
+        this.setHeight(300);
     }
 
     private void initContent(GridPane pane) {
@@ -53,34 +50,31 @@ public class RegFadWindow extends Stage {
         pane.add(txfLev, 1, 0);
 
         lblTidligere = new Label("Tidligere indhold");
-        pane.add(lblTidligere, 1, 0);
+        pane.add(lblTidligere, 0, 1);
 
         txfTidligere = new TextField();
         pane.add(txfTidligere, 1, 1);
 
         lblBrugt = new Label("Antal gange brugt");
-        pane.add(lblBrugt, 2, 0);
+        pane.add(lblBrugt, 0, 2);
 
         txfBrugt = new TextField();
         pane.add(txfBrugt, 1, 2);
 
         lblNr = new Label("Nummer");
-        pane.add(lblNr, 3, 0);
+        pane.add(lblNr, 0, 3);
 
         txfNr = new TextField();
         pane.add(txfNr, 1, 3);
 
         lblLiter = new Label("Antal Liter");
-        pane.add(lblNr, 4, 0);
+        pane.add(lblLiter, 0, 4);
 
         txfLiter = new TextField();
-        pane.add(txfNr, 1, 4);
+        pane.add(txfLiter, 1, 4);
 
         lblLager = new Label("Lager");
-        pane.add(lblLager, 5, 0);
-
-        txfLager = new TextField();
-        pane.add(txfLager, 1, 5);
+        pane.add(lblLager, 0, 5);
 
         okBut = new Button("Ok");
         pane.add(okBut, 0, 6);
@@ -109,7 +103,7 @@ public class RegFadWindow extends Stage {
         int nr = Integer.parseInt(txfNr.getText());
         int liter = Integer.parseInt(txfLiter.getText());
         Lager lager = cbbLager.getSelectionModel().getSelectedItem();
-        if (leverandør.length() == 0 || tidligere.length() == 0) {
+        if (leverandør.length() == 0 || tidligere.length() == 0 || txfBrugt.getText().length() == 0 || txfNr.getText().length() == 0 || txfLiter.getText().length() ==0) {
             Alert dialog = new Alert(Alert.AlertType.INFORMATION);
             dialog.setTitle("Error");
             dialog.setHeaderText("Angiv noget i alle felter");
