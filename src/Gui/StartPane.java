@@ -59,7 +59,7 @@ public class StartPane extends GridPane {
     }
 
     public void regFadAction() {
-        RegFadWindow regFadWindow = new RegFadWindow();
+        RegFadWindow regFadWindow = new RegFadWindow("Opret Fad");
         regFadWindow.showAndWait();
     }
 
