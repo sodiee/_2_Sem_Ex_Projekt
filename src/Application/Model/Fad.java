@@ -8,8 +8,6 @@ public class Fad {
     private int antalGangeBrugt;
     private int nummer;
     private int størrelseLiter;
-
-    private int literOptaget;
     private Lager lager;
 
     private Destillat destillat;
@@ -29,12 +27,29 @@ public class Fad {
         lager.addToList(this);
     }
 
-    public void addLiterTofad(int liter){
-        if(this.literOptaget + liter > størrelseLiter){
-            literOptaget += liter;
+    public void setDestillat(Destillat destillat){
+        this.destillat = destillat;
+        destillat.addFad(this);
+    }
+
+    public void addDestilatTofad(Destillat destillat){
+        if(!(destillat == null)){
+            setDestillat(destillat);
         }
         else{
             System.out.println("Der er ikke nok plads på fadet");
+        }
+    }
+
+    public Destillat getDestillat(){
+        return destillat;
+    }
+
+    public void removeDestillat(Destillat destillat, int nr){
+        if(this.getDestillat() == destillat){
+            tidligereDestillater.put(nr, destillat);
+            this.destillat = null;
+
         }
     }
 

@@ -54,9 +54,10 @@ public class Destillat {
     }
 
     public void hældDestillatPåfad(Fad fad){
+        int temporary = liter - fad.getStørrelseLiter();
         while(liter > 0) {
             addFad(fad);
-            fad.addLiterTofad(liter);
+            fad.addDestilatTofad(this);
             liter -= fad.getStørrelseLiter();
         }
     }
