@@ -94,7 +94,7 @@ public class DestillatPane extends GridPane {
         vbxInfo.getChildren().add(lblIsDone);
         vbxInfo.getChildren().add(lblIsDone2);
 
-        lblMedarbejder2.setFont(Font.font("Verdana", FontWeight.BOLD, 70));
+        lblMedarbejder2.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 
 
 
