@@ -68,6 +68,42 @@ public class Destillat {
         return fade;
     }
 
+    public String getMedarbejder() {
+        return medarbejder;
+    }
+
+    public int getLiter() {
+        return liter;
+    }
+
+    public double getAlkoholProcent() {
+        return alkoholProcent;
+    }
+
+    public LocalDate getStartDato() {
+        return startDato;
+    }
+
+    public LocalDate getSlutDato() {
+        return slutDato;
+    }
+
+    public String getKornSort() {
+        return kornSort;
+    }
+
+    public String getRygeMateriale() {
+        return rygeMateriale;
+    }
+
+    public String getBeskrivelse() {
+        return beskrivelse;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
     public String toString(){
         return beskrivelse;
     }
