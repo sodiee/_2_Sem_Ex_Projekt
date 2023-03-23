@@ -1,5 +1,7 @@
 package Application.Model;
 
+import java.util.HashMap;
+
 public class Fad {
     private String leverandør;
     private String tidligereIndhold;
@@ -7,6 +9,9 @@ public class Fad {
     private int nummer;
     private int størrelseLiter;
     private Lager lager;
+
+    private Destillat destillat;
+    private HashMap<Integer, Destillat> tidligereDestillater;
 
     public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
         this.leverandør = leverandør;
@@ -22,8 +27,35 @@ public class Fad {
         lager.addToList(this);
     }
 
-    public String toString(){
-        return "Nr:" + nummer + " " + " fra " + leverandør;
+    public void setDestillat(Destillat destillat) {
+        this.destillat = destillat;
+        destillat.addFad(this);
     }
 
+    public void addDestilatTofad(Destillat destillat) {
+        if (!(destillat == null)) {
+            setDestillat(destillat);
+        } else {
+            System.out.println("Der er ikke nok plads på fadet");
+        }
+    }
+
+    public Destillat getDestillat() {
+        return destillat;
+    }
+
+    public void removeDestillat(Destillat destillat, int nr) {
+        if (this.getDestillat() == destillat) {
+            tidligereDestillater.put(nr, destillat);
+            this.destillat = null;
+        }
+    }
+
+    public int getStørrelseLiter() {
+        return størrelseLiter;
+    }
+
+    public String toString() {
+        return "Nr:" + nummer + " " + " fra " + leverandør;
+    }
 }

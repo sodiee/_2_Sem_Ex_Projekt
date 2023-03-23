@@ -23,11 +23,11 @@ public class Lager {
         }
     }
 
-    public ArrayList<Fad> getFade(){
+    public ArrayList<Fad> getFade() {
         return fadArrayList;
     }
 
-    public String toString(){
+    public String toString() {
         return adresse;
     }
 }
