@@ -1,5 +1,7 @@
 package Application.Model;
 
+import java.util.HashMap;
+
 public class Fad {
     private String leverandør;
     private String tidligereIndhold;
@@ -9,6 +11,9 @@ public class Fad {
 
     private int literOptaget;
     private Lager lager;
+
+    private Destillat destillat;
+    private HashMap<Integer, Destillat> tidligereDestillater;
 
     public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
         this.leverandør = leverandør;

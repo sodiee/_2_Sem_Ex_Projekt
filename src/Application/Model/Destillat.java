@@ -50,6 +50,10 @@ public class Destillat {
 
     public void færdigørDestillat(Fad fad){
         isDone = true;
+        hældDestillatPåfad(fad);
+    }
+
+    public void hældDestillatPåfad(Fad fad){
         while(liter > 0) {
             addFad(fad);
             fad.addLiterTofad(liter);
