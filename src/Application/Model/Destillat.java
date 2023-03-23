@@ -48,9 +48,10 @@ public class Destillat {
         fade.add(fad);
     }}
 
-    public void færdigørDestillat(Fad fad){
+    public Destillat færdigørDestillat(Fad fad){
         isDone = true;
         hældDestillatPåfad(fad);
+        return this;
     }
 
     public void hældDestillatPåfad(Fad fad){

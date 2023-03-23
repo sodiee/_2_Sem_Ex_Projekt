@@ -49,7 +49,6 @@ public class Fad {
         if(this.getDestillat() == destillat){
             tidligereDestillater.put(nr, destillat);
             this.destillat = null;
-
         }
     }
 
