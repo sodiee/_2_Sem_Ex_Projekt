@@ -34,15 +34,23 @@ public class Controller {
         return lager;
     }
 
-    public static Destillat createDestillat(int destillatNr ,String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone){
-        Destillat destillat = new Destillat(destillatNr ,medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse, isDone);
-        Storage.addDestillat(destillat);
-        return destillat;
+    public static Destillat createDestillat(int destillatNr ,String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse){
+        if (liter == 0 || liter < 0 || alkoholProcent < 0 || startDato.isAfter(slutDato)) {
+            throw new IllegalArgumentException("Ugyldig data");
+        } else {
+            Destillat destillat = new Destillat(destillatNr, medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse);
+            Storage.addDestillat(destillat);
+            return destillat;
+        }
     }
-    public static Destillat createDestillatRøg(int destillatNr, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone){
-        Destillat destillat = new Destillat(destillatNr ,medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse, isDone);
-        Storage.addDestillat(destillat);
-        return destillat;
+    public static Destillat createDestillatRøg(int destillatNr, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse){
+        if (liter == 0 || liter < 0 || alkoholProcent < 0 || startDato.isAfter(slutDato)) {
+            throw new IllegalArgumentException("Ugyldig data");
+        } else {
+            Destillat destillat = new Destillat(destillatNr, medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse);
+            Storage.addDestillat(destillat);
+            return destillat;
+        }
     }
 
 
@@ -70,7 +78,7 @@ public class Controller {
         Fad fad2 = createFad("Sherry distilleri, Madrid", "Sherry", 2, 2, 95, sønderhøj);
         Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54, 50, sørenFrichsVej);
 
-        Destillat destillat = createDestillat(1,"John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever", true);
-        Destillat destillat2 = createDestillatRøg(2,"Bingo Dorte", 600, 60, LocalDate.of(2021, 2, 14), LocalDate.of(2022, 1, 19), "Byg", "Strå", "I can't believe its not whiskey", false);
+        Destillat destillat = createDestillat(1,"John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever");
+        Destillat destillat2 = createDestillatRøg(2,"Bingo Dorte", 600, 60, LocalDate.of(2021, 2, 14), LocalDate.of(2022, 1, 19), "Byg", "Strå", "I can't believe its not whiskey");
     }
 }
