@@ -20,6 +20,7 @@ public class Destillat {
 
     //Uden røg
     public Destillat(int destillatNr ,String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone) {
+        this.destillatNr = destillatNr;
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
@@ -32,6 +33,7 @@ public class Destillat {
 
     //Med røg
     public Destillat(int destillatNr, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone) {
+        this.destillatNr = destillatNr;
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
