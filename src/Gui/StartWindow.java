@@ -37,12 +37,20 @@ public class StartWindow extends Application {
     private void initTabPane(TabPane tabPane) {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
+        //StartPane
         Tab tabStart = new Tab("Lager Status");
         tabPane.getTabs().add(tabStart);
-
         StartPane startPane = new StartPane();
         tabStart.setContent(startPane);
         tabStart.setOnSelectionChanged(event -> startPane.updateControls());
+
+        //DestillatPane
+        Tab tabDestillat = new Tab("Destilleringer");
+        tabPane.getTabs().add(tabDestillat);
+        DestillatPane destillatPane = new DestillatPane();
+        tabDestillat.setContent(destillatPane);
+        tabDestillat.setOnSelectionChanged(event -> destillatPane.updateControls());
+
 
     }
 }
