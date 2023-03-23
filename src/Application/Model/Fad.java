@@ -27,37 +27,35 @@ public class Fad {
         lager.addToList(this);
     }
 
-    public void setDestillat(Destillat destillat){
+    public void setDestillat(Destillat destillat) {
         this.destillat = destillat;
         destillat.addFad(this);
     }
 
-    public void addDestilatTofad(Destillat destillat){
-        if(!(destillat == null)){
+    public void addDestilatTofad(Destillat destillat) {
+        if (!(destillat == null)) {
             setDestillat(destillat);
-        }
-        else{
+        } else {
             System.out.println("Der er ikke nok plads på fadet");
         }
     }
 
-    public Destillat getDestillat(){
+    public Destillat getDestillat() {
         return destillat;
     }
 
-    public void removeDestillat(Destillat destillat, int nr){
-        if(this.getDestillat() == destillat){
+    public void removeDestillat(Destillat destillat, int nr) {
+        if (this.getDestillat() == destillat) {
             tidligereDestillater.put(nr, destillat);
             this.destillat = null;
         }
     }
 
-    public int getStørrelseLiter(){
+    public int getStørrelseLiter() {
         return størrelseLiter;
     }
 
-    public String toString(){
+    public String toString() {
         return "Nr:" + nummer + " " + " fra " + leverandør;
     }
-
 }
