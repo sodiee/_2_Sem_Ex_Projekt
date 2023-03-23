@@ -68,6 +68,9 @@ public class Destillat {
         return fade;
     }
 
+    public int getDestillatNr(){
+        return destillatNr;
+    }
     public String getMedarbejder() {
         return medarbejder;
     }
