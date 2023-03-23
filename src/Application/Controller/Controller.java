@@ -34,13 +34,13 @@ public class Controller {
         return lager;
     }
 
-    public static Destillat createDestillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone){
-        Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse, isDone);
+    public static Destillat createDestillat(int destillatNr ,String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone){
+        Destillat destillat = new Destillat(destillatNr ,medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse, isDone);
         Storage.addDestillat(destillat);
         return destillat;
     }
-    public static Destillat createDestillatRøg(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone){
-        Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse, isDone);
+    public static Destillat createDestillatRøg(int destillatNr, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone){
+        Destillat destillat = new Destillat(destillatNr ,medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse, isDone);
         Storage.addDestillat(destillat);
         return destillat;
     }

@@ -6,6 +6,8 @@ public class Fad {
     private int antalGangeBrugt;
     private int nummer;
     private int størrelseLiter;
+
+    private int literOptaget;
     private Lager lager;
 
     public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
@@ -20,6 +22,19 @@ public class Fad {
     public void setLager(Lager lager) {
         this.lager = lager;
         lager.addToList(this);
+    }
+
+    public void addLiterTofad(int liter){
+        if(this.literOptaget + liter > størrelseLiter){
+            literOptaget += liter;
+        }
+        else{
+            System.out.println("Der er ikke nok plads på fadet");
+        }
+    }
+
+    public int getStørrelseLiter(){
+        return størrelseLiter;
     }
 
     public String toString(){

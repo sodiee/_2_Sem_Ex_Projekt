@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Destillat {
 
+    private int destillatNr;
     private String medarbejder;
     private int liter;
     private double alkoholProcent;
@@ -14,11 +15,11 @@ public class Destillat {
     private String kornSort;
     private String rygeMateriale;
     private String beskrivelse;
-    private boolean isDone;
+    private boolean isDone = false;
     private ArrayList<Fad> fade;
 
     //Uden røg
-    public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone) {
+    public Destillat(int destillatNr ,String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
@@ -30,7 +31,7 @@ public class Destillat {
     }
 
     //Med røg
-    public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone) {
+    public Destillat(int destillatNr, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
@@ -42,8 +43,18 @@ public class Destillat {
         this.isDone = isDone;
     }
 
-    public void færdigørDestillat(){
+    public void addFad(Fad fad){
+        if(!fade.contains(fad)){
+        fade.add(fad);
+    }}
+
+    public void færdigørDestillat(Fad fad){
         isDone = true;
+        while(liter > 0) {
+            addFad(fad);
+            fad.addLiterTofad(liter);
+            liter -= fad.getStørrelseLiter();
+        }
     }
 
     public ArrayList<Fad> getFade() {
