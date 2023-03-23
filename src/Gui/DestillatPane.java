@@ -130,7 +130,6 @@ public class DestillatPane extends GridPane {
             lblRygemateriale2.setText(destillat.getRygeMateriale());
             lblBeskrivelse2.setText(destillat.getBeskrivelse());
             lblIsDone2.setText(String.valueOf(destillat.isDone()));
-
         }
     }
 
@@ -138,15 +137,20 @@ public class DestillatPane extends GridPane {
     //buttonAction
     private void btnOpretAction(){
 
-        //showandwait
+        DestillatOpretWindow destillatOpretWindow = new DestillatOpretWindow();
+        destillatOpretWindow.showAndWait();
         lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
     private void btnRedigerAction(){
 
-        //showandwait
+        Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
+        DestillatRedigerWindow destillatRedigerWindow = new DestillatRedigerWindow(destillat);
+        destillatRedigerWindow.showAndWait();
         lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
     private void btnSletAction(){
-
+        //Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
+        //TODO: kald på en slet-distillering funktion i controlleren
+        lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
 }

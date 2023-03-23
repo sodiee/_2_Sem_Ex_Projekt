@@ -10,6 +10,7 @@ public class Storage {
     private static ArrayList<Fad> fadArrayList = new ArrayList<>();
     private static ArrayList<Lager> lagerArrayList = new ArrayList<>();
     private static ArrayList<Destillat> destillatArrayList = new ArrayList<>();
+    private static int destillatTæller;
     //________________________________________________________________________
 
     public static void addFad(Fad fad) {
@@ -34,4 +35,8 @@ public class Storage {
 
     public static void addDestillat(Destillat destillat){destillatArrayList.add(destillat);}
     public static ArrayList<Destillat> getDestillatArrayList(){return destillatArrayList;}
+
+    public static int getDestillatTæller(){return destillatTæller;}
+
+    //________________________________________________________________________
 }
