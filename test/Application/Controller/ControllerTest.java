@@ -48,4 +48,7 @@ class ControllerTest {
         Boolean actualBoolean = Storage.getLagerArrayList().contains(lager);
         assertTrue(actualBoolean);
     }
+
+    @Test
+    void createDestillat()
 }

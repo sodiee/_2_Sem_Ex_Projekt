@@ -31,7 +31,7 @@ public class DestillatPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-        lblDestilleringer = new Label();
+        lblDestilleringer = new Label("Destilleringer");
         this.add(lblDestilleringer, 0, 0);
 
         lvwDestilleringer = new ListView();
@@ -49,14 +49,14 @@ public class DestillatPane extends GridPane {
         btnSletDestillering.setOnAction(event -> btnSletAction());
 
         HBox hbxButtons = new HBox(5);
-        this.add(hbxButtons, 0, 2);
+        this.add(hbxButtons, 0, 3);
         hbxButtons.getChildren().add(btnOpretDestillering);
         hbxButtons.getChildren().add(btnRedigerDestillering);
         hbxButtons.getChildren().add(btnSletDestillering);
 
         //Info VBox
         VBox vbxInfo = new VBox(5);
-        this.add(vbxInfo, 1, 0);
+        this.add(vbxInfo, 1, 1);
         lblMedarbejder = new Label("Medarbejder");
         lblMedarbejder2 = new Label();
         lblLiter = new Label("Liter");
