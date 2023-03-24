@@ -1,5 +1,6 @@
 package Application.Model;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Fad {
@@ -9,7 +10,7 @@ public class Fad {
     private int nummer;
     private int størrelseLiter;
     private Lager lager;
-    private int age;
+    private int alder;
     private Destillat destillat;
     private HashMap<Integer, Destillat> tidligereDestillater;
 
@@ -19,8 +20,49 @@ public class Fad {
         this.antalGangeBrugt = antalGangeBrugt;
         this.nummer = nummer;
         this.størrelseLiter = størrelseLiter;
+        this.tidligereDestillater = new HashMap<>();
         setLager(lager);
-        age = 0;
+        alder = 0;
+    }
+
+    public double beregnAngelShare(Destillat destillat) {
+        double angelShareProcent = 0;
+        double angelShareDel = 0;
+        if (alder == 0) {
+            angelShareProcent = 0.02;
+            angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+            return angelShareDel;
+        } else if (alder < 5) {
+            angelShareProcent = 0.02;
+            for (int i = 0; i < alder; i++) {
+                angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+            }
+        } else if (alder >= 5 && alder < 8) {
+            angelShareProcent = 0.03;
+            for (int i = 0; i < alder; i++) {
+                angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+            }
+        } else if (alder >= 8 && alder < 12) {
+            angelShareProcent = 0.04;
+            for (int i = 0; i < alder; i++) {
+                angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+            }
+        } else if (alder >= 12) {
+            angelShareProcent = 0.05;
+            for (int i = 0; i < alder; i++) {
+                angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+            }
+            return angelShareDel;
+        }
+        return angelShareDel;
+    }
+
+    public int getAlder() {
+        return alder;
+    }
+
+    public void setAlder(int alder) {
+        this.alder = alder;
     }
 
     public void setLager(Lager lager) {
@@ -36,6 +78,7 @@ public class Fad {
     public void addDestilatTofad(Destillat destillat) {
         if (!(destillat == null)) {
             setDestillat(destillat);
+            antalGangeBrugt++;
         } else {
             System.out.println("Der er ikke nok plads på fadet");
         }
@@ -49,6 +92,7 @@ public class Fad {
         if (this.getDestillat() == destillat) {
             tidligereDestillater.put(nr, destillat);
             this.destillat = null;
+            alder = destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
         }
     }
 
