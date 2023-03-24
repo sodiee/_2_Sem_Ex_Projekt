@@ -25,36 +25,55 @@ public class Fad {
         alder = 0;
     }
 
+    /**
+     * Metode udregnet for, at angelShare delen i whisky brygning stiger hvert år. :)
+     * @param destillat
+     * @return
+     */
     public double beregnAngelShare(Destillat destillat) {
+        double tempLiter = destillat.getLiterFraStart();
+        double tempAS = 0;
         double angelShareProcent = 0;
-        double angelShareDel = 0;
+        double angelShareDelTemp = 0;
+        double angelShareDelTotal = 0;
         if (alder == 0) {
             angelShareProcent = 0.02;
-            angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
-            return angelShareDel;
+            angelShareDelTemp += destillat.getLiterFraStart() * angelShareProcent;
+            return angelShareDelTemp;
         } else if (alder < 5) {
             angelShareProcent = 0.02;
             for (int i = 0; i < alder; i++) {
-                angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+                angelShareDelTemp = tempLiter * angelShareProcent;
+                angelShareDelTotal += angelShareDelTemp;
+                tempAS = angelShareDelTemp;
+                tempLiter = tempLiter - tempAS;
             }
         } else if (alder >= 5 && alder < 8) {
             angelShareProcent = 0.03;
             for (int i = 0; i < alder; i++) {
-                angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+                angelShareDelTemp = tempLiter * angelShareProcent;
+                angelShareDelTotal += angelShareDelTemp;
+                tempAS = angelShareDelTemp;
+                tempLiter = tempLiter - tempAS;
             }
         } else if (alder >= 8 && alder < 12) {
             angelShareProcent = 0.04;
             for (int i = 0; i < alder; i++) {
-                angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+                angelShareDelTemp = tempLiter * angelShareProcent;
+                angelShareDelTotal += angelShareDelTemp;
+                tempAS = angelShareDelTemp;
+                tempLiter = tempLiter - tempAS;
             }
         } else if (alder >= 12) {
             angelShareProcent = 0.05;
             for (int i = 0; i < alder; i++) {
-                angelShareDel += destillat.getLiterFraStart() * angelShareProcent;
+                angelShareDelTemp = tempLiter * angelShareProcent;
+                angelShareDelTotal += angelShareDelTemp;
+                tempAS = angelShareDelTemp;
+                tempLiter = tempLiter - tempAS;
             }
-            return angelShareDel;
         }
-        return angelShareDel;
+        return angelShareDelTotal;
     }
 
     public int getAlder() {
