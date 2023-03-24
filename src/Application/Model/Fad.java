@@ -9,7 +9,7 @@ public class Fad {
     private int nummer;
     private int størrelseLiter;
     private Lager lager;
-
+    private int age;
     private Destillat destillat;
     private HashMap<Integer, Destillat> tidligereDestillater;
 
@@ -20,6 +20,7 @@ public class Fad {
         this.nummer = nummer;
         this.størrelseLiter = størrelseLiter;
         setLager(lager);
+        age = 0;
     }
 
     public void setLager(Lager lager) {
