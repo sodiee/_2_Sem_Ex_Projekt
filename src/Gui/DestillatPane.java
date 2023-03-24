@@ -56,6 +56,7 @@ public class DestillatPane extends GridPane {
         hbxButtons.getChildren().add(btnOpretDestillering);
         hbxButtons.getChildren().add(btnRedigerDestillering);
         hbxButtons.getChildren().add(btnSletDestillering);
+        hbxButtons.getChildren().add(btnDone);
 
         //Info VBox
         VBox vbxInfo = new VBox(5);
