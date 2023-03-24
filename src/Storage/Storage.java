@@ -37,6 +37,7 @@ public class Storage {
     public static ArrayList<Destillat> getDestillatArrayList(){return destillatArrayList;}
 
     public static int getDestillatTæller(){return destillatTæller;}
+    public static void deleteDestillat(Destillat destillat){destillatArrayList.remove(destillat);}
 
     //________________________________________________________________________
 }

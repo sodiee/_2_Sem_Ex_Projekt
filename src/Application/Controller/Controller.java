@@ -84,7 +84,9 @@ public class Controller {
     }
 
 
-    //TODO: Delete funktioner
+    public static void deleteDestillat(Destillat destillat){
+        Storage.deleteDestillat(destillat);
+    }
 
 
 

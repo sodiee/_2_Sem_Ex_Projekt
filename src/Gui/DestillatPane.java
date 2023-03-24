@@ -149,8 +149,9 @@ public class DestillatPane extends GridPane {
         lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
     private void btnSletAction(){
-        //Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
-        //TODO: kald på en slet-distillering funktion i controlleren
+        Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
+        Controller.deleteDestillat(destillat);
+        //TODO: Confirmation window
         lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
 }
