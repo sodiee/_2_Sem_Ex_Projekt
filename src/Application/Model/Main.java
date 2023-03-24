@@ -16,6 +16,7 @@ public class Main {
         System.out.println("Fad.getstørrelse " + fad.getStørrelseLiter());
         System.out.println("Liter fra start " + destillat.getLiterFraStart());
         System.out.println("fad.bAS " + fad.beregnAngelShare(destillat));
+        System.out.println("fad.BAS switch " + fad.beregnAngelShare2(destillat));
         System.out.println("dest.getliter " + destillat.getLiter());
         System.out.println();
 
@@ -25,6 +26,7 @@ public class Main {
         System.out.println("Fad.getstørrelse " + fad.getStørrelseLiter());
         System.out.println("Liter fra start " + destillat.getLiterFraStart());
         System.out.println("fad.bAS " + fad.beregnAngelShare(destillat));
+        System.out.println("fad.BAS switch " + fad.beregnAngelShare2(destillat));
         System.out.println("dest.getliter " + destillat.getLiter());
         System.out.println();
 
@@ -34,6 +36,7 @@ public class Main {
         System.out.println("Fad.getstørrelse " + fad.getStørrelseLiter());
         System.out.println("Liter fra start " + destillat.getLiterFraStart());
         System.out.println("fad.bAS " + fad.beregnAngelShare(destillat));
+        System.out.println("fad.BAS switch " + fad.beregnAngelShare2(destillat));
         System.out.println("dest.getliter " + destillat.getLiter());
         System.out.println();
 
@@ -43,6 +46,7 @@ public class Main {
         System.out.println("Fad.getstørrelse " + fad.getStørrelseLiter());
         System.out.println("Liter fra start " + destillat.getLiterFraStart());
         System.out.println("fad.bAS " + fad.beregnAngelShare(destillat));
+        System.out.println("fad.BAS switch " + fad.beregnAngelShare2(destillat));
         System.out.println("dest.getliter " + destillat.getLiter());
         System.out.println();
 
@@ -52,6 +56,7 @@ public class Main {
         System.out.println("Fad.getstørrelse " + fad.getStørrelseLiter());
         System.out.println("Liter fra start " + destillat.getLiterFraStart());
         System.out.println("fad.bAS " + fad.beregnAngelShare(destillat));
+        System.out.println("fad.BAS switch " + fad.beregnAngelShare2(destillat));
         System.out.println("dest.getliter " + destillat.getLiter());
         System.out.println();
     }
