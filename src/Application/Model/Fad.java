@@ -139,7 +139,8 @@ public class Fad {
         if (this.getDestillat() == destillat) {
             tidligereDestillater.put(nr, destillat);
             this.destillat = null;
-            alder = destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
+            alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
+
         }
     }
 

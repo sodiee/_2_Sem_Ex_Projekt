@@ -21,7 +21,7 @@ public class DestillatPane extends GridPane {
     private Label lblDestilleringer, lblNr, lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblSlutDato, lblKornSort, lblRygemateriale, lblBeskrivelse, lblIsDone;
     private Label lblNr2, lblMedarbejder2, lblLiter2, lblAlkPro2, lblStartDato2, lblSlutDato2, lblKornSort2, lblRygemateriale2, lblBeskrivelse2, lblIsDone2;
     private ListView<Destillat> lvwDestilleringer;
-    private Button btnOpretDestillering, btnRedigerDestillering, btnSletDestillering;
+    private Button btnOpretDestillering, btnRedigerDestillering, btnSletDestillering, btnDone;
 
     public DestillatPane() {
         this.setPadding(new Insets(10));
@@ -45,15 +45,18 @@ public class DestillatPane extends GridPane {
         btnOpretDestillering = new Button("Opret Ny");
         btnRedigerDestillering = new Button("Redigér");
         btnSletDestillering = new Button("Slet");
+        btnDone = new Button("MFærdigør");
         btnOpretDestillering.setOnAction(event -> btnOpretAction());
         btnRedigerDestillering.setOnAction(event -> btnRedigerAction());
         btnSletDestillering.setOnAction(event -> btnSletAction());
+        btnDone.setOnAction(event -> btnDoneAction());
 
         HBox hbxButtons = new HBox(5);
         this.add(hbxButtons, 0, 3);
         hbxButtons.getChildren().add(btnOpretDestillering);
         hbxButtons.getChildren().add(btnRedigerDestillering);
         hbxButtons.getChildren().add(btnSletDestillering);
+        hbxButtons.getChildren().add(btnDone);
 
         //Info VBox
         VBox vbxInfo = new VBox(5);
@@ -164,10 +167,15 @@ public class DestillatPane extends GridPane {
         } else {
 
         }
-
-
-
-        //TODO: Confirmation window
         lvwDestilleringer.getItems().setAll(Controller.getDestillat());
+    }
+
+    private void btnDoneAction(){
+        Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
+        if(destillat.isDone()){
+            destillat.setDone(false);
+        } else if (!destillat.isDone()) {
+            destillat.setDone(true);
+        }
     }
 }
