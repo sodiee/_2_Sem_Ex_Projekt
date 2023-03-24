@@ -36,24 +36,16 @@ public class Controller {
 
     //TODO: i stedet for at have 2 forskellige constructere, kunne man vel bare have én, hvor den uden indeholder en tom streng?
     public static Destillat createDestillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse){
-        if (liter <= 0 || alkoholProcent < 0 || startDato.isAfter(slutDato)) {
-            throw new IllegalArgumentException("Ugyldig input");
-        } else {
-            Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse);
-            destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
-            Storage.addDestillat(destillat);
-            return destillat;
-        }
+        Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse);
+        destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
+        Storage.addDestillat(destillat);
+        return destillat;
     }
     public static Destillat createDestillatRøg(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse){
-        if (liter <= 0 || alkoholProcent < 0 || startDato.isAfter(slutDato)) {
-            throw new IllegalArgumentException("Ugyldig input");
-        } else {
-            Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse);
-            destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
-            Storage.addDestillat(destillat);
-            return destillat;
-        }
+        Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse);
+        destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
+        Storage.addDestillat(destillat);
+        return destillat;
     }
 
 

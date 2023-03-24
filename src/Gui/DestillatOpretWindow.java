@@ -121,8 +121,8 @@ public class DestillatOpretWindow extends Stage{
                     dpSlutDato.getValue(),
                     txfKornSort.getText(),
                     txfRygemateriale.getText(),
-                    txfBeskrivelse.getText(),
-                    false);
+                    txfBeskrivelse.getText()
+                    );
 
         }
         //Hvis røg ikke er angivet
@@ -134,8 +134,8 @@ public class DestillatOpretWindow extends Stage{
                     dpStartDato.getValue(),
                     dpSlutDato.getValue(),
                     txfKornSort.getText(),
-                    txfBeskrivelse.getText(),
-                    false);
+                    txfBeskrivelse.getText()
+                    );
         }
         this.hide();
     }
