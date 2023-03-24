@@ -27,55 +27,10 @@ public class Fad {
 
     /**
      * Metode udregnet for, at angelShare delen i whisky brygning stiger hvert år. :)
+     * Altså efter startalderen, så bliver angelShareProcenten sat og udregnet i bunden af metoden i for-loopet.
      * @param destillat
      * @return
      */
-    public double beregnAngelShare(Destillat destillat) {
-        double tempLiter = destillat.getLiterFraStart();
-        double tempAS = 0;
-        double angelShareProcent = 0;
-        double angelShareDelTemp = 0;
-        double angelShareDelTotal = 0;
-        if (alder == 0) {
-            angelShareProcent = 0.02;
-            angelShareDelTemp += destillat.getLiterFraStart() * angelShareProcent;
-            return angelShareDelTemp;
-        } else if (alder < 5) {
-            angelShareProcent = 0.02;
-            for (int i = 0; i < alder; i++) {
-                angelShareDelTemp = tempLiter * angelShareProcent;
-                angelShareDelTotal += angelShareDelTemp;
-                tempAS = angelShareDelTemp;
-                tempLiter = tempLiter - tempAS;
-            }
-        } else if (alder >= 5 && alder < 8) {
-            angelShareProcent = 0.03;
-            for (int i = 0; i < alder; i++) {
-                angelShareDelTemp = tempLiter * angelShareProcent;
-                angelShareDelTotal += angelShareDelTemp;
-                tempAS = angelShareDelTemp;
-                tempLiter = tempLiter - tempAS;
-            }
-        } else if (alder >= 8 && alder < 12) {
-            angelShareProcent = 0.04;
-            for (int i = 0; i < alder; i++) {
-                angelShareDelTemp = tempLiter * angelShareProcent;
-                angelShareDelTotal += angelShareDelTemp;
-                tempAS = angelShareDelTemp;
-                tempLiter = tempLiter - tempAS;
-            }
-        } else if (alder >= 12) {
-            angelShareProcent = 0.05;
-            for (int i = 0; i < alder; i++) {
-                angelShareDelTemp = tempLiter * angelShareProcent;
-                angelShareDelTotal += angelShareDelTemp;
-                tempAS = angelShareDelTemp;
-                tempLiter = tempLiter - tempAS;
-            }
-        }
-        return angelShareDelTotal;
-    }
-
     public double beregnAngelShare2(Destillat destillat) {
         double tempLiter = destillat.getLiterFraStart();
         double angelShareProcent;
@@ -114,6 +69,7 @@ public class Fad {
 
         return angelShareDelTotal;
     }
+
 
     public double beregnAngelShare3(Destillat destillat) {
         double tempLiter = destillat.getLiterFraStart();
