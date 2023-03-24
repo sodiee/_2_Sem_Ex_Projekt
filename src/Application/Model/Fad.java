@@ -115,6 +115,39 @@ public class Fad {
         return angelShareDelTotal;
     }
 
+    public double beregnAngelShare3(Destillat destillat) {
+        double tempLiter = destillat.getLiterFraStart();
+        double angelShareProcent = 0;
+        double angelShareDelTotal = 0;
+
+        if (alder == 0) {
+            angelShareProcent = 0.02;
+            return destillat.getLiterFraStart() * angelShareProcent;
+        } else {
+            if (alder < 5) {
+                angelShareProcent = 0.02;
+            } else if (alder < 8) {
+                angelShareProcent = 0.03;
+            } else if (alder < 12) {
+                angelShareProcent = 0.04;
+            } else {
+                angelShareProcent = 0.05;
+            }
+
+            double angelShareDelTemp = 0;
+            double tempAS = 0;
+
+            for (int i = 0; i < alder; i++) {
+                angelShareDelTemp = tempLiter * angelShareProcent;
+                angelShareDelTotal += angelShareDelTemp;
+                tempAS = angelShareDelTemp;
+                tempLiter = tempLiter - tempAS;
+            }
+        }
+
+        return angelShareDelTotal;
+    }
+
     public int getAlder() {
         return alder;
     }
