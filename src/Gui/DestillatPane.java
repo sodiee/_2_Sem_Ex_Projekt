@@ -20,8 +20,8 @@ import java.util.List;
 
 public class DestillatPane extends GridPane {
 
-    private Label lblDestilleringer, lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblSlutDato, lblKornSort, lblRygemateriale, lblBeskrivelse, lblIsDone;
-    private Label lblMedarbejder2, lblLiter2, lblAlkPro2, lblStartDato2, lblSlutDato2, lblKornSort2, lblRygemateriale2, lblBeskrivelse2, lblIsDone2;
+    private Label lblDestilleringer, lblNr, lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblSlutDato, lblKornSort, lblRygemateriale, lblBeskrivelse, lblIsDone;
+    private Label lblNr2, lblMedarbejder2, lblLiter2, lblAlkPro2, lblStartDato2, lblSlutDato2, lblKornSort2, lblRygemateriale2, lblBeskrivelse2, lblIsDone2;
     private ListView<Destillat> lvwDestilleringer;
     private Button btnOpretDestillering, btnRedigerDestillering, btnSletDestillering;
 
@@ -30,7 +30,10 @@ public class DestillatPane extends GridPane {
         this.setHgap(10);
         this.setVgap(10);
         this.setGridLinesVisible(false);
+        initGUI();
 
+    }
+    private void initGUI(){
         lblDestilleringer = new Label("Destilleringer");
         this.add(lblDestilleringer, 0, 0);
 
@@ -73,6 +76,8 @@ public class DestillatPane extends GridPane {
         lblRygemateriale2 = new Label();
         lblBeskrivelse = new Label("Beskrivelse");
         lblBeskrivelse2 = new Label();
+        lblNr = new Label("ID Nummer");
+        lblNr2 = new Label();
         lblIsDone = new Label("Færdiggjort");
         lblIsDone2 = new Label();
         vbxInfo.getChildren().add(lblMedarbejder);
@@ -91,16 +96,21 @@ public class DestillatPane extends GridPane {
         vbxInfo.getChildren().add(lblRygemateriale2);
         vbxInfo.getChildren().add(lblBeskrivelse);
         vbxInfo.getChildren().add(lblBeskrivelse2);
+        vbxInfo.getChildren().add(lblNr);
+        vbxInfo.getChildren().add(lblNr2);
         vbxInfo.getChildren().add(lblIsDone);
         vbxInfo.getChildren().add(lblIsDone2);
 
-        lblMedarbejder2.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-
-
-
-    }
-    private void initData(){
-
+        lblMedarbejder.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblStartDato.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblSlutDato.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblKornSort.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblRygemateriale.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblNr.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblIsDone.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
     }
 
     private void selectedDestillatChanged(){this.updateControls();}
@@ -110,6 +120,7 @@ public class DestillatPane extends GridPane {
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
 
         if (destillat != null){
+            lblNr2.setText(String.valueOf(destillat.getDestillatNr()));
             lblMedarbejder2.setText(destillat.getMedarbejder());
             lblLiter2.setText(String.valueOf(destillat.getLiter()));
             lblAlkPro2.setText(String.valueOf(destillat.getAlkoholProcent()));
@@ -119,20 +130,27 @@ public class DestillatPane extends GridPane {
             lblRygemateriale2.setText(destillat.getRygeMateriale());
             lblBeskrivelse2.setText(destillat.getBeskrivelse());
             lblIsDone2.setText(String.valueOf(destillat.isDone()));
-
         }
-
     }
 
 
     //buttonAction
     private void btnOpretAction(){
 
+        DestillatOpretWindow destillatOpretWindow = new DestillatOpretWindow();
+        destillatOpretWindow.showAndWait();
+        lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
     private void btnRedigerAction(){
 
+        Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
+        DestillatRedigerWindow destillatRedigerWindow = new DestillatRedigerWindow(destillat);
+        destillatRedigerWindow.showAndWait();
+        lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
     private void btnSletAction(){
-
+        //Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
+        //TODO: kald på en slet-distillering funktion i controlleren
+        lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
 }

@@ -19,8 +19,7 @@ public class Destillat {
     private ArrayList<Fad> fade = new ArrayList<>();
 
     //Uden røg
-    public Destillat(int destillatNr ,String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone) {
-        this.destillatNr = destillatNr;
+    public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
@@ -32,8 +31,7 @@ public class Destillat {
     }
 
     //Med røg
-    public Destillat(int destillatNr, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone) {
-        this.destillatNr = destillatNr;
+    public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
@@ -44,6 +42,8 @@ public class Destillat {
         this.beskrivelse = beskrivelse;
         this.isDone = isDone;
     }
+
+    public void setDestillatNr(int destillatNr) {this.destillatNr = destillatNr;}
 
     public void addFad(Fad fad){
         if(!fade.contains(fad)){
@@ -64,10 +64,14 @@ public class Destillat {
         }
     }
 
+    //Getters_____________________________________________________________________________________
     public ArrayList<Fad> getFade() {
         return fade;
     }
 
+    public int getDestillatNr(){
+        return destillatNr;
+    }
     public String getMedarbejder() {
         return medarbejder;
     }
@@ -102,6 +106,47 @@ public class Destillat {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    //Setters_____________________________________________________________________________________
+    public void setMedarbejder(String medarbejder) {
+        this.medarbejder = medarbejder;
+    }
+
+    public void setLiter(int liter) {
+        this.liter = liter;
+    }
+
+    public void setAlkoholProcent(double alkoholProcent) {
+        this.alkoholProcent = alkoholProcent;
+    }
+
+    public void setStartDato(LocalDate startDato) {
+        this.startDato = startDato;
+    }
+
+    public void setSlutDato(LocalDate slutDato) {
+        this.slutDato = slutDato;
+    }
+
+    public void setKornSort(String kornSort) {
+        this.kornSort = kornSort;
+    }
+
+    public void setRygeMateriale(String rygeMateriale) {
+        this.rygeMateriale = rygeMateriale;
+    }
+
+    public void setBeskrivelse(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    public void setFade(ArrayList<Fad> fade) {
+        this.fade = fade;
     }
 
     public String toString(){

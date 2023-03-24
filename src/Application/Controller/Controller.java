@@ -34,13 +34,16 @@ public class Controller {
         return lager;
     }
 
-    public static Destillat createDestillat(int destillatNr ,String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone){
-        Destillat destillat = new Destillat(destillatNr ,medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse, isDone);
+    //TODO: i stedet for at have 2 forskellige constructere, kunne man vel bare have én, hvor den uden indeholder en tom streng?
+    public static Destillat createDestillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone){
+        Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse, isDone);
+        destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
         Storage.addDestillat(destillat);
         return destillat;
     }
-    public static Destillat createDestillatRøg(int destillatNr, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone){
-        Destillat destillat = new Destillat(destillatNr ,medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse, isDone);
+    public static Destillat createDestillatRøg(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, boolean isDone){
+        Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse, isDone);
+        destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
         Storage.addDestillat(destillat);
         return destillat;
     }
@@ -59,6 +62,31 @@ public class Controller {
 
     public static ArrayList<Fad> getDestillatFade(Destillat destillat){return destillat.getFade();}
 
+    //Edit
+    public static void redigerDestillat(Destillat destillat, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse){
+        destillat.setMedarbejder(medarbejder);
+        destillat.setLiter(liter);
+        destillat.setAlkoholProcent(alkoholProcent);
+        destillat.setStartDato(startDato);
+        destillat.setSlutDato(slutDato);
+        destillat.setKornSort(kornSort);
+        destillat.setBeskrivelse(beskrivelse);
+    }
+    public static void redigerDestillatRøg(Destillat destillat, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale,  String beskrivelse){
+        destillat.setMedarbejder(medarbejder);
+        destillat.setLiter(liter);
+        destillat.setAlkoholProcent(alkoholProcent);
+        destillat.setStartDato(startDato);
+        destillat.setSlutDato(slutDato);
+        destillat.setKornSort(kornSort);
+        destillat.setRygeMateriale(rygeMateriale);
+        destillat.setBeskrivelse(beskrivelse);
+    }
+
+
+    //TODO: Delete funktioner
+
+
 
 
     public static void initStorage() {
@@ -70,7 +98,7 @@ public class Controller {
         Fad fad2 = createFad("Sherry distilleri, Madrid", "Sherry", 2, 2, 95, sønderhøj);
         Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54, 50, sørenFrichsVej);
 
-        Destillat destillat = createDestillat(1,"John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever", true);
-        Destillat destillat2 = createDestillatRøg(2,"Bingo Dorte", 600, 60, LocalDate.of(2021, 2, 14), LocalDate.of(2022, 1, 19), "Byg", "Strå", "I can't believe its not whiskey", false);
+        Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever", true);
+        Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2021, 2, 14), LocalDate.of(2022, 1, 19), "Byg", "Strå", "I can't believe its not whiskey", false);
     }
 }
