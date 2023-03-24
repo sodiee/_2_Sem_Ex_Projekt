@@ -6,10 +6,7 @@ import Application.Model.Fad;
 import Application.Model.Lager;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 import java.util.List;
+import java.util.Optional;
 
 public class DestillatPane extends GridPane {
 
@@ -150,7 +148,25 @@ public class DestillatPane extends GridPane {
     }
     private void btnSletAction(){
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
-        Controller.deleteDestillat(destillat);
+
+        Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirmation.setTitle("Slettelse");
+        alertConfirmation.setHeaderText("Er du sikker på at du vil slette destilleringen?");
+
+        Optional<ButtonType> option = alertConfirmation.showAndWait();
+
+        if (option.get() == null) {
+            //no selection
+        } else if (option.get() == ButtonType.OK) {
+            Controller.deleteDestillat(destillat);
+        } else if (option.get() == ButtonType.CANCEL) {
+            //cancelled
+        } else {
+
+        }
+
+
+
         //TODO: Confirmation window
         lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
