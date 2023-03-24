@@ -106,7 +106,13 @@ public class DestillatOpretWindow extends Stage{
         if(!Application.Controller.ValidationController.validateString(txfMedarbejder.getText(), "Medarbejder", true, false)) return;
         if(!Application.Controller.ValidationController.validateInt(txfLiter.getText(), "Liter")) return;
         if(!Application.Controller.ValidationController.validateDouble(txfAlkPro.getText(), "Alkohol Procent")) return;
-        //TODO: Valider om dato er gyldig?
+        if(dpStartDato.getValue().isAfter(dpSlutDato.getValue())){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Ikke Gyldigt Input");
+            a.setHeaderText("Startdatoen ligger efter slutdatoen");
+            a.showAndWait();
+            return;
+        }
         if(!Application.Controller.ValidationController.validateString(txfKornSort.getText(), "Korn Sort", false, false)) return;
         if(txfRygemateriale.getLength() != 0){if(!Application.Controller.ValidationController.validateString(txfKornSort.getText(), "Korn Sort", false, false)) return;}
         if(!Application.Controller.ValidationController.validateString(txfBeskrivelse.getText(), "Beskrivelse", true, true)) return;
