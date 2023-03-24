@@ -16,7 +16,7 @@ public class Destillat {
     private String rygeMateriale;
     private String beskrivelse;
     private boolean isDone = false;
-    private ArrayList<Fad> fade;
+    private ArrayList<Fad> fade = new ArrayList<>();
 
     //Uden røg
     public Destillat(int destillatNr ,String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, boolean isDone) {
