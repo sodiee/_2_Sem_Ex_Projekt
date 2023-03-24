@@ -33,10 +33,13 @@ public class Storage {
 
     //________________________________________________________________________
 
-    public static void addDestillat(Destillat destillat){destillatArrayList.add(destillat);}
+    public static void addDestillat(Destillat destillat){destillatArrayList.add(destillat); destillatTæller++;}
+
+
     public static ArrayList<Destillat> getDestillatArrayList(){return destillatArrayList;}
 
     public static int getDestillatTæller(){return destillatTæller;}
+
 
     //________________________________________________________________________
 }
