@@ -43,6 +43,7 @@ public class Destillat {
         this.rygeMateriale = rygeMateriale;
         this.beskrivelse = beskrivelse;
         this.isDone = false;
+        this.literFraStart = liter;
     }
 
     public void setDestillatNr(int destillatNr) {this.destillatNr = destillatNr;}

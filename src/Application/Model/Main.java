@@ -63,5 +63,38 @@ public class Main {
         System.out.println("fad.bas if-else 2 " + fad.beregnAngelShare3(destillat));
         System.out.println("dest.getliter " + destillat.getLiter());
         System.out.println();
+
+        fad.setAlder(0);
+        System.out.println("0 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(1);
+        System.out.println("1 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(2);
+        System.out.println("2 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(4);
+        System.out.println("4 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(5);
+        System.out.println("5 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(7);
+        System.out.println("7 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(8);
+        System.out.println("8 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(11);
+        System.out.println("11 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(12);
+        System.out.println("12 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(13);
+        System.out.println("13 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        fad.setAlder(20);
+        System.out.println("20 fad.BAS switch " + fad.beregnAngelShare2(destillat));
     }
 }

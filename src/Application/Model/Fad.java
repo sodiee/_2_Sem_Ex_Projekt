@@ -1,5 +1,6 @@
 package Application.Model;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.HashMap;
 
@@ -28,6 +29,7 @@ public class Fad {
     /**
      * Metode udregnet for, at angelShare delen i whisky brygning stiger hvert år. :)
      * Altså efter startalderen, så bliver angelShareProcenten sat og udregnet i bunden af metoden i for-loopet.
+     *
      * @param destillat
      * @return
      */
@@ -36,37 +38,46 @@ public class Fad {
         double angelShareProcent;
         double angelShareDelTotal = 0;
 
-        switch (alder) {
-            case 0:
-                return destillat.getLiterFraStart() * 0.02;
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-                angelShareProcent = 0.02;
-                break;
-            case 5:
-            case 6:
-            case 7:
-                angelShareProcent = 0.03;
-                break;
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-                angelShareProcent = 0.04;
-                break;
-            default:
-                angelShareProcent = 0.05;
-                break;
+        if (alder < 0) {
+            throw new IllegalArgumentException("Ugyldig alder på fad");
+        } else if (destillat.getFade() != null) {
+            switch (alder) {
+                case 0:
+                    return destillat.getLiterFraStart() * 0.02;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    angelShareProcent = 0.02;
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                    angelShareProcent = 0.03;
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                    angelShareProcent = 0.04;
+                    break;
+                default:
+                    angelShareProcent = 0.05;
+                    break;
+            }
+
+            for (int i = 0; i < 3; i++) {
+                double angelShareDelTemp = tempLiter * angelShareProcent;
+                angelShareDelTotal += angelShareDelTemp;
+                tempLiter -= angelShareDelTemp;
+            }
+
+
         }
 
-        for (int i = 0; i < alder; i++) {
-            double angelShareDelTemp = tempLiter * angelShareProcent;
-            angelShareDelTotal += angelShareDelTemp;
-            tempLiter -= angelShareDelTemp;
-        }
-
+        //angelShareDelTotal = angelShareDelTotal * 100;
+        //angelShareDelTotal = Math.round(angelShareDelTotal);
+        //angelShareDelTotal = angelShareDelTotal / 100;
         return angelShareDelTotal;
     }
 
@@ -93,7 +104,7 @@ public class Fad {
             double angelShareDelTemp = 0;
             double tempAS = 0;
 
-            for (int i = 0; i < alder; i++) {
+            for (int i = 0; i < 3; i++) {
                 angelShareDelTemp = tempLiter * angelShareProcent;
                 angelShareDelTotal += angelShareDelTemp;
                 tempAS = angelShareDelTemp;
