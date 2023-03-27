@@ -1,5 +1,6 @@
 package Application.Model;
 
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -27,7 +28,6 @@ public class Fad {
         this.tidligereDestillater = new HashMap<>();
         setLager(lager);
         alder = 0;
-        String hej = "Hej";
     }
 
     /**
