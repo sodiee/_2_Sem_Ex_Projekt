@@ -17,7 +17,9 @@ public class Fad {
     private Lager lager;
     private int alder;
     private Destillat destillat;
-    private ArrayList<Destillat> tidligereDestillater;
+    private HashMap<Integer, Destillat> tidligereDestillater;
+
+    private Status status;
 
     public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
         this.leverandør = leverandør;
@@ -125,6 +127,14 @@ public class Fad {
         return whisky;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
     public int getAlder() {
         return alder;
     }
@@ -152,16 +162,13 @@ public class Fad {
         }
     }
 
-    public void removeDestillat() {
+    public void removeDestillat(int nr) {
         if (this.getDestillat() == destillat) {
             tidligereDestillater.add(destillat);
             this.destillat = null;
             alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
+            createWhisky()
         }
-    }
-
-    public void convertToWhisky(){
-        
     }
 
     public Destillat getDestillat() {
