@@ -96,5 +96,8 @@ public class Main {
 
         fad.setAlder(20);
         System.out.println("20 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+
+        Whisky whisky = new Whisky(100, 50, "", true, 50, fad);
+        System.out.println(whisky.hældWhiskyPåFlaske(130));
     }
 }

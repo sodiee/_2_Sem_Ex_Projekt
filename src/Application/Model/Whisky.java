@@ -1,29 +1,36 @@
 package Application.Model;
 
+import java.util.ArrayList;
+
 public class Whisky {
     private static int nummer;
     private double alkoholProcent;
     private String beskrivelse;
     private double liter;
-    private boolean fortyndet;
-    private int fortyndelseIL;
-
     private Fad fad;
+    private ArrayList<WhiskyPåFlaske> flasker;
 
-    public Whisky(int liter, double alkoholProcent, String beskrivelse, boolean fortyndet, int fortyndelseIL, Fad fad) {
+    public Whisky(int liter, String beskrivelse, Fad fad) {
+        this.liter = liter;
         this.nummer = nummer + 1;
-        this.alkoholProcent = alkoholProcent;
+        this.alkoholProcent = fad.getDestillat().getAlkoholProcent();
         this.beskrivelse = beskrivelse;
-        this.fortyndet = fortyndet;
-        this.fortyndelseIL = fortyndelseIL;
         this.fad = fad;
+        this.flasker = new ArrayList<>();
     }
 
-    public void hældWhiskyPåFlaske(Destillat destillat, int antal) {
+    public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal) {
         double flaskeStørrelseLiter = 0.7;
-        int muligtAntal = (int) (destillat.getLiterFraStart() / flaskeStørrelseLiter);
-        if (antal > muligtAntal) {
+        int muligtAntal = (int) (this.getLiter() / flaskeStørrelseLiter);
 
+        if (antal > muligtAntal) {
+            throw new IllegalArgumentException("Du har angivet for mange flasker i antal");
+        } else {
+            for (int i = 1; i < antal; i++) {
+                WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, muligtAntal, this, fad.getLager());
+                flasker.add(whiskyPåFlaske);
+            }
+            return flasker;
         }
     }
 
@@ -51,7 +58,7 @@ public class Whisky {
         this.beskrivelse = beskrivelse;
     }
 
-    public int getLiter() {
+    public double getLiter() {
         return liter;
     }
 
