@@ -30,6 +30,7 @@ public class Fad {
         this.tidligereDestillater = new ArrayList<>();
         setLager(lager);
         alder = 0;
+        status = Status.TOM;
     }
 
     /**
