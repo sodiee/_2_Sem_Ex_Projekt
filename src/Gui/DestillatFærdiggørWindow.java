@@ -121,7 +121,7 @@ public class DestillatFærdiggørWindow extends Stage{
 
             for(Fad fad : selectedItems){
                 fad.setiBrug(true);
-                fad.setOpfyldtLiter(fad.getStørrelseLiter());
+                fad.setOpfyldtLiter(fad.getStørrelseLiter()); //PROBLEM HER, DEN BLIVER 0
             }
             destillat.setDone(true);
             this.hide();

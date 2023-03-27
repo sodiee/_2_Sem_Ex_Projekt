@@ -1,9 +1,6 @@
 package Application.Controller;
 
-import Application.Model.Destillat;
-import Application.Model.Fad;
-import Application.Model.Lager;
-import Application.Model.Whisky;
+import Application.Model.*;
 import Storage.Storage;
 
 import java.time.LocalDate;
@@ -59,7 +56,16 @@ public class Controller {
 
     public static Whisky createWhisky(Fad fad) {
         Whisky whisky = fad.createWhisky(fad);
+        Storage.addWhisky(whisky);
         return whisky;
+    }
+
+    public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML) {
+        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaske(antal, fortyndelseIML);
+        for(WhiskyPåFlaske wpf : whiskyPåFlasker) {
+            Storage.addWhiskyPåFlaske(wpf);
+        }
+        return whiskyPåFlasker;
     }
 
     //Get

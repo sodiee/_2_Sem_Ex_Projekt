@@ -7,8 +7,10 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         Lager lager = Controller.createLager(1, 1, 1, "h");
-        Destillat destillat = Controller.createDestillat("h", 100, 40, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "h", "h");
         Fad fad = Controller.createFad("h", "h", 1, 1, 100, lager);
+        Destillat destillat = Controller.createDestillat("h", 100, 40, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "h", "h");
+        fad.setDestillat(destillat);
+        Whisky whisky = Controller.createWhisky(fad);
 
         System.out.println("dest.getliter " + destillat.getLiter());
 
@@ -96,8 +98,8 @@ public class Main {
 
         fad.setAlder(20);
         System.out.println("20 fad.BAS switch " + fad.beregnAngelShare2(destillat));
+        //fad.setDestillat(destillat);
 
-        //Whisky whisky = new Whisky(100, 50, "", true, 50, fad);
-        //System.out.println(whisky.hældWhiskyPåFlaske(130));
+        //System.out.println(Controller.createWhiskyPåFlaske(whisky, 100, 50));
     }
 }
