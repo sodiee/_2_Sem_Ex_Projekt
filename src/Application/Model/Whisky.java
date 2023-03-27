@@ -1,21 +1,28 @@
 package Application.Model;
 
 public class Whisky {
-
-    private int nummer;
+    private static int nummer;
     private double alkoholProcent;
     private String beskrivelse;
     private int liter;
     private boolean fortyndet;
-    private int fortyndelseIML;
+    private int fortyndelseIL;
 
-    public Whisky(int nummer, double alkoholProcent, String beskrivelse, int liter, boolean fortyndet, int fortyndelseIML) {
-        this.nummer = nummer;
+    private Fad fad;
+
+    public Whisky(int liter, double alkoholProcent, String beskrivelse, boolean fortyndet, int fortyndelseIL, Fad fad) {
+        this.nummer = nummer + 1;
         this.alkoholProcent = alkoholProcent;
         this.beskrivelse = beskrivelse;
-        this.liter = liter;
         this.fortyndet = fortyndet;
-        this.fortyndelseIML = fortyndelseIML;
+        this.fortyndelseIL = fortyndelseIL;
+        this.fad = fad;
+    }
+
+    public void hældWhiskyPåFlaske(Destillat destillat, int antal) {
+        double flaskeStørrelseLiter = 0.7;
+        int muligtAntal = (int) (destillat.getLiterFraStart() / flaskeStørrelseLiter);
+
     }
 
     public int getNummer() {
@@ -58,11 +65,11 @@ public class Whisky {
         this.fortyndet = fortyndet;
     }
 
-    public int getFortyndelseIML() {
-        return fortyndelseIML;
+    public int getFortyndelseIL() {
+        return fortyndelseIL;
     }
 
-    public void setFortyndelseIML(int fortyndelseIML) {
-        this.fortyndelseIML = fortyndelseIML;
+    public void setFortyndelseIL(int fortyndelseIL) {
+        this.fortyndelseIL = fortyndelseIL;
     }
 }

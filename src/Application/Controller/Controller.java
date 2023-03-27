@@ -3,6 +3,7 @@ package Application.Controller;
 import Application.Model.Destillat;
 import Application.Model.Fad;
 import Application.Model.Lager;
+import Application.Model.Whisky;
 import Storage.Storage;
 
 import java.time.LocalDate;
@@ -54,6 +55,10 @@ public class Controller {
             Storage.addDestillat(destillat);
             return destillat;
         }
+    }
+
+    public static Whisky createWhisky() {
+        
     }
 
 

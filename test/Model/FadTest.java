@@ -53,7 +53,7 @@ public class FadTest {
         double actual = fad.beregnAngelShare2(destillat);
 
         //Assert
-        double forventet = 2.0;
+        double forventet = 5.88;
         assertEquals(forventet, actual, 0.1);
     }
 

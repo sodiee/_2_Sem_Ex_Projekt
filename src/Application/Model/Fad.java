@@ -11,7 +11,6 @@ public class Fad {
     private boolean iBrug = false;
     private int nummer;
     private int størrelseLiter;
-    //TODO: opfyldt skal muligvis være Double ikke Int
     private int opfyldtLiter = 0;
     private Lager lager;
     private int alder;
@@ -116,6 +115,12 @@ public class Fad {
         }
 
         return angelShareDelTotal;
+    }
+
+    public Whisky createWhisky(double alkoholProcent, boolean fortyndet, int fortyndelseIL) {
+        int antalLiter = opfyldtLiter + fortyndelseIL;
+        Whisky whisky = new Whisky(antalLiter, alkoholProcent, destillat.getBeskrivelse(), fortyndet, fortyndelseIL, this);
+        return whisky;
     }
 
     public int getAlder() {
