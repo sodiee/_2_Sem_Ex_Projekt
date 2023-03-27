@@ -74,6 +74,12 @@ public class StartPane extends GridPane {
 
     private void selectedFadChanged() {
         this.updateControls();
+        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT){
+            btnOpretWhisky.setDisable(false);
+        }
+        else{
+            btnOpretWhisky.setDisable(true);
+        }
     }
 
     public void regFadAction() {
@@ -100,10 +106,6 @@ public class StartPane extends GridPane {
         Lager lager = lvwLager.getSelectionModel().getSelectedItem();
         if (lager != null){
             lvwFad.getItems().setAll(lager.getFade());
-        }
-        btnOpretWhisky.setDisable(true);
-        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT){
-            btnOpretWhisky.setDisable(false);
         }
 
     }
