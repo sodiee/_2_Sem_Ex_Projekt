@@ -31,6 +31,8 @@ public class DestillatPane extends GridPane {
         initGUI();
 
     }
+
+    //TODO: Gør således at beskrivelsesfeltet laver ny linje, i stedet for at køre uendeligt til højre
     private void initGUI(){
         lblDestilleringer = new Label("Destilleringer");
         this.add(lblDestilleringer, 0, 0);
@@ -45,11 +47,15 @@ public class DestillatPane extends GridPane {
         btnOpretDestillering = new Button("Opret Ny");
         btnRedigerDestillering = new Button("Redigér");
         btnSletDestillering = new Button("Slet");
-        btnDone = new Button("MFærdigør");
+        btnDone = new Button("Færdigør");
         btnOpretDestillering.setOnAction(event -> btnOpretAction());
         btnRedigerDestillering.setOnAction(event -> btnRedigerAction());
         btnSletDestillering.setOnAction(event -> btnSletAction());
         btnDone.setOnAction(event -> btnDoneAction());
+        btnOpretDestillering.setDisable(true);
+        btnRedigerDestillering.setDisable(true);
+        btnSletDestillering.setDisable(true);
+        btnDone.setDisable(true);
 
         HBox hbxButtons = new HBox(5);
         this.add(hbxButtons, 0, 3);
@@ -120,6 +126,7 @@ public class DestillatPane extends GridPane {
 
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
 
+        //indsæt information omkring valgte destillat
         if (destillat != null){
             lblNr2.setText(String.valueOf(destillat.getDestillatNr()));
             lblMedarbejder2.setText(destillat.getMedarbejder());
@@ -131,6 +138,22 @@ public class DestillatPane extends GridPane {
             lblRygemateriale2.setText(destillat.getRygeMateriale());
             lblBeskrivelse2.setText(destillat.getBeskrivelse());
             lblIsDone2.setText(String.valueOf(destillat.isDone()));
+        }
+
+        //aktiver buttons, da de er disabled fra start
+        btnSletDestillering.setDisable(false);
+        btnRedigerDestillering.setDisable(false);
+        btnOpretDestillering.setDisable(false);
+
+        //Gør således man ikke kan trykke "Færdiggør" eller "Redigér" på et destillat der allerede er fordelt på fad
+        //TODO: skal man ikke kunne slette færdiggørede destillater?
+        if (destillat.isDone()){
+            btnDone.setDisable(true);
+            btnRedigerDestillering.setDisable(true);
+        }
+        else if (destillat.isDone()){
+            btnDone.setDisable(false);
+            btnRedigerDestillering.setDisable(false);
         }
     }
 
@@ -171,11 +194,18 @@ public class DestillatPane extends GridPane {
     }
 
     private void btnDoneAction(){
+        //TODO: pop op vindue som sætter det på fade. Vis total liter, og en liste af fade. marker dem for at fylde. Mulighed for hvad man skal gøre med resterende
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
         if(destillat.isDone()){
-            destillat.setDone(false);
+            DestillatFærdiggørWindow destillatFærdiggørWindow = new DestillatFærdiggørWindow(destillat);
+            destillatFærdiggørWindow.showAndWait();
+            lvwDestilleringer.getItems().setAll(Controller.getDestillat());
+
         } else if (!destillat.isDone()) {
-            destillat.setDone(true);
+            Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
+            alertIntEmpty.setTitle("Allerede færdigjordt");
+            alertIntEmpty.setHeaderText("Destillat #" + destillat.getDestillatNr() + " Er allerede færdigjordt og indeholder ikke spiritus");
+            alertIntEmpty.showAndWait();
         }
     }
 }
