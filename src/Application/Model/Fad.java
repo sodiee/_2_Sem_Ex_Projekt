@@ -118,7 +118,7 @@ public class Fad {
         return angelShareDelTotal;
     }
 
-    public Whisky createWhisky(double alkoholProcent, boolean fortyndet, int fortyndelseIL) {
+    public Whisky createWhisky(Fad fad, double alkoholProcent, boolean fortyndet, int fortyndelseIL) {
         int antalLiter = opfyldtLiter + fortyndelseIL;
         Whisky whisky = new Whisky(antalLiter, alkoholProcent, destillat.getBeskrivelse(), fortyndet, fortyndelseIL, this);
         return whisky;

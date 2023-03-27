@@ -22,7 +22,9 @@ public class Whisky {
     public void hældWhiskyPåFlaske(Destillat destillat, int antal) {
         double flaskeStørrelseLiter = 0.7;
         int muligtAntal = (int) (destillat.getLiterFraStart() / flaskeStørrelseLiter);
-        if (antal )
+        if (antal > muligtAntal) {
+
+        }
     }
 
     public int getNummer() {
