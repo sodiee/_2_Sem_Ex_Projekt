@@ -91,7 +91,7 @@ public class Fad {
 
     public double beregnAngelShare3(Destillat destillat) {
         double tempLiter = destillat.getLiterFraStart();
-        double angelShareProcent = 0;
+        double angelShareProcent;
         double angelShareDelTotal = 0;
 
         if (alder == 0) {
@@ -123,7 +123,7 @@ public class Fad {
     }
 
     public Whisky createWhisky(Fad fad) {
-        double antalLiter = opfyldtLiter - fad.beregnAngelShare3(destillat);
+        double antalLiter = fad.opfyldtLiter - fad.beregnAngelShare3(fad.getDestillat());
         Whisky whisky = new Whisky((int) antalLiter, destillat.getBeskrivelse(), this);
         return whisky;
     }

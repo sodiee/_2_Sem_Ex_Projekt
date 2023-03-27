@@ -10,7 +10,7 @@ public class Whisky {
     private Fad fad;
     private ArrayList<WhiskyPåFlaske> flasker;
 
-    public Whisky(int liter, String beskrivelse, Fad fad) {
+    public Whisky(double liter, String beskrivelse, Fad fad) {
         this.liter = liter;
         this.nummer = nummer + 1;
         this.alkoholProcent = fad.getDestillat().getAlkoholProcent();
@@ -20,18 +20,20 @@ public class Whisky {
     }
 
     public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl) {
-        double flaskeStørrelseLiter = 0.7;
-        int muligtAntal = (int) (this.getLiter() / flaskeStørrelseLiter);
+        double flaskeStørrelseML = 700;
+        double muligtAntal = ((this.getLiter() * 1000) + (antal * fortyndelseIMl) / flaskeStørrelseML);
 
         if (antal > muligtAntal) {
             throw new IllegalArgumentException("Du har angivet for mange flasker i antal");
         } else {
+            double påfyldningPerFlaske = flaskeStørrelseML - fortyndelseIMl;
             for (int i = 1; i < antal; i++) {
-                WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, muligtAntal, fortyndelseIMl,this, fad.getLager());
+                WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, (int)muligtAntal, fortyndelseIMl, this, fad.getLager());
                 flasker.add(whiskyPåFlaske);
+                this.setLiter(this.getLiter() - påfyldningPerFlaske);
             }
-            return flasker;
         }
+        return flasker;
     }
 
     public int getNummer() {
@@ -62,7 +64,7 @@ public class Whisky {
         return liter;
     }
 
-    public void setLiter(int liter) {
+    public void setLiter(double liter) {
         this.liter = liter;
     }
 
