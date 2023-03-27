@@ -17,7 +17,6 @@ public class Fad {
     private int alder;
     private Destillat destillat;
     private HashMap<Integer, Destillat> tidligereDestillater;
-    private Status status;
 
     public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
         this.leverandør = leverandør;
@@ -28,7 +27,6 @@ public class Fad {
         this.tidligereDestillater = new HashMap<>();
         setLager(lager);
         alder = 0;
-        this.status = Status.TOM;
     }
 
     /**
@@ -121,52 +119,13 @@ public class Fad {
     }
 
     public Whisky createWhisky(Fad fad) {
-        int antalLiter = (int) (opfyldtLiter - fad.beregnAngelShare3(destillat));
-        Whisky whisky = new Whisky(antalLiter, destillat.getBeskrivelse(), this);
+        double antalLiter = opfyldtLiter - fad.beregnAngelShare3(destillat);
+        Whisky whisky = new Whisky(antalLiter, alkoholProcent, destillat.getBeskrivelse(), fortyndet, fortyndelseIL, this);
         return whisky;
-    }
-
-    public void addDestilatTofad(Destillat destillat) {
-        if (!(destillat == null)) {
-            setDestillat(destillat);
-            antalGangeBrugt++;
-        } else {
-            System.out.println("Der er ikke nok plads på fadet");
-        }
-    }
-
-    public void removeDestillat(Destillat destillat, int nr) {
-        if (this.getDestillat() == destillat) {
-            tidligereDestillater.put(nr, destillat);
-            this.destillat = null;
-            alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
-
-        }
-    }
-
-    //Getters_____________________________________________________________________________________
-    public Status getStatus() {
-        return status;
     }
 
     public int getAlder() {
         return alder;
-    }
-
-    public Destillat getDestillat() {
-        return destillat;
-    }
-
-    public int getStørrelseLiter() {
-        return størrelseLiter;
-    }
-    public boolean isiBrug() {
-        return iBrug;
-    }
-
-    //Setters_____________________________________________________________________________________
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     public void setAlder(int alder) {
@@ -183,7 +142,35 @@ public class Fad {
         destillat.addFad(this);
     }
 
+    public void addDestilatTofad(Destillat destillat) {
+        if (!(destillat == null)) {
+            setDestillat(destillat);
+            antalGangeBrugt++;
+        } else {
+            System.out.println("Der er ikke nok plads på fadet");
+        }
+    }
 
+    public Destillat getDestillat() {
+        return destillat;
+    }
+
+    public void removeDestillat(Destillat destillat, int nr) {
+        if (this.getDestillat() == destillat) {
+            tidligereDestillater.put(nr, destillat);
+            this.destillat = null;
+            alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
+
+        }
+    }
+
+    public int getStørrelseLiter() {
+        return størrelseLiter;
+    }
+
+    public boolean isiBrug() {
+        return iBrug;
+    }
 
     public void setiBrug(boolean iBrug) {
         this.iBrug = iBrug;
