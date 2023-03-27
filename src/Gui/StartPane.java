@@ -74,7 +74,8 @@ public class StartPane extends GridPane {
     }
 
     private void selectedFadChanged() {
-        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT){
+        //TODO Ændre så den ikke giver fejl når man skifter fane mens et fad er markeret.
+        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT && lvwFad.getSelectionModel().getSelectedItem().getStatus() != null){
             btnOpretWhisky.setDisable(false);
         }
         else{
