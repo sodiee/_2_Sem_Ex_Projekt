@@ -17,7 +17,7 @@ public class Fad {
     private Lager lager;
     private int alder;
     private Destillat destillat;
-    private HashMap<Integer, Destillat> tidligereDestillater;
+    private ArrayList<Destillat> tidligereDestillater;
 
     private Status status;
 
@@ -167,10 +167,14 @@ public class Fad {
             tidligereDestillater.add(destillat);
             this.destillat = null;
             alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
-            createWhisky()
+            convertToWhisky();
         }
     }
 
+    public void convertToWhisky(){
+        this.setStatus(Status.WHISKY);
+        createWhisky(this);
+    }
     public Destillat getDestillat() {
         return destillat;
     }
