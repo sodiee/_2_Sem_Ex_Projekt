@@ -66,19 +66,4 @@ public class Whisky {
         this.liter = liter;
     }
 
-    public boolean isFortyndet() {
-        return fortyndet;
-    }
-
-    public void setFortyndet(boolean fortyndet) {
-        this.fortyndet = fortyndet;
-    }
-
-    public int getFortyndelseIL() {
-        return fortyndelseIL;
-    }
-
-    public void setFortyndelseIL(int fortyndelseIL) {
-        this.fortyndelseIL = fortyndelseIL;
-    }
 }

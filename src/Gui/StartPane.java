@@ -3,6 +3,7 @@ package Gui;
 import Application.Controller.Controller;
 import Application.Model.Fad;
 import Application.Model.Lager;
+import Application.Model.Status;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,7 +21,7 @@ public class StartPane extends GridPane {
 
     private ListView<Fad> lvwFad;
 
-    private Button regFad, btnOpretLager;
+    private Button regFad, btnOpretLager, btnOpretWhisky;
 
 
     public StartPane() {
@@ -50,12 +51,15 @@ public class StartPane extends GridPane {
         regFad.setAlignment(Pos.BASELINE_CENTER);
         regFad.setOnAction(event -> this.regFadAction());
 
-        /**
+        btnOpretWhisky = new Button("Opret Whisky");
+        btnOpretWhisky.setAlignment(Pos.BASELINE_RIGHT);
+        btnOpretWhisky.setOnAction(event -> this.opretWhiskyAction());
+        btnOpretWhisky.setDisable(true);
+
         HBox hbx1 = new HBox(10);
-        this.add(hbx1, 0, 2, 1, 2);
-        hbx1.getChildren().add(btnOpretLager);
+        this.add(hbx1, 1, 2);
         hbx1.getChildren().add(regFad);
-        **/
+        hbx1.getChildren().add(btnOpretWhisky);
 
         lblLager = new Label("Lager");
         this.add(lblLager,0,0);
@@ -82,11 +86,24 @@ public class StartPane extends GridPane {
         lagerOpretWindow.showAndWait();
     }
 
+    public void opretWhiskyAction(){
+
+        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT){
+            lvwFad.getSelectionModel().getSelectedItem().removeDestillat();
+        }
+
+
+    }
+
     public void updateControls() {
 
         Lager lager = lvwLager.getSelectionModel().getSelectedItem();
         if (lager != null){
             lvwFad.getItems().setAll(lager.getFade());
+        }
+        btnOpretWhisky.setDisable(true);
+        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT){
+            btnOpretWhisky.setDisable(false);
         }
 
     }
