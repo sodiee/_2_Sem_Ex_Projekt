@@ -19,7 +19,7 @@ public class Whisky {
         this.flasker = new ArrayList<>();
     }
 
-    public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal) {
+    public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl) {
         double flaskeStørrelseLiter = 0.7;
         int muligtAntal = (int) (this.getLiter() / flaskeStørrelseLiter);
 
@@ -27,7 +27,7 @@ public class Whisky {
             throw new IllegalArgumentException("Du har angivet for mange flasker i antal");
         } else {
             for (int i = 1; i < antal; i++) {
-                WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, muligtAntal, this, fad.getLager());
+                WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, muligtAntal, fortyndelseIMl,this, fad.getLager());
                 flasker.add(whiskyPåFlaske);
             }
             return flasker;
@@ -66,19 +66,4 @@ public class Whisky {
         this.liter = liter;
     }
 
-    public boolean isFortyndet() {
-        return fortyndet;
-    }
-
-    public void setFortyndet(boolean fortyndet) {
-        this.fortyndet = fortyndet;
-    }
-
-    public int getFortyndelseIL() {
-        return fortyndelseIL;
-    }
-
-    public void setFortyndelseIL(int fortyndelseIL) {
-        this.fortyndelseIL = fortyndelseIL;
-    }
 }
