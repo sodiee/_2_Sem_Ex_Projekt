@@ -1,5 +1,7 @@
 package Application.Model;
 
+import java.util.ArrayList;
+
 public class Whisky {
     private static int nummer;
     private double alkoholProcent;
@@ -7,6 +9,8 @@ public class Whisky {
     private double liter;
     private boolean fortyndet;
     private int fortyndelseIL;
+
+    private ArrayList<WhiskyPåFlaske> flasker;
 
     private Fad fad;
 
@@ -51,7 +55,7 @@ public class Whisky {
         this.beskrivelse = beskrivelse;
     }
 
-    public int getLiter() {
+    public double getLiter() {
         return liter;
     }
 
