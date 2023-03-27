@@ -41,9 +41,10 @@ public class DestillatFærdiggørWindow extends Stage{
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
         this.setScene(scene);
-        this.initGUI(pane);
+
         this.destillat = destillat;
         this.resterendeLiter = destillat.getLiter();
+        this.initGUI(pane);
     }
 
     private void initGUI(GridPane pane){
@@ -98,11 +99,11 @@ public class DestillatFærdiggørWindow extends Stage{
         }
 
         lblResterendeValue.setText(String.valueOf(resterendeLiter-fadeLiter));
-        if (resterendeLiter-fadeLiter > 0){
+        if (resterendeLiter-fadeLiter < 0){
             lblResterendeValue.setStyle("-fx-text-fill: red;");
             btnGodkend.setDisable(true);
         }
-        else if (resterendeLiter-fadeLiter < 0){
+        else if (resterendeLiter-fadeLiter > 0){
             lblResterendeValue.setStyle("-fx-text-fill: black;");
         }
     }
@@ -113,7 +114,7 @@ public class DestillatFærdiggørWindow extends Stage{
         alertConfirmation.setHeaderText("Er du sikker på at du vil færdigøre destilleringen med valgte fad, og " + (resterendeLiter-fadeLiter) + " Liter overflødigt?");
 
         Optional<ButtonType> option = alertConfirmation.showAndWait();
-        if (resterendeLiter-fadeLiter > 0){return;}
+        if (resterendeLiter-fadeLiter < 0){return;}
         if (option.get() == null) {
 
         } else if (option.get() == ButtonType.OK) {
@@ -122,6 +123,7 @@ public class DestillatFærdiggørWindow extends Stage{
                 fad.setiBrug(true);
                 fad.setOpfyldtLiter(fad.getStørrelseLiter());
             }
+            destillat.setDone(true);
             this.hide();
 
         } else if (option.get() == ButtonType.CANCEL) {

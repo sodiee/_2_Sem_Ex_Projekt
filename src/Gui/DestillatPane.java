@@ -55,7 +55,7 @@ public class DestillatPane extends GridPane {
         btnOpretDestillering.setDisable(true);
         btnRedigerDestillering.setDisable(true);
         btnSletDestillering.setDisable(true);
-        btnDone.setDisable(true);
+        btnDone.setDisable(false);
 
         HBox hbxButtons = new HBox(5);
         this.add(hbxButtons, 0, 3);
@@ -147,14 +147,14 @@ public class DestillatPane extends GridPane {
 
         //Gør således man ikke kan trykke "Færdiggør" eller "Redigér" på et destillat der allerede er fordelt på fad
         //TODO: skal man ikke kunne slette færdiggørede destillater?
-        if (destillat.isDone()){
+        /**if (!destillat.isDone() && destillat != null){
             btnDone.setDisable(true);
             btnRedigerDestillering.setDisable(true);
         }
         else if (destillat.isDone()){
             btnDone.setDisable(false);
             btnRedigerDestillering.setDisable(false);
-        }
+        }**/
     }
 
 
@@ -194,14 +194,14 @@ public class DestillatPane extends GridPane {
     }
 
     private void btnDoneAction(){
-        //TODO: pop op vindue som sætter det på fade. Vis total liter, og en liste af fade. marker dem for at fylde. Mulighed for hvad man skal gøre med resterende
+        //TODO: Evt gøre så "færdgjort bliver rettet uden at skulle markere igen
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
-        if(destillat.isDone()){
+        if(!destillat.isDone()){
             DestillatFærdiggørWindow destillatFærdiggørWindow = new DestillatFærdiggørWindow(destillat);
             destillatFærdiggørWindow.showAndWait();
             lvwDestilleringer.getItems().setAll(Controller.getDestillat());
 
-        } else if (!destillat.isDone()) {
+        } else if (destillat.isDone()) {
             Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
             alertIntEmpty.setTitle("Allerede færdigjordt");
             alertIntEmpty.setHeaderText("Destillat #" + destillat.getDestillatNr() + " Er allerede færdigjordt og indeholder ikke spiritus");
