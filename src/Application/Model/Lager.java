@@ -3,9 +3,9 @@ package Application.Model;
 import java.util.ArrayList;
 
 public class Lager {
-    private int reoler;
     private int hylder;
     private int pladsPåHylde;
+    private int reoler;
     private String adresse;
     private ArrayList<Fad> fadArrayList;
 
