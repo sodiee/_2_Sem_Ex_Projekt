@@ -3,6 +3,7 @@ package Application.Model;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Fad {
@@ -16,7 +17,7 @@ public class Fad {
     private Lager lager;
     private int alder;
     private Destillat destillat;
-    private HashMap<Integer, Destillat> tidligereDestillater;
+    private ArrayList<Destillat> tidligereDestillater;
 
     public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
         this.leverandør = leverandør;
@@ -151,17 +152,17 @@ public class Fad {
         }
     }
 
-    public Destillat getDestillat() {
-        return destillat;
-    }
-
-    public void removeDestillat(Destillat destillat, int nr) {
+    public void removeDestillat(int nr) {
         if (this.getDestillat() == destillat) {
-            tidligereDestillater.put(nr, destillat);
+            tidligereDestillater.add(destillat);
             this.destillat = null;
             alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
-
+            createWhisky()
         }
+    }
+
+    public Destillat getDestillat() {
+        return destillat;
     }
 
     public int getStørrelseLiter() {
