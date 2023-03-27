@@ -27,7 +27,7 @@ public class Fad {
         this.antalGangeBrugt = antalGangeBrugt;
         this.nummer = nummer;
         this.størrelseLiter = størrelseLiter;
-        this.tidligereDestillater = new HashMap<>();
+        this.tidligereDestillater = new ArrayList<>();
         setLager(lager);
         alder = 0;
     }
@@ -123,7 +123,7 @@ public class Fad {
 
     public Whisky createWhisky(Fad fad) {
         double antalLiter = opfyldtLiter - fad.beregnAngelShare3(destillat);
-        Whisky whisky = new Whisky(antalLiter, alkoholProcent, destillat.getBeskrivelse(), fortyndet, fortyndelseIL, this);
+        Whisky whisky = new Whisky((int) antalLiter, destillat.getBeskrivelse(), this);
         return whisky;
     }
 
