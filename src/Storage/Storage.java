@@ -11,36 +11,26 @@ public class Storage {
     private static ArrayList<Lager> lagerArrayList = new ArrayList<>();
     private static ArrayList<Destillat> destillatArrayList = new ArrayList<>();
     private static int destillatTæller;
-    //________________________________________________________________________
+    private static double destillatOverflød;
 
+    //________________________________________________________________________
     public static void addFad(Fad fad) {
         fadArrayList.add(fad);
     }
-
     public static ArrayList<Fad> getFadArrayList() {
         return fadArrayList;
     }
-
     //________________________________________________________________________
-
     public static void addLager(Lager lager) {
         lagerArrayList.add(lager);
     }
-
     public static ArrayList<Lager> getLagerArrayList() {
         return lagerArrayList;
     }
-
     //________________________________________________________________________
-
     public static void addDestillat(Destillat destillat){destillatArrayList.add(destillat); destillatTæller++;}
-
-
     public static ArrayList<Destillat> getDestillatArrayList(){return destillatArrayList;}
-
     public static int getDestillatTæller(){return destillatTæller;}
     public static void deleteDestillat(Destillat destillat){destillatArrayList.remove(destillat);}
-
-
     //________________________________________________________________________
 }

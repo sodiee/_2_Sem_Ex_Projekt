@@ -5,10 +5,12 @@ import Application.Model.Fad;
 import Application.Model.Lager;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class StartPane extends GridPane {
 
@@ -18,7 +20,7 @@ public class StartPane extends GridPane {
 
     private ListView<Fad> lvwFad;
 
-    private Button regFad;
+    private Button regFad, btnOpretLager;
 
 
     public StartPane() {
@@ -38,9 +40,22 @@ public class StartPane extends GridPane {
         ChangeListener<Fad> listener1 = (ov, oldCompny, newCompany) -> this.selectedFadChanged();
         lvwFad.getSelectionModel().selectedItemProperty().addListener(listener1);
 
+        btnOpretLager = new Button("Opret Lager");
+        this.add(btnOpretLager, 0, 2);
+        btnOpretLager.setAlignment(Pos.BASELINE_CENTER);
+        btnOpretLager.setOnAction(event -> this.btnOpretLagerAction());
+
         regFad = new Button("Registrer Fad");
-        this.add(regFad, 0, 2);
+        this.add(regFad, 1, 2);
+        regFad.setAlignment(Pos.BASELINE_CENTER);
         regFad.setOnAction(event -> this.regFadAction());
+
+        /**
+        HBox hbx1 = new HBox(10);
+        this.add(hbx1, 0, 2, 1, 2);
+        hbx1.getChildren().add(btnOpretLager);
+        hbx1.getChildren().add(regFad);
+        **/
 
         lblLager = new Label("Lager");
         this.add(lblLager,0,0);
@@ -60,6 +75,11 @@ public class StartPane extends GridPane {
     public void regFadAction() {
         RegFadWindow regFadWindow = new RegFadWindow("Opret Fad");
         regFadWindow.showAndWait();
+    }
+
+    public void btnOpretLagerAction(){
+        LagerOpretWindow lagerOpretWindow = new LagerOpretWindow();
+        lagerOpretWindow.showAndWait();
     }
 
     public void updateControls() {

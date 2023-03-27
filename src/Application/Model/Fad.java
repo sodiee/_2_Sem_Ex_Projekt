@@ -8,8 +8,11 @@ public class Fad {
     private String leverandør;
     private String tidligereIndhold;
     private int antalGangeBrugt;
+    private boolean iBrug = false;
     private int nummer;
     private int størrelseLiter;
+    //TODO: opfyldt skal muligvis være Double ikke Int
+    private int opfyldtLiter = 0;
     private Lager lager;
     private int alder;
     private Destillat destillat;
@@ -159,7 +162,19 @@ public class Fad {
         return størrelseLiter;
     }
 
+    public boolean isiBrug() {
+        return iBrug;
+    }
+
+    public void setiBrug(boolean iBrug) {
+        this.iBrug = iBrug;
+    }
+
+    public int getOpfyldtLiter() {return opfyldtLiter;}
+
+    public void setOpfyldtLiter(int opfyldtLiter) {this.opfyldtLiter = opfyldtLiter;}
+
     public String toString() {
-        return "Nr:" + nummer + " " + " fra " + leverandør;
+        return "Nr:" + nummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";
     }
 }

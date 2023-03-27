@@ -38,6 +38,7 @@ public class ValidationController {
                     return false;
                 }
                 //Hvis strengen indeholder et symbol/tegn
+                //TODO: Virker ikke
                 /** if(!stringValue.matches("[^A-Za-z0-9 ]") && allowSymbol == false){
                     Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
                     alertIntEmpty.setTitle("Ikke Gyldigt Input");
