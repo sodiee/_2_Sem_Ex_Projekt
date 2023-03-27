@@ -27,6 +27,7 @@ public class Fad {
         this.tidligereDestillater = new HashMap<>();
         setLager(lager);
         alder = 0;
+        String hej = "Hej";
     }
 
     /**
