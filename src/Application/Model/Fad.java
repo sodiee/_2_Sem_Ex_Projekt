@@ -119,8 +119,8 @@ public class Fad {
         return angelShareDelTotal;
     }
 
-    public Whisky createWhisky(Fad fad, double alkoholProcent, boolean fortyndet, int fortyndelseIL) {
-        int antalLiter = opfyldtLiter + fortyndelseIL;
+    public Whisky createWhisky(Fad fad) {
+        double antalLiter = opfyldtLiter - fad.beregnAngelShare3(destillat);
         Whisky whisky = new Whisky(antalLiter, alkoholProcent, destillat.getBeskrivelse(), fortyndet, fortyndelseIL, this);
         return whisky;
     }
@@ -181,6 +181,9 @@ public class Fad {
 
     public void setOpfyldtLiter(int opfyldtLiter) {this.opfyldtLiter = opfyldtLiter;}
 
+    public Lager getLager() {
+        return lager;
+    }
     public String toString() {
         return "Nr:" + nummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";
     }

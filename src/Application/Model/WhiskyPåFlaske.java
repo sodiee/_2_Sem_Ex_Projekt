@@ -5,16 +5,26 @@ import java.util.ArrayList;
 public class WhiskyPåFlaske {
     private int nummer;
 
-    private int liter;
+    private int totalNummer;
+    private double fortyndelseIML;
+
+    private double liter;
 
     private Whisky whisky;
 
-    private ArrayList<Lager> lagre;
+    private Lager lager;
 
-    public WhiskyPåFlaske(int nummer, int liter, Whisky whisky, ArrayList<Lager> lagre) {
+    public WhiskyPåFlaske(int nummer, int totalNummer, double fortyndelseIML, Whisky whisky, Lager lager) {
         this.nummer = nummer;
-        this.liter = liter;
+        this.totalNummer = totalNummer;
+        this.fortyndelseIML = fortyndelseIML;
+        this.liter = 0.7;
         this.whisky = whisky;
-        this.lagre = lagre;
+        this.lager = lager;
+    }
+
+    @Override
+    public String toString() {
+        return "Flaske nummer " + nummer + "/" + totalNummer;
     }
 }

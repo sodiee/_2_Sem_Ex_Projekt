@@ -57,8 +57,8 @@ public class Controller {
         }
     }
 
-    public static Whisky createWhisky(Fad fad, double alkoholProcent, boolean fortyndet, int fortyndelseIL) {
-        Whisky whisky = fad.createWhisky(fad, alkoholProcent, fortyndet, fortyndelseIL);
+    public static Whisky createWhisky(Fad fad) {
+        Whisky whisky = fad.createWhisky(fad);
         return whisky;
     }
 
