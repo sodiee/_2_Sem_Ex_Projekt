@@ -18,6 +18,8 @@ public class Fad {
     private Destillat destillat;
     private HashMap<Integer, Destillat> tidligereDestillater;
 
+    private Status status;
+
     public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
         this.leverandør = leverandør;
         this.tidligereIndhold = tidligereIndhold;
@@ -27,6 +29,7 @@ public class Fad {
         this.tidligereDestillater = new HashMap<>();
         setLager(lager);
         alder = 0;
+        this.status = Status.TOM;
     }
 
     /**
@@ -122,6 +125,14 @@ public class Fad {
         double antalLiter = opfyldtLiter - fad.beregnAngelShare3(destillat);
         Whisky whisky = new Whisky(antalLiter, alkoholProcent, destillat.getBeskrivelse(), fortyndet, fortyndelseIL, this);
         return whisky;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public int getAlder() {
