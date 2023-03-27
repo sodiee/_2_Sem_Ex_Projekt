@@ -57,10 +57,9 @@ public class Controller {
         }
     }
 
-    public static Whisky createWhisky() {
-        
+    public static Whisky createWhisky(Fad fad) {
+        Whisky whisky = fad.createWhisky()
     }
-
 
     //Get
 

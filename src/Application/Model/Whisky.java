@@ -4,7 +4,7 @@ public class Whisky {
     private static int nummer;
     private double alkoholProcent;
     private String beskrivelse;
-    private int liter;
+    private double liter;
     private boolean fortyndet;
     private int fortyndelseIL;
 
@@ -22,7 +22,7 @@ public class Whisky {
     public void hældWhiskyPåFlaske(Destillat destillat, int antal) {
         double flaskeStørrelseLiter = 0.7;
         int muligtAntal = (int) (destillat.getLiterFraStart() / flaskeStørrelseLiter);
-
+        if (antal )
     }
 
     public int getNummer() {
