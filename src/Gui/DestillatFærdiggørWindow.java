@@ -1,22 +1,25 @@
 package Gui;
 
+import Application.Controller.Controller;
 import Application.Model.Destillat;
 import Application.Model.Fad;
 import Storage.Storage;
 import javafx.beans.value.ChangeListener;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class DestillatFærdiggørWindow extends Stage{
