@@ -17,4 +17,10 @@ public class Reol {
 
     public ArrayList<Hylde> getHylder() {return hylder;}
     public int getReolNr() {return reolNr;}
+
+    public void addHylde(Hylde hylde){
+        if(!hylder.contains(hylde)){
+            hylder.add(hylde);
+        }
+    }
 }

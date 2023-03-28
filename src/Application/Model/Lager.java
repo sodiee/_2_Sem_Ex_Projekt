@@ -35,4 +35,10 @@ public class Lager {
 
     public ArrayList<Reol> getReoler(){return reolArrayList;}
 
+    public void addReol(Reol reol){
+        if(!reolArrayList.contains(reol)){
+            reolArrayList.add(reol);
+        }
+    }
+
 }

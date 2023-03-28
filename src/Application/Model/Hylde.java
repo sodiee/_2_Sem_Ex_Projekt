@@ -18,4 +18,10 @@ public class Hylde {
     public ArrayList<Hyldeplads> getHyldepladser() {
         return hyldepladser;
     }
+
+    public void addHyldePlads(Hyldeplads hyldeplads){
+        if(!hyldepladser.contains(hyldeplads)){
+            hyldepladser.add(hyldeplads);
+        }
+    }
 }
