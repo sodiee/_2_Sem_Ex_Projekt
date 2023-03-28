@@ -24,7 +24,7 @@ public class Whisky {
         double muligtAntal = (((this.getLiter() * 1000) + (antal * fortyndelseIMl)) / flaskeStørrelseML);
 
         if (antal > muligtAntal) {
-            throw new IllegalArgumentException("Du har angivet for mange flasker i antal");
+            throw new IllegalArgumentException("Du har angivet for mange flasker i antal, i forhold til hvor meget der kan produceres");
         } else {
             double påfyldningPerFlaske = flaskeStørrelseML - fortyndelseIMl;
             for (int i = 1; i < antal + 1; i++) {

@@ -103,9 +103,13 @@ public class Controller {
 
     //region Whisky
     public static Whisky createWhisky(Fad fad) {
-        Whisky whisky = fad.createWhisky(fad);
-        Storage.addWhisky(whisky);
-        return whisky;
+        if (fad.getDestillat() != null) {
+            Whisky whisky = fad.createWhisky(fad);
+            Storage.addWhisky(whisky);
+            return whisky;
+        } else {
+            throw new NullPointerException("Der er ikke knyttet et destillat til dette fad, så konvertering til whisky kan ikke lade sig gøre.");
+        }
     }
     public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML) {
         ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaske(antal, fortyndelseIML);

@@ -112,6 +112,8 @@ class ControllerTest {
     @Test
     void TC9_createDestillat() {
         //Arrange
+        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
 
         //Act
         //Assert
@@ -142,17 +144,16 @@ class ControllerTest {
         Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
         Destillat destillat = null;
-        destillat.hældDestillatPåfad(fad);
-        NullPointerException e = new NullPointerException();
 
         //Act
         //Assert
 
-        Exception actual = assertThrows(NullPointerException.class, () -> {
+        Exception forventet = assertThrows(NullPointerException.class, () -> {
             Controller.createWhisky(fad);
         });
+        String nullPointerExceptionMsg = "Der er ikke knyttet et destillat til dette fad, så konvertering til whisky kan ikke lade sig gøre.";
 
-        assertEquals(actual, e.getMessage());
+        assertEquals(forventet.getMessage(), nullPointerExceptionMsg);
     }
 
     @Test
@@ -172,10 +173,24 @@ class ControllerTest {
             Boolean actualBoolean = Storage.getWhiskyPåFlaskeArrayList().contains(wpf);
             assertTrue(actualBoolean);
         }
-
-
-
-
     }
 
+    @Test
+    void TC24_createWhiskyPåFlaske() {
+        //Arrange
+        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        destillat.hældDestillatPåfad(fad);
+        Whisky whisky = Controller.createWhisky(fad);
+
+        //Act
+        //Assert
+        Exception forventet = assertThrows(IllegalArgumentException.class, () -> {
+            Controller.createWhiskyPåFlaske(whisky, 200, 15);
+        });
+        String faktisk = "Du har angivet for mange flasker i antal, i forhold til hvor meget der kan produceres";
+
+        assertEquals(forventet.getMessage(), faktisk);
+    }
 }

@@ -36,6 +36,9 @@ public class Fad {
         double angelShareProcent;
         double angelShareDelTotal = 0;
 
+        if (alder < 0) {
+            throw new IllegalArgumentException("Ugyldig alder på fad");
+        }
         if (alder == 0) {
             angelShareProcent = 0.02;
             return destillat.getLiterFraStart() * angelShareProcent;
@@ -65,9 +68,9 @@ public class Fad {
     }
 
     public Whisky createWhisky(Fad fad) {
-        double antalLiter = fad.opfyldtLiter - fad.beregnAngelShare(fad.getDestillat());
-        Whisky whisky = new Whisky((int) antalLiter, destillat.getBeskrivelse(), this);
-        return whisky;
+            double antalLiter = fad.opfyldtLiter - fad.beregnAngelShare(fad.getDestillat());
+            Whisky whisky = new Whisky((int) antalLiter, destillat.getBeskrivelse(), this);
+            return whisky;
     }
 
     public void setStatus(Status status) {
@@ -97,7 +100,7 @@ public class Fad {
     }
 
     public void addDestilatTofad(Destillat destillat) {
-        if (!(destillat == null)) {
+        if (destillat != null) {
             setDestillat(destillat);
             destillat.addFad(this);
             antalGangeBrugt++;
