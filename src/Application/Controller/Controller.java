@@ -123,18 +123,27 @@ public class Controller {
         Lager sønderhøj = createLager(2, 3, 3, "Sønderhøj 30");
         Lager sørenFrichsVej = createLager(3, 2, 2, "Søren Frichs Vej");
 
-        Fad fad = createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
-        Fad fad1 = createFad("Bourbon distilleri, Texas", "Bourbon", 1, 326, 90, sønderhøj);
-        Fad fad2 = createFad("Sherry distilleri, Madrid", "Sherry", 2, 2, 95, sønderhøj);
-        Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54, 50, sørenFrichsVej);
-
-        Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever");
-        Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2021, 2, 14), LocalDate.of(2022, 1, 19), "Byg", "Strå", "I can't believe its not whiskey");
-
         Reol reol = createReol(sønderhøj, 5, 8);
         Reol reol2 = createReol(sønderhøj, 4, 8);
         Reol reol3 = createReol(sørenFrichsVej, 6, 8);
         Reol reol4 = createReol(sørenFrichsVej, 3, 8);
+
+        Hylde hylde = new Hylde(1,reol);
+
+        Hyldeplads hyldeplads1 = new Hyldeplads(1,hylde);
+        Hyldeplads hyldeplads2 = new Hyldeplads(2,hylde);
+        Hyldeplads hyldeplads3 = new Hyldeplads(3,hylde);
+        Hyldeplads hyldeplads4 = new Hyldeplads(4,hylde);
+
+        Fad fad = createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, hyldeplads1);
+        Fad fad1 = createFad("Bourbon distilleri, Texas", "Bourbon", 1, 326, 90, hyldeplads2);
+        Fad fad2 = createFad("Sherry distilleri, Madrid", "Sherry", 2, 2, 95, hyldeplads3);
+        Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54, 50, hyldeplads4);
+
+        Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever");
+        Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2021, 2, 14), LocalDate.of(2022, 1, 19), "Byg", "Strå", "I can't believe its not whiskey");
+
+
 
 
     }
