@@ -42,10 +42,10 @@ public class LagerPane extends GridPane {
         this.add(cbxLager, 0, 1);
         this.add(lblReol, 0, 2);
         this.add(lvwReol, 0, 3);
-        this.add(lblHylde, 0, 4);
-        this.add(lvwHylde, 0, 5);
-        this.add(lblHyldeplads, 1, 2);
-        this.add(lvwHyldeplads, 1, 3);
+        this.add(lblHylde, 1, 2);
+        this.add(lvwHylde, 1, 3);
+        this.add(lblHyldeplads, 0, 4);
+        this.add(lvwHyldeplads, 0, 5);
         this.add(lblFad, 1, 4);
         this.add(lblFadInfo, 1, 5);
 
@@ -66,8 +66,6 @@ public class LagerPane extends GridPane {
     }
     public void updateControls(){
 
-
-
     }
     private void selectedReolChanged(){
         Reol reol = lvwReol.getSelectionModel().getSelectedItem();
@@ -76,7 +74,6 @@ public class LagerPane extends GridPane {
     private void selectedHyldeChanged(){
         Hylde hylde = lvwHylde.getSelectionModel().getSelectedItem();
         lvwHyldeplads.getItems().setAll(hylde.getHyldepladser());
-
     }
     private void selectedHyldepladsChanged(){
         Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();

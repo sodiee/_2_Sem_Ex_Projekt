@@ -23,6 +23,7 @@ public class Controller {
     public static ArrayList<Fad> getFad(){
         return Storage.getFadArrayList();
     }
+    public static void deleteFad(Fad fad){Storage.deleteFad(fad);}
     //endregion
 
     //region Lager

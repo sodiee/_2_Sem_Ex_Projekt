@@ -58,6 +58,11 @@ public class StartWindow extends Application {
         tabLager.setContent(lagerPane);
         tabLager.setOnSelectionChanged(event -> lagerPane.updateControls());
 
+        //WhiskyPane
+
+        //FadPane
+
+
     }
 }
 

@@ -14,6 +14,7 @@ public class Storage {
     public static ArrayList<Fad> getFadArrayList() {
         return fadArrayList;
     }
+    public static void deleteFad(Fad fad){fadArrayList.remove(fad);}
     //endregion
 
     //region Lager
