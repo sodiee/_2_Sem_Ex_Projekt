@@ -18,4 +18,8 @@ public class Hyldeplads {
     public Fad getFad() {
         return fad;
     }
+
+    public void setFad(Fad fad) {
+        this.fad = fad;
+    }
 }
