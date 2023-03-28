@@ -158,6 +158,7 @@ public class Fad {
     public void addDestilatTofad(Destillat destillat) {
         if (!(destillat == null)) {
             setDestillat(destillat);
+            destillat.addFad(this);
             antalGangeBrugt++;
         } else {
             System.out.println("Der er ikke nok plads på fadet");
