@@ -7,8 +7,8 @@ public class Hyldeplads {
     private int hyldepladsNr;
     private Fad fad;
 
-    public Hyldeplads(){
-
+    public Hyldeplads(int hyldepladsNr){
+        this.hyldepladsNr = hyldepladsNr;
     }
 
     public int getHyldepladsNr() {
