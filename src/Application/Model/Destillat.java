@@ -54,6 +54,7 @@ public class Destillat {
     public void addFad(Fad fad){
         if(!fade.contains(fad)){
         fade.add(fad);
+        fad.setDestillat(this);
     }}
 
     public Destillat færdigørDestillat(Fad fad){

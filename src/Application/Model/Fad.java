@@ -99,6 +99,7 @@ public class Fad {
     public void addDestilatTofad(Destillat destillat) {
         if (!(destillat == null)) {
             setDestillat(destillat);
+            destillat.addFad(this);
             antalGangeBrugt++;
         } else {
             System.out.println("Der er ikke nok plads på fadet");
@@ -106,10 +107,10 @@ public class Fad {
     }
 
     public void removeDestillat() {
-        if (this.getDestillat() == destillat) {
+        if (destillat != null) {
             tidligereDestillater.add(destillat);
-            this.destillat = null;
             alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
+            this.destillat = null;
             convertToWhisky();
         }
     }
