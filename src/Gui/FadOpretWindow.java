@@ -1,7 +1,10 @@
 package Gui;
 
 import Application.Controller.Controller;
+import Application.Model.Hyldeplads;
 import Application.Model.Lager;
+import Application.Model.Reol;
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -11,30 +14,27 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-public class RegFadWindow extends Stage {
+public class FadOpretWindow extends Stage {
 
-    private TextField txfLev, txfTidligere, txfBrugt, txfNr, txfLiter;
+    private TextField txfLev, txfTidligere, txfBrugt, txfLiter;
 
-    private Label lblLev, lblTidligere, lblBrugt, lblNr, lblLiter, lblLager;
+    private Label lblLev, lblTidligere, lblBrugt, lblLiter, lblLager, lblReol;
 
     private Button okBut, canBut;
 
     private ComboBox<Lager> cbbLager;
+    private ComboBox<Reol> cbxReol;
 
-    public RegFadWindow(String title) {
+    public FadOpretWindow(String title) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-
-
         this.setTitle(title);
         GridPane pane = new GridPane();
         this.initContent(pane);
-
         Scene scene = new Scene(pane);
         this.setScene(scene);
-
-        this.setHeight(300);
+        //this.setHeight(300);
     }
 
     private void initContent(GridPane pane) {
@@ -61,20 +61,14 @@ public class RegFadWindow extends Stage {
         txfBrugt = new TextField();
         pane.add(txfBrugt, 1, 2);
 
-        lblNr = new Label("Nummer");
-        pane.add(lblNr, 0, 3);
-
-        txfNr = new TextField();
-        pane.add(txfNr, 1, 3);
-
         lblLiter = new Label("Antal Liter");
-        pane.add(lblLiter, 0, 4);
+        pane.add(lblLiter, 0, 3);
 
         txfLiter = new TextField();
-        pane.add(txfLiter, 1, 4);
+        pane.add(txfLiter, 1, 3);
 
         lblLager = new Label("Lager");
-        pane.add(lblLager, 0, 5);
+        pane.add(lblLager, 0, 4);
 
         okBut = new Button("Ok");
         pane.add(okBut, 0, 6);
@@ -86,10 +80,23 @@ public class RegFadWindow extends Stage {
         canBut.setOnAction(event -> this.canAction());
 
         cbbLager = new ComboBox<>();
-        pane.add(cbbLager, 1, 5);
+        pane.add(cbbLager, 1, 4);
         cbbLager.getItems().addAll(Controller.getLager());
+        ChangeListener<Lager> listener1 = (ov, oldCompny, newCompany) -> this.onLagerChanged();
+        cbbLager.getSelectionModel().selectedItemProperty().addListener(listener1);
+
+        lblReol = new Label("Reol");
+        pane.add(lblReol, 0, 5);
+
+        cbxReol = new ComboBox<>();
+        pane.add(cbxReol, 1, 5);
 
 
+
+    }
+
+    private void onLagerChanged(){
+        cbxReol.getItems().setAll(cbbLager.getSelectionModel().getSelectedItem().getReoler());
     }
 
     private void canAction() {
@@ -100,15 +107,15 @@ public class RegFadWindow extends Stage {
         String leverandør = txfLev.getText().trim();
         String tidligere = txfTidligere.getText().trim();
         int brugt = Integer.parseInt(txfBrugt.getText());
-        int nr = Integer.parseInt(txfNr.getText());
         int liter = Integer.parseInt(txfLiter.getText());
         Lager lager = cbbLager.getSelectionModel().getSelectedItem();
-        if (leverandør.length() == 0 || tidligere.length() == 0 || txfBrugt.getText().length() == 0 || txfNr.getText().length() == 0 || txfLiter.getText().length() == 0) {
+
+        if (leverandør.length() == 0 || tidligere.length() == 0 || txfBrugt.getText().length() == 0 || txfLiter.getText().length() == 0) {
             Alert dialog = new Alert(Alert.AlertType.INFORMATION);
             dialog.setTitle("Error");
             dialog.setHeaderText("Angiv noget i alle felter");
             dialog.showAndWait();
-        } else if (brugt == 0 || nr == 0 || liter == 0) {
+        } else if (brugt == 0 || liter == 0) {
             Alert dialog1 = new Alert(Alert.AlertType.INFORMATION);
             dialog1.setTitle("Error");
             dialog1.setHeaderText("Brugt, nummer og liter må ikke være 0");
@@ -119,8 +126,19 @@ public class RegFadWindow extends Stage {
             dialog.setHeaderText("Du skal vælge et lager");
             dialog.showAndWait();
         } else {
-            Controller.createFad(leverandør, tidligere, brugt, nr, liter, lager);
-            hide();
+
+            Hyldeplads hyldeplads = Controller.findTomHyldeplads(cbxReol.getSelectionModel().getSelectedItem());
+            if(hyldeplads == null){
+                Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+                dialog.setTitle("Error");
+                dialog.setHeaderText("Hyldeplads er null");
+                dialog.showAndWait();
+            }
+            else{
+                Controller.createFad(leverandør, tidligere, brugt, liter, hyldeplads);
+                hide();
+            }
+
         }
 
 

@@ -1,6 +1,7 @@
 package Gui;
 
 import Application.Controller.Controller;
+import Application.Model.Fad;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -61,7 +62,11 @@ public class StartWindow extends Application {
         //WhiskyPane
 
         //FadPane
-
+        Tab tabFad = new Tab("Fade");
+        tabPane.getTabs().add(tabFad);
+        FadPane fadPane = new FadPane();
+        tabFad.setContent(fadPane);
+        tabFad.setOnSelectionChanged(event -> fadPane.updateControls());
 
     }
 }

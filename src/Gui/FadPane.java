@@ -3,6 +3,7 @@ package Gui;
 import Application.Controller.Controller;
 import Application.Model.Fad;
 import Application.Model.Status;
+import Storage.Storage;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -21,6 +22,7 @@ public class FadPane extends GridPane {
     private VBox vbxInfo;
     private HBox hbxButtons;
     private Button btnRegFad, btnSletFad, btnRedigérFad, btnOpretWhisky;
+    private Fad selectedFad;
 
     public FadPane(){
         this.setPadding(new Insets(10));
@@ -28,7 +30,7 @@ public class FadPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
         this.initGUI();
-
+        this.initData();
 
     }
 
@@ -92,11 +94,26 @@ public class FadPane extends GridPane {
         this.add(lvwFad, 0, 0);
         this.add(vbxInfo, 1, 0);
         this.add(hbxButtons, 0, 1, 1, 2);
+        lvwFad.getItems().addAll(Storage.getFadArrayList());
+    }
+
+    private void initData(){
+
+        if(selectedFad == null){return;}
+        LblTidligereIndholdValue.setText(selectedFad.getTidligereIndhold());
+        lblAntalGangeBrugtValue.setText(String.valueOf(selectedFad.getAntalGangeBrugt()));
+        //lblLagerValue.setText(selectedFad.getLager().toString());
+        lblAlderValue.setText(String.valueOf(selectedFad.getAlder()));
+        if(selectedFad.getDestillat() != null){
+            lblDestillatValue.setText("Destillat #"+String.valueOf(selectedFad.getDestillat().getDestillatNr()));
+        }
+        lblStatusValue.setText(selectedFad.getStatus().name());
     }
 
     private void selectedFadChanged() {
-        //TODO Ændre så den ikke giver fejl når man skifter fane mens et fad er markeret.
-        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT && lvwFad.getSelectionModel().getSelectedItem().getStatus() != null){
+
+        if(lvwFad.getSelectionModel().getSelectedItem() == null){return;}
+        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT && lvwFad.getSelectionModel().getSelectedItem() != null){
             btnOpretWhisky.setDisable(false);
         }
         else{
@@ -106,20 +123,30 @@ public class FadPane extends GridPane {
         if(lvwFad.getSelectionModel().getSelectedItem() != null){
             btnRedigérFad.setDisable(false);
             btnSletFad.setDisable(false);
+
+            selectedFad = lvwFad.getSelectionModel().getSelectedItem();
+            initData();
+
         }
         else{
             btnRedigérFad.setDisable(true);
             btnSletFad.setDisable(true);
         }
+    }
+    public void updateControls(){
 
     }
     public void regFadAction() {
-        RegFadWindow regFadWindow = new RegFadWindow("Opret Fad");
-        regFadWindow.showAndWait();
+        FadOpretWindow fadOpretWindow = new FadOpretWindow("Opret Fad");
+        fadOpretWindow.showAndWait();
+        lvwFad.getItems().clear();
+        lvwFad.getItems().addAll(Storage.getFadArrayList());
     }
     public void redigerAction() {
-
-
+        FadRedigerWindow fadRedigerWindow = new FadRedigerWindow(lvwFad.getSelectionModel().getSelectedItem());
+        fadRedigerWindow.showAndWait();
+        lvwFad.getItems().clear();
+        lvwFad.getItems().addAll(Storage.getFadArrayList());
     }
     public void sletAction() {
         Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
@@ -131,18 +158,14 @@ public class FadPane extends GridPane {
 
         } else if (option.get() == ButtonType.OK) {
             Controller.deleteFad(lvwFad.getSelectionModel().getSelectedItem());
+            lvwFad.getItems().clear();
+            lvwFad.getItems().addAll(Storage.getFadArrayList());
         } else if (option.get() == ButtonType.CANCEL) {
 
         }
     }
     public void opretWhiskyAction(){
-        //TODO:
-        //sæt if() ved markeringen, så knappen ikke kan trykkes
-        //lav alert der bekræfter ændringen
-        //sørg for man ikke kan trykke på knappen to gange
-        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT){
-
-        }
+        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() != Status.DESTILLAT){return;}
 
         Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
         alertConfirmation.setTitle("Slettelse");
@@ -153,6 +176,8 @@ public class FadPane extends GridPane {
 
         } else if (option.get() == ButtonType.OK) {
             lvwFad.getSelectionModel().getSelectedItem().removeDestillat();
+            lvwFad.getItems().clear();
+            lvwFad.getItems().addAll(Storage.getFadArrayList());
         } else if (option.get() == ButtonType.CANCEL) {
 
         }

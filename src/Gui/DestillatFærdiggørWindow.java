@@ -59,7 +59,7 @@ public class DestillatFærdiggørWindow extends Stage{
         pane.add(lvwFad, 1, 1);
 
         for (Fad fad : Storage.getFadArrayList()){
-            if(!fad.isiBrug()){
+            if(fad.getStatus() == Status.TOM){
                 lvwFad.getItems().add(fad);
             }
         }
@@ -121,9 +121,9 @@ public class DestillatFærdiggørWindow extends Stage{
         } else if (option.get() == ButtonType.OK) {
 
             for(Fad fad : selectedItems){
-                fad.setiBrug(true);
                 fad.setOpfyldtLiter(fad.getStørrelseLiter()); //PROBLEM HER, DEN BLIVER 0
                 fad.setStatus(Status.DESTILLAT);
+                fad.setDestillat(destillat);
             }
             destillat.setDone(true);
             this.hide();

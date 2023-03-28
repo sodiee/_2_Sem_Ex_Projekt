@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class Controller {
 
     //region Fad
-    public static Fad createFad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Hyldeplads hyldeplads) {
+    public static Fad createFad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int størrelseLiter, Hyldeplads hyldeplads) {
         //TODO: tjek om det er sådan her man sørger for at lageret ikke er null
         if (hyldeplads == null){
             throw new IllegalArgumentException("Hyldeplads må ikke være null");
         }
         else{
-            Fad fad = new Fad(leverandør, tidligereIndhold, antalGangeBrugt, nummer, størrelseLiter, hyldeplads);
+            Fad fad = new Fad(leverandør, tidligereIndhold, antalGangeBrugt, størrelseLiter, hyldeplads);
             Storage.addFad(fad);
             return fad;
         }
@@ -35,7 +35,6 @@ public class Controller {
     public static ArrayList<Lager> getLager(){
         return Storage.getLagerArrayList();
     }
-    //TODO: dobbelcheck lige at den her (createReol) er som den skal være
     public static Reol createReol(Lager lager, int antalHylder, int antalHyldepladser){
         Reol reol = new Reol(lager.getReoler().size()+1, lager);
 
@@ -44,12 +43,31 @@ public class Controller {
             Hylde hylde = new Hylde(i+1, reol);
             for(int j = 0; j < antalHyldepladser; j++){
                 Hyldeplads hyldeplads = new Hyldeplads(j+1, hylde);
+                hyldeplads.setOptaget(true);
                 hylde.addHyldePlads(hyldeplads);
             }
             reol.addHylde(hylde);
         }
         lager.addReol(reol);
         return reol;
+    }
+
+    /**
+     * Finder en tom hyldeplads på en reol, hvis det kan lade sig gøre
+     * @param reol
+     * @return hyldeplads, hvis en er ledig
+     */
+    public static Hyldeplads findTomHyldeplads(Reol reol){
+
+        for(int i = 0; i < reol.getHylder().size(); i++){
+            Hylde hylde = reol.getHylder().get(i);
+            for(int j = 0; j < hylde.getHyldepladser().size(); j++){
+                if(!hylde.getHyldepladser().get(j).optaget){
+                    return hylde.getHyldepladser().get(j);
+                }
+            }
+        }
+        return null;
     }
     //endregion
 
@@ -128,18 +146,18 @@ public class Controller {
         Reol reol2 = createReol(sønderhøj, 4, 8);
         Reol reol3 = createReol(sørenFrichsVej, 6, 8);
         Reol reol4 = createReol(sørenFrichsVej, 3, 8);
+        Reol reol5 = createReol(sørenFrichsVej, 7, 8);
 
         Hylde hylde = new Hylde(1,reol);
-
         Hyldeplads hyldeplads1 = new Hyldeplads(1,hylde);
         Hyldeplads hyldeplads2 = new Hyldeplads(2,hylde);
         Hyldeplads hyldeplads3 = new Hyldeplads(3,hylde);
         Hyldeplads hyldeplads4 = new Hyldeplads(4,hylde);
 
-        Fad fad = createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, hyldeplads1);
-        Fad fad1 = createFad("Bourbon distilleri, Texas", "Bourbon", 1, 326, 90, hyldeplads2);
-        Fad fad2 = createFad("Sherry distilleri, Madrid", "Sherry", 2, 2, 95, hyldeplads3);
-        Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54, 50, hyldeplads4);
+        Fad fad = createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, hyldeplads1);
+        Fad fad1 = createFad("Bourbon distilleri, Texas", "Bourbon", 1, 326,  hyldeplads2);
+        Fad fad2 = createFad("Sherry distilleri, Madrid", "Sherry", 2, 2,  hyldeplads3);
+        Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54,  hyldeplads4);
 
         Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever");
         Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2021, 2, 14), LocalDate.of(2022, 1, 19), "Byg", "Strå", "I can't believe its not whiskey");

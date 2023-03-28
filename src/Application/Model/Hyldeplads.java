@@ -9,10 +9,13 @@ public class Hyldeplads {
     private Hylde hylde;
     private Fad fad;
 
+    public boolean optaget;
+
 
     public Hyldeplads(int hyldepladsNr, Hylde hylde){
         this.hyldepladsNr = hyldepladsNr;
         this.hylde = hylde;
+        this.optaget = false;
     }
 
     public int getHyldepladsNr() {
@@ -29,5 +32,17 @@ public class Hyldeplads {
 
     public void setHylde(Hylde hylde) {
         this.hylde = hylde;
+    }
+
+    public boolean isOptaget() {
+        return optaget;
+    }
+
+    public void setOptaget(boolean optaget) {
+        this.optaget = optaget;
+    }
+    @Override
+    public String toString(){
+        return "#" + hyldepladsNr;
     }
 }

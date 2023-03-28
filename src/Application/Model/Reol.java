@@ -28,4 +28,11 @@ public class Reol {
     public void setLager(Lager lager) {
         this.lager = lager;
     }
+
+    @Override
+    public String toString(){
+        return "#" + reolNr;
+    }
 }
+
+

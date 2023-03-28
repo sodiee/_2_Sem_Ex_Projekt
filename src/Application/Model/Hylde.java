@@ -29,4 +29,8 @@ public class Hylde {
     public void setReol(Reol reol) {
         this.reol = reol;
     }
+    @Override
+    public String toString(){
+        return "#" + hyldeNr;
+    }
 }

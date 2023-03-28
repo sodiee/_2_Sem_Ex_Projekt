@@ -2,6 +2,8 @@ package Application.Model;
 
 
 
+import javafx.scene.control.Alert;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,12 +11,9 @@ public class Fad {
     private String leverandør;
     private String tidligereIndhold;
     private int antalGangeBrugt;
-    //TODO: iBrug kan byttes ud med at bruge enum i stedet?
-    private boolean iBrug = false;
-    private int nummer;
+    private static int nummer;
     private int størrelseLiter;
     private int opfyldtLiter = 0;
-    private Lager lager;
     private Reol reol;
     private Hylde hylde;
     private Hyldeplads hyldeplads;
@@ -26,11 +25,11 @@ public class Fad {
 
 
 
-    public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Hyldeplads hyldeplads) {
+    public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int størrelseLiter, Hyldeplads hyldeplads) {
         this.leverandør = leverandør;
         this.tidligereIndhold = tidligereIndhold;
         this.antalGangeBrugt = antalGangeBrugt;
-        this.nummer = nummer;
+        this.nummer = nummer + 1;
         this.størrelseLiter = størrelseLiter;
         this.tidligereDestillater = new ArrayList<>();
         setHyldeplads(hyldeplads);
@@ -40,6 +39,9 @@ public class Fad {
 
 
     public double beregnAngelShare(Destillat destillat) {
+
+        //TODO: ERROR: destillat == null, når man færdigøre destillat til whisky
+
         double tempLiter = destillat.getLiterFraStart();
         double angelShareProcent;
         double angelShareDelTotal = 0;
@@ -122,6 +124,11 @@ public class Fad {
     }
 
     public Whisky createWhisky(Fad fad) {
+            if(destillat == null){
+                Alert alertConfirmation = new Alert(Alert.AlertType.ERROR);
+                alertConfirmation.setTitle("Null");
+                alertConfirmation.setHeaderText("ERROR: destillat == null");
+            }
             double antalLiter = fad.opfyldtLiter - fad.beregnAngelShare(fad.getDestillat());
             Whisky whisky = new Whisky((int) antalLiter, destillat.getBeskrivelse(), this);
             return whisky;
@@ -170,6 +177,11 @@ public class Fad {
             this.destillat = null;
             convertToWhisky();
         }
+        else{
+            Alert alertConfirmation = new Alert(Alert.AlertType.ERROR);
+            alertConfirmation.setTitle("Null");
+            alertConfirmation.setHeaderText("ERROR: destillat == null");
+        }
     }
 
     public void convertToWhisky(){
@@ -184,13 +196,6 @@ public class Fad {
         return størrelseLiter;
     }
 
-    public boolean isiBrug() {
-        return iBrug;
-    }
-
-    public void setiBrug(boolean iBrug) {
-        this.iBrug = iBrug;
-    }
 
     public int getOpfyldtLiter() {return opfyldtLiter;}
 
@@ -199,6 +204,67 @@ public class Fad {
     public Hyldeplads getHyldeplads() {
         return hyldeplads;
     }
+
+    public String getLeverandør() {
+        return leverandør;
+    }
+
+    public void setLeverandør(String leverandør) {
+        this.leverandør = leverandør;
+    }
+
+    public String getTidligereIndhold() {
+        return tidligereIndhold;
+    }
+
+    public void setTidligereIndhold(String tidligereIndhold) {
+        this.tidligereIndhold = tidligereIndhold;
+    }
+
+    public int getAntalGangeBrugt() {
+        return antalGangeBrugt;
+    }
+
+    public void setAntalGangeBrugt(int antalGangeBrugt) {
+        this.antalGangeBrugt = antalGangeBrugt;
+    }
+
+    public int getNummer() {
+        return nummer;
+    }
+
+    public void setNummer(int nummer) {
+        this.nummer = nummer;
+    }
+
+    public void setStørrelseLiter(int størrelseLiter) {
+        this.størrelseLiter = størrelseLiter;
+    }
+
+    public Reol getReol() {
+        return reol;
+    }
+
+    public void setReol(Reol reol) {
+        this.reol = reol;
+    }
+
+    public Hylde getHylde() {
+        return hylde;
+    }
+
+    public void setHylde(Hylde hylde) {
+        this.hylde = hylde;
+    }
+
+    public ArrayList<Destillat> getTidligereDestillater() {
+        return tidligereDestillater;
+    }
+
+    public void setTidligereDestillater(ArrayList<Destillat> tidligereDestillater) {
+        this.tidligereDestillater = tidligereDestillater;
+    }
+
     public String toString() {
         return "Nr:" + nummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";
     }

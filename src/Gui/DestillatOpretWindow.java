@@ -31,6 +31,7 @@ public class DestillatOpretWindow extends Stage{
         Scene scene = new Scene(pane);
         this.setScene(scene);
         //this.setHeight(300);
+        //TODO: bliver ikke stor nok i højden
         this.initGUI(pane);
     }
 

@@ -84,8 +84,8 @@ public class StartPane extends GridPane {
     }
 
     public void regFadAction() {
-        RegFadWindow regFadWindow = new RegFadWindow("Opret Fad");
-        regFadWindow.showAndWait();
+        FadOpretWindow fadOpretWindow = new FadOpretWindow("Opret Fad");
+        fadOpretWindow.showAndWait();
     }
 
     public void btnOpretLagerAction(){
@@ -101,10 +101,7 @@ public class StartPane extends GridPane {
     }
 
     public void updateControls() {
-        Lager lager = lvwLager.getSelectionModel().getSelectedItem();
-       if (lager != null){
-            lvwFad.getItems().setAll(lager.getFade());
-        }
+
     }
 
 }
