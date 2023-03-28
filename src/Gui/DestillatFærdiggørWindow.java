@@ -99,11 +99,11 @@ public class DestillatFærdiggørWindow extends Stage{
         }
 
         lblResterendeValue.setText(String.valueOf(resterendeLiter-fadeLiter));
-        if (resterendeLiter-fadeLiter < 0){
+        if (resterendeLiter - fadeLiter < 0){
             lblResterendeValue.setStyle("-fx-text-fill: red;");
             btnGodkend.setDisable(true);
         }
-        else if (resterendeLiter-fadeLiter > 0){
+        else if (resterendeLiter - fadeLiter > 0){
             lblResterendeValue.setStyle("-fx-text-fill: black;");
         }
     }

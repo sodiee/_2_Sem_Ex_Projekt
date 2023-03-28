@@ -1,12 +1,11 @@
 package Application.Controller;
 
-import Application.Model.Destillat;
-import Application.Model.Fad;
-import Application.Model.Lager;
+import Application.Model.*;
 import Storage.Storage;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -63,7 +62,7 @@ class ControllerTest {
     }
 
     @Test
-    void TC5_createDestillatTC5() {
+    void TC5_createDestillat() {
         //Arrange
 
         //Act
@@ -75,7 +74,7 @@ class ControllerTest {
     }
 
     @Test
-    void TC6_createDestillatTC5() {
+    void TC6_createDestillat() {
         //Arrange
 
         //Act
@@ -87,7 +86,7 @@ class ControllerTest {
     }
 
     @Test
-    void TC7_createDestillatTC5() {
+    void TC7_createDestillat() {
         //Arrange
 
         //Act
@@ -99,7 +98,7 @@ class ControllerTest {
     }
 
     @Test
-    void TC8_createDestillatTC5() {
+    void TC8_createDestillat() {
         //Arrange
 
         //Act
@@ -111,7 +110,7 @@ class ControllerTest {
     }
 
     @Test
-    void TC9_createDestillatTC5() {
+    void TC9_createDestillat() {
         //Arrange
 
         //Act
@@ -121,4 +120,62 @@ class ControllerTest {
         });
         assertEquals(forventet.getMessage(), "Ugyldig data");
     }
+
+    @Test
+    void TC21_createWhisky() {
+        //Arrange
+        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        destillat.hældDestillatPåfad(fad);
+        //Act
+        Whisky whisky = Controller.createWhisky(fad);
+
+        //Assert
+        Boolean actualBoolean = Storage.getWhiskyArrayList().contains(whisky);
+        assertTrue(actualBoolean);
+    }
+
+    @Test
+    void TC22_createWhisky() {
+        //Arrange
+        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Destillat destillat = null;
+        destillat.hældDestillatPåfad(fad);
+        NullPointerException e = new NullPointerException();
+
+        //Act
+        //Assert
+
+        Exception actual = assertThrows(NullPointerException.class, () -> {
+            Controller.createWhisky(fad);
+        });
+
+        assertEquals(actual, e.getMessage());
+    }
+
+    @Test
+    void TC23_createWhiskyPåFlaske() {
+        //Arrange
+        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        destillat.hældDestillatPåfad(fad);
+        Whisky whisky = Controller.createWhisky(fad);
+
+        //Act
+        //Assert
+        ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15);
+
+        for (WhiskyPåFlaske wpf : whiskyPåFlaskeArrayList) {
+            Boolean actualBoolean = Storage.getWhiskyPåFlaskeArrayList().contains(wpf);
+            assertTrue(actualBoolean);
+        }
+
+
+
+
+    }
+
 }

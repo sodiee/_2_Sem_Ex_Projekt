@@ -21,16 +21,16 @@ public class Whisky {
 
     public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl) {
         double flaskeStørrelseML = 700;
-        double muligtAntal = ((this.getLiter() * 1000) + (antal * fortyndelseIMl) / flaskeStørrelseML);
+        double muligtAntal = (((this.getLiter() * 1000) + (antal * fortyndelseIMl)) / flaskeStørrelseML);
 
         if (antal > muligtAntal) {
             throw new IllegalArgumentException("Du har angivet for mange flasker i antal");
         } else {
             double påfyldningPerFlaske = flaskeStørrelseML - fortyndelseIMl;
-            for (int i = 1; i < antal; i++) {
+            for (int i = 1; i < antal + 1; i++) {
                 WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, (int)muligtAntal, fortyndelseIMl, this, fad.getLager());
                 flasker.add(whiskyPåFlaske);
-                this.setLiter(this.getLiter() - påfyldningPerFlaske);
+                this.setLiter(this.getLiter() - (påfyldningPerFlaske / 1000));
             }
         }
         return flasker;

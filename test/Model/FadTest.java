@@ -20,7 +20,7 @@ public class FadTest {
 
         //Act & Assert
         Exception forventet = assertThrows(IllegalArgumentException.class, () -> {
-            fad.beregnAngelShare2(destillat);
+            fad.beregnAngelShare(destillat);
         });
         assertEquals(forventet.getMessage(), "Ugyldig alder på fad");
     }
@@ -34,7 +34,7 @@ public class FadTest {
         fad.setAlder(0);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 2.0;
@@ -50,7 +50,7 @@ public class FadTest {
         fad.setAlder(1);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 5.88;
@@ -66,7 +66,7 @@ public class FadTest {
         fad.setAlder(4);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 5.88;
@@ -82,7 +82,7 @@ public class FadTest {
         fad.setAlder(5);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 8.77;
@@ -98,7 +98,7 @@ public class FadTest {
         fad.setAlder(7);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 8.77;
@@ -114,7 +114,7 @@ public class FadTest {
         fad.setAlder(8);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 11.52;
@@ -130,7 +130,7 @@ public class FadTest {
         fad.setAlder(11);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 11.52;
@@ -146,7 +146,7 @@ public class FadTest {
         fad.setAlder(12);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 14.26;
@@ -162,7 +162,7 @@ public class FadTest {
         fad.setAlder(13);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 14.26;
@@ -178,7 +178,7 @@ public class FadTest {
         fad.setAlder(20);
 
         //Act
-        double actual = fad.beregnAngelShare2(destillat);
+        double actual = fad.beregnAngelShare(destillat);
 
         //Assert
         double forventet = 14.26;

@@ -68,6 +68,7 @@ public class Destillat {
             fad.addDestilatTofad(this);
             liter -= fad.getStørrelseLiter();
             fad.setStatus(Status.DESTILLAT);
+            fad.setOpfyldtLiter(fad.getStørrelseLiter());
         }
     }
 
