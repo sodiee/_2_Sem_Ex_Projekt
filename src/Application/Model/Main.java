@@ -67,5 +67,6 @@ public class Main {
         ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15);
         System.out.println(whiskyPåFlaskeArrayList);
         System.out.println(whisky.getLiter());
+        //.
     }
 }
