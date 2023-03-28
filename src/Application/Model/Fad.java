@@ -10,6 +10,7 @@ public class Fad {
     private String leverandør;
     private String tidligereIndhold;
     private int antalGangeBrugt;
+    //TODO: iBrug kan byttes ud med at bruge enum i stedet?
     private boolean iBrug = false;
     private int nummer;
     private int størrelseLiter;

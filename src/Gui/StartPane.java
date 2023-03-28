@@ -98,8 +98,6 @@ public class StartPane extends GridPane {
        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT){
             lvwFad.getSelectionModel().getSelectedItem().removeDestillat();
         }
-
-
     }
 
     public void updateControls() {
