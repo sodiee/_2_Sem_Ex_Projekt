@@ -23,6 +23,10 @@ public class WhiskyPåFlaske {
         this.lager = lager;
     }
 
+    public void setWhisky(Whisky whisky) {
+        this.whisky = whisky;
+    }
+
     @Override
     public String toString() {
         return "Flaske nummer " + nummer + "/" + totalNummer;

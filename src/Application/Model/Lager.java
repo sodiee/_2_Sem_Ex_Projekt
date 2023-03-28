@@ -38,6 +38,7 @@ public class Lager {
     public void addReol(Reol reol){
         if(!reolArrayList.contains(reol)){
             reolArrayList.add(reol);
+            reol.setLager(this);
         }
     }
 

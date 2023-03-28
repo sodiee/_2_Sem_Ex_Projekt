@@ -7,8 +7,11 @@ public class Hyldeplads {
     private int hyldepladsNr;
     private Fad fad;
 
-    public Hyldeplads(int hyldepladsNr){
+    private Hylde hylde;
+
+    public Hyldeplads(int hyldepladsNr, Hylde hylde){
         this.hyldepladsNr = hyldepladsNr;
+        this.hylde = hylde;
     }
 
     public int getHyldepladsNr() {
@@ -21,5 +24,9 @@ public class Hyldeplads {
 
     public void setFad(Fad fad) {
         this.fad = fad;
+    }
+
+    public void setHylde(Hylde hylde) {
+        this.hylde = hylde;
     }
 }
