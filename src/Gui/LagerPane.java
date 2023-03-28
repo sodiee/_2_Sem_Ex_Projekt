@@ -56,6 +56,10 @@ public class LagerPane extends GridPane {
         lvwHylde.getSelectionModel().selectedItemProperty().addListener(listener2);
         lvwHyldeplads.getSelectionModel().selectedItemProperty().addListener(listener3);
 
+        lvwHyldeplads.setPrefHeight(100);
+        lvwHylde.setPrefHeight(100);
+        lvwReol.setPrefHeight(100);
+
         cbxLager.getItems().addAll(Storage.getLagerArrayList());
     }
     public void updateControls(){
