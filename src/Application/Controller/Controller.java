@@ -5,18 +5,17 @@ import Storage.Storage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Controller {
 
     //region Fad
-    public static Fad createFad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
+    public static Fad createFad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Hyldeplads hyldeplads) {
         //TODO: tjek om det er sådan her man sørger for at lageret ikke er null
-        if (lager == null){
-            throw new IllegalArgumentException("Lager må ikke være null");
+        if (hyldeplads == null){
+            throw new IllegalArgumentException("Hyldeplads må ikke være null");
         }
         else{
-            Fad fad = new Fad(leverandør, tidligereIndhold, antalGangeBrugt, nummer, størrelseLiter, lager);
+            Fad fad = new Fad(leverandør, tidligereIndhold, antalGangeBrugt, nummer, størrelseLiter, hyldeplads);
             Storage.addFad(fad);
             return fad;
         }
@@ -111,8 +110,8 @@ public class Controller {
             throw new NullPointerException("Der er ikke knyttet et destillat til dette fad, så konvertering til whisky kan ikke lade sig gøre.");
         }
     }
-    public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML) {
-        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaske(antal, fortyndelseIML);
+    public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML, Lager lager) {
+        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaske(antal, fortyndelseIML, lager);
         for(WhiskyPåFlaske wpf : whiskyPåFlasker) {
             Storage.addWhiskyPåFlaske(wpf);
         }

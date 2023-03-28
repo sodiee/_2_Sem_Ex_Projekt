@@ -19,7 +19,7 @@ public class Whisky {
         this.flasker = new ArrayList<>();
     }
 
-    public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl) {
+    public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl, Lager lager) {
         double flaskeStørrelseML = 700;
         double muligtAntal = (((this.getLiter() * 1000) + (antal * fortyndelseIMl)) / flaskeStørrelseML);
 
@@ -28,7 +28,7 @@ public class Whisky {
         } else {
             double påfyldningPerFlaske = flaskeStørrelseML - fortyndelseIMl;
             for (int i = 1; i < antal + 1; i++) {
-                WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, (int)muligtAntal, fortyndelseIMl, this, fad.getLager());
+                WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, (int)muligtAntal, fortyndelseIMl, this, lager);
                 flasker.add(whiskyPåFlaske);
                 this.setLiter(this.getLiter() - (påfyldningPerFlaske / 1000));
             }

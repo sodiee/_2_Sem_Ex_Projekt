@@ -27,6 +27,11 @@ public class WhiskyPåFlaske {
         this.whisky = whisky;
     }
 
+    public void setLager(Lager lager){
+        this.lager = lager;
+        lager.addFlaske(this);
+    }
+
     @Override
     public String toString() {
         return "Flaske nummer " + nummer + "/" + totalNummer;

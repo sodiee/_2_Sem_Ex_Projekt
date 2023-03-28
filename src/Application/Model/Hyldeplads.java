@@ -5,9 +5,10 @@ import java.util.ArrayList;
 public class Hyldeplads {
 
     private int hyldepladsNr;
-    private Fad fad;
 
     private Hylde hylde;
+    private Fad fad;
+
 
     public Hyldeplads(int hyldepladsNr, Hylde hylde){
         this.hyldepladsNr = hyldepladsNr;

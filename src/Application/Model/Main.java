@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         Lager lager = Controller.createLager(1, 1, 1, "h");
-        Fad fad = Controller.createFad("h", "h", 1, 1, 100, lager);
+       // Fad fad = Controller.createFad("h", "h", 1, 1, 100, );
         Destillat destillat = Controller.createDestillat("h", 100, 40, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "h", "h");
-        destillat.hældDestillatPåfad(fad);
-        Whisky whisky = Controller.createWhisky(fad);
+       // destillat.hældDestillatPåfad(fad);
+        //Whisky whisky = Controller.createWhisky(fad);
 /*
         System.out.println("dest.getliter " + destillat.getLiter());
 
@@ -62,11 +62,11 @@ public class Main {
         System.out.println("dest.getliter " + destillat.getLiter());
         System.out.println();
 */
-        System.out.println(whisky.getLiter());
+        //System.out.println(whisky.getLiter());
 
-        ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15);
-        System.out.println(whiskyPåFlaskeArrayList);
-        System.out.println(whisky.getLiter());
+        //ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15, lager);
+        //System.out.println(whiskyPåFlaskeArrayList);
+        //System.out.println(whisky.getLiter());
         //.
     }
 }

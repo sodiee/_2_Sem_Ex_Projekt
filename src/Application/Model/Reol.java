@@ -6,9 +6,8 @@ import java.util.ArrayList;
 
 public class Reol {
     private int reolNr;
-    private ArrayList<Hylde> hylder = new ArrayList<>();
-
     private Lager lager;
+    private ArrayList<Hylde> hylder = new ArrayList<>();
 
     public Reol(int reolNr, Lager lager){
         this.reolNr = reolNr;

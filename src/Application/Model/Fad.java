@@ -11,21 +11,25 @@ public class Fad {
     private int nummer;
     private int størrelseLiter;
     private int opfyldtLiter = 0;
-    private Lager lager;
     private int alder;
-    private Destillat destillat;
+
+    private Hyldeplads hyldeplads;
+
     private ArrayList<Destillat> tidligereDestillater;
+    private Destillat destillat;
 
     private Status status;
 
-    public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Lager lager) {
+
+
+    public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int nummer, int størrelseLiter, Hyldeplads hyldeplads) {
         this.leverandør = leverandør;
         this.tidligereIndhold = tidligereIndhold;
         this.antalGangeBrugt = antalGangeBrugt;
         this.nummer = nummer;
         this.størrelseLiter = størrelseLiter;
         this.tidligereDestillater = new ArrayList<>();
-        setLager(lager);
+        setHyldeplads(hyldeplads);
         alder = 0;
         status = Status.TOM;
     }
@@ -89,9 +93,9 @@ public class Fad {
         this.alder = alder;
     }
 
-    public void setLager(Lager lager) {
-        this.lager = lager;
-        lager.addToList(this);
+    public void setHyldeplads(Hyldeplads hyldeplads){
+        this.hyldeplads = hyldeplads;
+        hyldeplads.setFad(this);
     }
 
     public void setDestillat(Destillat destillat) {
@@ -142,8 +146,8 @@ public class Fad {
 
     public void setOpfyldtLiter(int opfyldtLiter) {this.opfyldtLiter = opfyldtLiter;}
 
-    public Lager getLager() {
-        return lager;
+    public Hyldeplads getHyldeplads() {
+        return hyldeplads;
     }
     public String toString() {
         return "Nr:" + nummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";

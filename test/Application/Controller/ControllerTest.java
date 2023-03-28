@@ -167,7 +167,7 @@ class ControllerTest {
 
         //Act
         //Assert
-        ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15);
+        ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15,sønderhøj);
 
         for (WhiskyPåFlaske wpf : whiskyPåFlaskeArrayList) {
             Boolean actualBoolean = Storage.getWhiskyPåFlaskeArrayList().contains(wpf);
@@ -187,7 +187,7 @@ class ControllerTest {
         //Act
         //Assert
         Exception forventet = assertThrows(IllegalArgumentException.class, () -> {
-            Controller.createWhiskyPåFlaske(whisky, 200, 15);
+            Controller.createWhiskyPåFlaske(whisky, 200, 15, sønderhøj);
         });
         String faktisk = "Du har angivet for mange flasker i antal, i forhold til hvor meget der kan produceres";
 
