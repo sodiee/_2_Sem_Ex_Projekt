@@ -52,9 +52,11 @@ public class LagerPane extends GridPane {
         ChangeListener<Reol> listener1 = (ov, oldCompny, newCompany) -> this.selectedReolChanged();
         ChangeListener<Hylde> listener2 = (ov, oldCompny, newCompany) -> this.selectedHyldeChanged();
         ChangeListener<Hyldeplads> listener3 = (ov, oldCompny, newCompany) -> this.selectedHyldepladsChanged();
+        ChangeListener<Lager> listener4 = (ov, oldCompny, newCompany) -> this.selectedLagerChanged();
         lvwReol.getSelectionModel().selectedItemProperty().addListener(listener1);
         lvwHylde.getSelectionModel().selectedItemProperty().addListener(listener2);
         lvwHyldeplads.getSelectionModel().selectedItemProperty().addListener(listener3);
+        cbxLager.getSelectionModel().selectedItemProperty().addListener(listener4);
 
         lvwHyldeplads.setPrefHeight(100);
         lvwHylde.setPrefHeight(100);
@@ -64,10 +66,7 @@ public class LagerPane extends GridPane {
     }
     public void updateControls(){
 
-        Lager lager = cbxLager.getSelectionModel().getSelectedItem();
-        if(lager != null) {
-            lvwReol.getItems().setAll(lager.getReoler());
-        }
+
 
     }
     private void selectedReolChanged(){
@@ -82,5 +81,11 @@ public class LagerPane extends GridPane {
     private void selectedHyldepladsChanged(){
         Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();
         lblFadInfo.setText(hyldeplads.getFad().toString());
+    }
+    private void selectedLagerChanged(){
+        Lager lager = cbxLager.getSelectionModel().getSelectedItem();
+        if(lager != null) {
+            lvwReol.getItems().setAll(lager.getReoler());
+        }
     }
 }
