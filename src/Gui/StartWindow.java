@@ -51,6 +51,12 @@ public class StartWindow extends Application {
         tabDestillat.setContent(destillatPane);
         tabDestillat.setOnSelectionChanged(event -> destillatPane.updateControls());
 
+        //LagerPane
+        Tab tabLager = new Tab("Lagerhuse");
+        tabPane.getTabs().add(tabLager);
+        LagerPane lagerPane = new LagerPane();
+        tabLager.setContent(lagerPane);
+        tabLager.setOnSelectionChanged(event -> lagerPane.updateControls());
 
     }
 }
