@@ -27,19 +27,19 @@ public class Whisky {
             throw new IllegalArgumentException("Du har angivet for mange flasker i antal, i forhold til hvor meget der kan produceres");
         }
 
-        return hældWhiskyPåFlaskeRekursiv(antal, fortyndelseIMl, flaskeStørrelseML, muligtAntal, new ArrayList<WhiskyPåFlaske>(), 1);
+        return hældWhiskyPåFlaskeRekursiv(antal, fortyndelseIMl, flaskeStørrelseML, muligtAntal, new ArrayList<WhiskyPåFlaske>(), 1, lager);
     }
 
-    private ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursiv(int antal, double fortyndelseIMl, double flaskeStørrelseML, double muligtAntal, ArrayList<WhiskyPåFlaske> flasker, int i) {
+    private ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursiv(int antal, double fortyndelseIMl, double flaskeStørrelseML, double muligtAntal, ArrayList<WhiskyPåFlaske> flasker, int i, Lager lager) {
         if (i > antal) {
             return flasker;
         }
 
-        WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, (int)muligtAntal, fortyndelseIMl, this, fad.getLager());
+        WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, (int)muligtAntal, fortyndelseIMl, this, lager);
         flasker.add(whiskyPåFlaske);
         this.setLiter(this.getLiter() - ((flaskeStørrelseML - fortyndelseIMl) / 1000));
 
-        return hældWhiskyPåFlaskeRekursiv(antal, fortyndelseIMl, flaskeStørrelseML, muligtAntal, flasker, i + 1);
+        return hældWhiskyPåFlaskeRekursiv(antal, fortyndelseIMl, flaskeStørrelseML, muligtAntal, flasker, i + 1, lager);
     }
     /*public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl) {
         double flaskeStørrelseML = 700;
