@@ -22,6 +22,11 @@ public class Hylde {
     public void addHyldePlads(Hyldeplads hyldeplads){
         if(!hyldepladser.contains(hyldeplads)){
             hyldepladser.add(hyldeplads);
+            hyldeplads.setHylde(this);
         }
+    }
+
+    public void setReol(Reol reol) {
+        this.reol = reol;
     }
 }

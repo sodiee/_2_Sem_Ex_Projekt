@@ -21,6 +21,11 @@ public class Reol {
     public void addHylde(Hylde hylde){
         if(!hylder.contains(hylde)){
             hylder.add(hylde);
+            hylde.setReol(this);
         }
+    }
+
+    public void setLager(Lager lager) {
+        this.lager = lager;
     }
 }
