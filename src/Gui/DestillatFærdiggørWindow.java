@@ -3,6 +3,7 @@ package Gui;
 import Application.Controller.Controller;
 import Application.Model.Destillat;
 import Application.Model.Fad;
+import Application.Model.Status;
 import Storage.Storage;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;

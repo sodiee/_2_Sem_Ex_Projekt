@@ -44,10 +44,10 @@ public class LagerPane extends GridPane {
         this.add(lvwReol, 0, 3);
         this.add(lblHylde, 0, 4);
         this.add(lvwHylde, 0, 5);
-        this.add(lblHyldeplads, 1, 3);
-        this.add(lvwHyldeplads, 1, 4);
-        this.add(lblFad, 1, 5);
-        this.add(lblFadInfo, 1, 6);
+        this.add(lblHyldeplads, 1, 2);
+        this.add(lvwHyldeplads, 1, 3);
+        this.add(lblFad, 1, 4);
+        this.add(lblFadInfo, 1, 5);
 
         ChangeListener<Reol> listener1 = (ov, oldCompny, newCompany) -> this.selectedReolChanged();
         ChangeListener<Hylde> listener2 = (ov, oldCompny, newCompany) -> this.selectedHyldeChanged();
@@ -61,7 +61,9 @@ public class LagerPane extends GridPane {
     public void updateControls(){
 
         Lager lager = cbxLager.getSelectionModel().getSelectedItem();
-        lvwReol.getItems().setAll(lager.getReoler());
+        if(lager != null) {
+            lvwReol.getItems().setAll(lager.getReoler());
+        }
 
     }
     private void selectedReolChanged(){
