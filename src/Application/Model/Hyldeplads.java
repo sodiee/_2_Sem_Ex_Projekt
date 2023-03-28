@@ -22,6 +22,10 @@ public class Hyldeplads {
         return fad;
     }
 
+    public void setFad(Fad fad) {
+        this.fad = fad;
+    }
+
     public void setHylde(Hylde hylde) {
         this.hylde = hylde;
     }
