@@ -3,6 +3,7 @@ package Gui;
 import Application.Controller.Controller;
 import Application.Model.Destillat;
 import Application.Model.Fad;
+import Application.Model.Status;
 import Storage.Storage;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -89,6 +90,7 @@ public class DestillatFærdiggørWindow extends Stage{
     }
 
     private void selectedFadChanged(){
+        //TODO: Kalder den korrekt, når der bliver valgt til eller fra?
         btnGodkend.setDisable(false);
         selectedItems = lvwFad.getSelectionModel().getSelectedItems();
         fadeLiter = 0;
@@ -120,7 +122,8 @@ public class DestillatFærdiggørWindow extends Stage{
 
             for(Fad fad : selectedItems){
                 fad.setiBrug(true);
-                fad.setOpfyldtLiter(fad.getStørrelseLiter()); //PROBLEM HER, DEN BLIVER 0  --- er du sikker?
+                fad.setOpfyldtLiter(fad.getStørrelseLiter()); //PROBLEM HER, DEN BLIVER 0
+                fad.setStatus(Status.DESTILLAT);
             }
             destillat.setDone(true);
             this.hide();

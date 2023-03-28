@@ -44,28 +44,30 @@ public class LagerPane extends GridPane {
         this.add(lvwReol, 0, 3);
         this.add(lblHylde, 0, 4);
         this.add(lvwHylde, 0, 5);
-        this.add(lblHyldeplads, 1, 3);
-        this.add(lvwHyldeplads, 1, 4);
-        this.add(lblFad, 1, 5);
-        this.add(lblFadInfo, 1, 6);
+        this.add(lblHyldeplads, 1, 2);
+        this.add(lvwHyldeplads, 1, 3);
+        this.add(lblFad, 1, 4);
+        this.add(lblFadInfo, 1, 5);
 
         ChangeListener<Reol> listener1 = (ov, oldCompny, newCompany) -> this.selectedReolChanged();
         ChangeListener<Hylde> listener2 = (ov, oldCompny, newCompany) -> this.selectedHyldeChanged();
         ChangeListener<Hyldeplads> listener3 = (ov, oldCompny, newCompany) -> this.selectedHyldepladsChanged();
-        ChangeListener<Lager> listener4 = (ov, oldCompny, newCompany) -> this.selectedLagerChanged();
         lvwReol.getSelectionModel().selectedItemProperty().addListener(listener1);
         lvwHylde.getSelectionModel().selectedItemProperty().addListener(listener2);
         lvwHyldeplads.getSelectionModel().selectedItemProperty().addListener(listener3);
 
-        lvwHyldeplads.setPrefHeight(200);
-        lvwHylde.setPrefHeight(200);
-        lvwReol.setPrefHeight(200);
+        lvwHyldeplads.setPrefHeight(100);
+        lvwHylde.setPrefHeight(100);
+        lvwReol.setPrefHeight(100);
 
         cbxLager.getItems().addAll(Storage.getLagerArrayList());
     }
     public void updateControls(){
 
-
+        Lager lager = cbxLager.getSelectionModel().getSelectedItem();
+        if(lager != null) {
+            lvwReol.getItems().setAll(lager.getReoler());
+        }
 
     }
     private void selectedReolChanged(){
@@ -80,9 +82,5 @@ public class LagerPane extends GridPane {
     private void selectedHyldepladsChanged(){
         Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();
         lblFadInfo.setText(hyldeplads.getFad().toString());
-    }
-    private void selectedLagerChanged(){
-        Lager lager = cbxLager.getSelectionModel().getSelectedItem();
-        lvwReol.getItems().setAll(lager.getReoler());
     }
 }

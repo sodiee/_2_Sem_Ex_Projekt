@@ -165,10 +165,10 @@ public class Fad {
     }
 
     public void removeDestillat() {
-        if (this.getDestillat() == destillat) {
+        if (destillat != null) {
             tidligereDestillater.add(destillat);
-            this.destillat = null;
             alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
+            this.destillat = null;
             convertToWhisky();
         }
     }
