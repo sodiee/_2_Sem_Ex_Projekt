@@ -132,5 +132,7 @@ public class Controller {
         Reol reol2 = createReol(sønderhøj, 4, 8);
         Reol reol3 = createReol(sørenFrichsVej, 6, 8);
         Reol reol4 = createReol(sørenFrichsVej, 3, 8);
+
+
     }
 }

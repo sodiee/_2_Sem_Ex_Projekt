@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Hylde {
     private int hyldeNr;
-    private ArrayList<Hyldeplads> hyldepladser;
+    private ArrayList<Hyldeplads> hyldepladser = new ArrayList<>();
     private Reol reol;
     public Hylde(int hyldeNr, Reol reol){
         this.hyldeNr = hyldeNr;
