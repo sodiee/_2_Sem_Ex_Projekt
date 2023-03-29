@@ -18,6 +18,7 @@ public class Fad {
     private Hylde hylde;
     private Hyldeplads hyldeplads;
     private int alder;
+
     private Destillat destillat;
     private ArrayList<Destillat> tidligereDestillater;
     private Status status;
