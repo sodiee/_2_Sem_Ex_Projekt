@@ -53,7 +53,7 @@ public class Controller {
             Hylde hylde = new Hylde(i+1, reol);
             for(int j = 0; j < antalHyldepladser; j++){
                 Hyldeplads hyldeplads = new Hyldeplads(j+1, hylde);
-                hyldeplads.setOptaget(true);
+                hyldeplads.setOptaget(false);
                 hylde.addHyldePlads(hyldeplads);
             }
             reol.addHylde(hylde);

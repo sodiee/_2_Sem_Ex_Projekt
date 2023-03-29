@@ -14,7 +14,10 @@ public class FadTest {
     void TC10_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(-1);
 
@@ -29,7 +32,10 @@ public class FadTest {
     void TC11_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(0);
 
@@ -45,7 +51,10 @@ public class FadTest {
     void TC12_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(1);
 
@@ -61,7 +70,10 @@ public class FadTest {
     void TC13_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(4);
 
@@ -77,7 +89,10 @@ public class FadTest {
     void TC14_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(5);
 
@@ -93,7 +108,10 @@ public class FadTest {
     void TC15_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(7);
 
@@ -109,7 +127,10 @@ public class FadTest {
     void TC16_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(8);
 
@@ -125,7 +146,10 @@ public class FadTest {
     void TC17_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(11);
 
@@ -141,7 +165,10 @@ public class FadTest {
     void TC18_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(12);
 
@@ -157,7 +184,10 @@ public class FadTest {
     void TC19_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(13);
 
@@ -173,7 +203,10 @@ public class FadTest {
     void TC20_beregnAngelShare() {
         //Arrange
         Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 64, 130, lager);
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(20);
 
