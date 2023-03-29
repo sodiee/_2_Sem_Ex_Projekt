@@ -78,6 +78,9 @@ public class Destillat {
         return fade;
     }
 
+    public int getDestillatAge() {
+        return this.getSlutDato().getYear() - this.getStartDato().getYear();
+    }
     public int getDestillatNr(){
         return destillatNr;
     }

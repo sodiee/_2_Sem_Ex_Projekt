@@ -26,7 +26,7 @@ public class FadPane extends GridPane {
     private Button btnRegFad, btnSletFad, btnRedigérFad, btnOpretWhisky;
     private Fad selectedFad;
 
-    public FadPane(){
+    public FadPane() {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setVgap(10);
@@ -36,7 +36,7 @@ public class FadPane extends GridPane {
 
     }
 
-    private void initGUI(){
+    private void initGUI() {
         //kun labels til ting ikke I toString()
         //labelLager = "Lager - reol hylde hyldeplads
         //listview kun så stor som antallet af tidligere destillater
@@ -106,18 +106,20 @@ public class FadPane extends GridPane {
         lvwFad.getItems().addAll(Storage.getFadArrayList());
     }
 
-    private void initData(){
+    private void initData() {
 
-        if(selectedFad == null){return;}
+        if (selectedFad == null) {
+            return;
+        }
         LblTidligereIndholdValue.setText(selectedFad.getTidligereIndhold());
         lblAntalGangeBrugtValue.setText(String.valueOf(selectedFad.getAntalGangeBrugt()));
         //lblLagerValue.setText(selectedFad.getLager().toString());
         lblAlderValue.setText(String.valueOf(selectedFad.getAlder()));
-        if(selectedFad.getDestillat() != null){
-            lblDestillatValue.setText("Destillat #"+String.valueOf(selectedFad.getDestillat().getDestillatNr()));
+        if (selectedFad.getDestillat() != null) {
+            lblDestillatValue.setText("Destillat #" + String.valueOf(selectedFad.getDestillat().getDestillatNr()));
         }
         lblStatusValue.setText(selectedFad.getStatus().name());
-        if(Controller.findLagerAfFad(selectedFad) != null){
+        if (Controller.findLagerAfFad(selectedFad) != null) {
             lblLager.setText(Controller.findLagerAfFad(selectedFad).toString());
         }
 
@@ -125,45 +127,53 @@ public class FadPane extends GridPane {
 
     private void selectedFadChanged() {
 
-        if(lvwFad.getSelectionModel().getSelectedItem() == null){return;}
-        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT && lvwFad.getSelectionModel().getSelectedItem() != null){
-            btnOpretWhisky.setDisable(false);
+        if (lvwFad.getSelectionModel().getSelectedItem() == null) {
+            return;
         }
-        else{
+        if (lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT && lvwFad.getSelectionModel().getSelectedItem() != null) {
+            btnOpretWhisky.setDisable(false);
+        } else {
             btnOpretWhisky.setDisable(true);
         }
 
-        if(lvwFad.getSelectionModel().getSelectedItem() != null){
+        if (lvwFad.getSelectionModel().getSelectedItem() != null) {
             btnRedigérFad.setDisable(false);
             btnSletFad.setDisable(false);
 
             selectedFad = lvwFad.getSelectionModel().getSelectedItem();
             initData();
 
-        }
-        else{
+        } else {
             btnRedigérFad.setDisable(true);
             btnSletFad.setDisable(true);
         }
     }
-    public void updateControls(){
+
+    public void updateControls() {
 
     }
+
     public void regFadAction() {
         FadOpretWindow fadOpretWindow = new FadOpretWindow("Opret Fad");
         fadOpretWindow.showAndWait();
         lvwFad.getItems().clear();
         lvwFad.getItems().addAll(Storage.getFadArrayList());
     }
+
     public void redigerAction() {
-        if(lvwFad.getSelectionModel().getSelectedItem() == null){return;}
+        if (lvwFad.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
         FadRedigerWindow fadRedigerWindow = new FadRedigerWindow(lvwFad.getSelectionModel().getSelectedItem());
         fadRedigerWindow.showAndWait();
         lvwFad.getItems().clear();
         lvwFad.getItems().addAll(Storage.getFadArrayList());
     }
+
     public void sletAction() {
-        if(lvwFad.getSelectionModel().getSelectedItem() == null){return;}
+        if (lvwFad.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
         Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
         alertConfirmation.setTitle("Slettelse");
         alertConfirmation.setHeaderText("Er du sikker på at du vil slette fadet?");
@@ -179,23 +189,32 @@ public class FadPane extends GridPane {
 
         }
     }
-    public void opretWhiskyAction(){
-        if(lvwFad.getSelectionModel().getSelectedItem().getStatus() != Status.DESTILLAT){return;}
 
-        Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirmation.setTitle("Slettelse");
-        alertConfirmation.setHeaderText("Er du sikker på at du vil konvertere fadets indhold fra destillat til Whisky?");
-        Optional<ButtonType> option = alertConfirmation.showAndWait();
-
-        if (option.get() == null) {
-
-        } else if (option.get() == ButtonType.OK) {
-            lvwFad.getSelectionModel().getSelectedItem().removeDestillat();
-            lvwFad.getItems().clear();
-            lvwFad.getItems().addAll(Storage.getFadArrayList());
-        } else if (option.get() == ButtonType.CANCEL) {
-
+    public void opretWhiskyAction() {
+        if (lvwFad.getSelectionModel().getSelectedItem().getStatus() != Status.DESTILLAT) {
+            return;
         }
-    }
 
+        if (lvwFad.getSelectionModel().getSelectedItem().getDestillat().getDestillatAge() >= 3) {
+            Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            alertConfirmation.setTitle("Slettelse");
+            alertConfirmation.setHeaderText("Er du sikker på at du vil konvertere fadets indhold fra destillat til Whisky?");
+            Optional<ButtonType> option = alertConfirmation.showAndWait();
+
+            if (option.get() == null) {
+
+            } else if (option.get() == ButtonType.OK) {
+                lvwFad.getSelectionModel().getSelectedItem().removeDestillat();
+                lvwFad.getItems().clear();
+                lvwFad.getItems().addAll(Storage.getFadArrayList());
+            } else if (option.get() == ButtonType.CANCEL) {
+
+            }
+        } else {
+                Alert alertIkkeMuligt = new Alert(Alert.AlertType.ERROR);
+                alertIkkeMuligt.setTitle("Destillat ikke gammel nok");
+                alertIkkeMuligt.setHeaderText("Destillat er ikke 3 år eller over og må derfor ikke kaldes whisky.");
+                Optional<ButtonType> optional = alertIkkeMuligt.showAndWait();
+            }
+        }
 }

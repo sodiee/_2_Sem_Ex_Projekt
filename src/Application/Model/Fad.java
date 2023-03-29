@@ -5,7 +5,6 @@ package Application.Model;
 import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Fad {
     private String leverandør;
@@ -36,65 +35,14 @@ public class Fad {
         status = Status.TOM;
     }
 
-
     public double beregnAngelShare(Destillat destillat) {
-
-        //TODO: ERROR: destillat == null, når man færdigøre destillat til whisky
-
         double tempLiter = destillat.getLiterFraStart();
         double angelShareProcent;
         double angelShareDelTotal = 0;
 
         if (alder < 0) {
             throw new IllegalArgumentException("Ugyldig alder på fad");
-        } else if (destillat.getFade() != null) {
-            switch (alder) {
-                case 0:
-                    return destillat.getLiterFraStart() * 0.02;
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    angelShareProcent = 0.02;
-                    break;
-                case 5:
-                case 6:
-                case 7:
-                    angelShareProcent = 0.03;
-                    break;
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                    angelShareProcent = 0.04;
-                    break;
-                default:
-                    angelShareProcent = 0.05;
-                    break;
-            }
-
-            for (int i = 0; i < 3; i++) {
-                double angelShareDelTemp = tempLiter * angelShareProcent;
-                angelShareDelTotal += angelShareDelTemp;
-                tempLiter -= angelShareDelTemp;
-            }
-
-
-        }
-
-        //angelShareDelTotal = angelShareDelTotal * 100;
-        //angelShareDelTotal = Math.round(angelShareDelTotal);
-        //angelShareDelTotal = angelShareDelTotal / 100;
-        return angelShareDelTotal;
-    }
-
-
-    public double beregnAngelShare3(Destillat destillat) {
-        double tempLiter = destillat.getLiterFraStart();
-        double angelShareProcent;
-        double angelShareDelTotal = 0;
-
-        if (alder == 0) {
+        } if (alder == 0) {
             angelShareProcent = 0.02;
             return destillat.getLiterFraStart() * angelShareProcent;
         } else {
@@ -176,7 +124,7 @@ public class Fad {
             this.destillat = null;
             convertToWhisky();
         }
-        else{
+        else {
             Alert alertConfirmation = new Alert(Alert.AlertType.ERROR);
             alertConfirmation.setTitle("Null");
             alertConfirmation.setHeaderText("ERROR: destillat == null");

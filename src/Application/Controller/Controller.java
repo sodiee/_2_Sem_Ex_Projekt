@@ -140,7 +140,7 @@ public class Controller {
         }
     }
     public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML, Lager lager) {
-        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaske(antal, fortyndelseIML, lager);
+        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIML, lager);
         for(WhiskyPåFlaske wpf : whiskyPåFlasker) {
             Storage.addWhiskyPåFlaske(wpf);
         }
@@ -165,15 +165,12 @@ public class Controller {
         Hyldeplads hyldeplads4 = new Hyldeplads(4,hylde);
 
         Fad fad = createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, hyldeplads1);
-        Fad fad1 = createFad("Bourbon distilleri, Texas", "Bourbon", 1, 326,  hyldeplads2);
+        Fad fad1 = createFad("Bourbon distilleri, Texas", "Bourbon", 1, 500,  hyldeplads2);
         Fad fad2 = createFad("Sherry distilleri, Madrid", "Sherry", 2, 2,  hyldeplads3);
         Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54,  hyldeplads4);
 
         Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever");
-        Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2021, 2, 14), LocalDate.of(2022, 1, 19), "Byg", "Strå", "I can't believe its not whiskey");
-
-
-
-
+        destillat.hældDestillatPåfad(fad1);
+        Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2017, 2, 14), LocalDate.of(2021, 1, 19), "Byg", "Strå", "I can't believe its not whiskey");
     }
 }

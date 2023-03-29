@@ -214,4 +214,26 @@ class ControllerTest {
 
         assertEquals(forventet.getMessage(), faktisk);
     }
+
+    @Test
+    void TC25_createWhiskyPåFlaske() {
+        //Arrange
+        Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        destillat.hældDestillatPåfad(fad);
+        Whisky whisky = Controller.createWhisky(fad);
+
+        //Act
+        //Assert
+        ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 0, lager);
+
+        for (WhiskyPåFlaske wpf : whiskyPåFlaskeArrayList) {
+            Boolean actualBoolean = Storage.getWhiskyPåFlaskeArrayList().contains(wpf);
+            assertTrue(actualBoolean);
+        }
+    }
 }

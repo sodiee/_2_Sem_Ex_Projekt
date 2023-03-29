@@ -47,7 +47,7 @@ public class DestillatPane extends GridPane {
         btnOpretDestillering = new Button("Opret Ny");
         btnRedigerDestillering = new Button("Redigér");
         btnSletDestillering = new Button("Slet");
-        btnDone = new Button("Færdigør");
+        btnDone = new Button("Hæld på fad");
         btnOpretDestillering.setOnAction(event -> btnOpretAction());
         btnRedigerDestillering.setOnAction(event -> btnRedigerAction());
         btnSletDestillering.setOnAction(event -> btnSletAction());

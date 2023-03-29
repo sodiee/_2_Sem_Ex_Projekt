@@ -38,7 +38,7 @@ public class DestillatFærdiggørWindow extends Stage{
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-        this.setTitle("Færdigør destillat nr: " + destillat.getDestillatNr());
+        this.setTitle("Hæld destillat nr: " + destillat.getDestillatNr() + " på fad");
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
         this.setScene(scene);
@@ -111,8 +111,8 @@ public class DestillatFærdiggørWindow extends Stage{
     private void btnGodkendAction(){
 
         Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirmation.setTitle("Færdigør Destillat");
-        alertConfirmation.setHeaderText("Er du sikker på at du vil færdigøre destilleringen med valgte fad, og " + (resterendeLiter-fadeLiter) + " Liter overflødigt?");
+        alertConfirmation.setTitle("Hæld destillat på fad");
+        alertConfirmation.setHeaderText("Er du sikker på at du vil hælde destilleringen på valgte fad, og smide " + (resterendeLiter-fadeLiter) + " overflødige liter ud?");
 
         Optional<ButtonType> option = alertConfirmation.showAndWait();
         if (resterendeLiter-fadeLiter < 0){return;}
@@ -124,6 +124,7 @@ public class DestillatFærdiggørWindow extends Stage{
                 fad.setOpfyldtLiter(fad.getStørrelseLiter()); //PROBLEM HER, DEN BLIVER 0
                 fad.setStatus(Status.DESTILLAT);
                 fad.setDestillat(destillat);
+                fad.getDestillat().setLiter(0);
             }
             destillat.setDone(true);
             this.hide();
