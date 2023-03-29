@@ -14,13 +14,13 @@ public class WhiskyPåFlaske {
 
     private Lager lager;
 
-    public WhiskyPåFlaske(int nummer, int totalNummer, double fortyndelseIML, Whisky whisky, Lager lager) {
+    public WhiskyPåFlaske(int nummer, int totalNummer, double fortyndelseIML, Whisky whisky) {
         this.nummer = nummer;
         this.totalNummer = totalNummer;
         this.fortyndelseIML = fortyndelseIML;
         this.liter = 0.7;
         this.whisky = whisky;
-        this.lager = lager;
+        this.lager = null;
     }
 
     public void setWhisky(Whisky whisky) {

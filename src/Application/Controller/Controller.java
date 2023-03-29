@@ -140,13 +140,21 @@ public class Controller {
         }
     }
     public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML, Lager lager) {
-        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIML, lager);
+        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIML);
         for(WhiskyPåFlaske wpf : whiskyPåFlasker) {
             Storage.addWhiskyPåFlaske(wpf);
         }
+        setWhiskyPåFlaskePåLager(whiskyPåFlasker, lager);
         return whiskyPåFlasker;
     }
+
+    public static void setWhiskyPåFlaskePåLager(ArrayList<WhiskyPåFlaske> flasker, Lager lager) {
+        for (WhiskyPåFlaske wpf : flasker) {
+            wpf.setLager(lager);
+        }
+    }
     //endregion
+
 
     public static void initStorage() {
         Lager sønderhøj = createLager(2, 3, 3, "Sønderhøj 30");

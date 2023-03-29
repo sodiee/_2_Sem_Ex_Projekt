@@ -30,6 +30,7 @@ public class Destillat {
         this.beskrivelse = beskrivelse;
         this.isDone = false;
         this.literFraStart = liter;
+        destillatNr = destillatNr + 1;
     }
 
     //Med røg
@@ -43,7 +44,7 @@ public class Destillat {
         this.rygeMateriale = rygeMateriale;
         this.beskrivelse = beskrivelse;
         this.isDone = false;
-        this.literFraStart = liter;
+        destillatNr = destillatNr + 1;
     }
 
     public void setDestillatNr(int destillatNr) {this.destillatNr = destillatNr;}

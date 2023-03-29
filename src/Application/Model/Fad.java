@@ -28,7 +28,7 @@ public class Fad {
         this.leverandør = leverandør;
         this.tidligereIndhold = tidligereIndhold;
         this.antalGangeBrugt = antalGangeBrugt;
-        this.nummer = nummer + 1;
+        nummer = nummer + 1;
         this.størrelseLiter = størrelseLiter;
         this.tidligereDestillater = new ArrayList<>();
         setHyldeplads(hyldeplads);
