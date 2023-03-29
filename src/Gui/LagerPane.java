@@ -4,10 +4,14 @@ import Application.Model.*;
 import Storage.Storage;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class LagerPane extends GridPane {
 
@@ -16,7 +20,8 @@ public class LagerPane extends GridPane {
     private ListView<Reol> lvwReol;
     private ListView<Hylde> lvwHylde;
     private ListView<Hyldeplads> lvwHyldeplads;
-
+    private HBox hbxButtons;
+    private Button btnOpret;
 
     public LagerPane(){
         this.setPadding(new Insets(10));
@@ -37,6 +42,8 @@ public class LagerPane extends GridPane {
         lvwHylde = new ListView();
         lvwHyldeplads = new ListView();
         lblFadInfo = new Label();
+        hbxButtons = new HBox();
+        btnOpret = new Button("Opret");
 
         this.add(lblLager, 0, 0);
         this.add(cbxLager, 0, 1);
@@ -48,6 +55,11 @@ public class LagerPane extends GridPane {
         this.add(lvwHyldeplads, 0, 5);
         this.add(lblFad, 1, 4);
         this.add(lblFadInfo, 1, 5);
+        this.add(hbxButtons, 0, 6);
+
+        btnOpret.setOnAction(event -> btnOpretLagerAction());
+        hbxButtons.getChildren().add(btnOpret);
+
 
         ChangeListener<Reol> listener1 = (ov, oldCompny, newCompany) -> this.selectedReolChanged();
         ChangeListener<Hylde> listener2 = (ov, oldCompny, newCompany) -> this.selectedHyldeChanged();
@@ -63,9 +75,20 @@ public class LagerPane extends GridPane {
         lvwReol.setPrefHeight(200);
 
         cbxLager.getItems().addAll(Storage.getLagerArrayList());
+
+        lblFad.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblLager.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblHylde.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblFad.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblHyldeplads.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblReol.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
     }
     public void updateControls(){
 
+    }
+    public void btnOpretLagerAction(){
+        LagerOpretWindow lagerOpretWindow = new LagerOpretWindow();
+        lagerOpretWindow.showAndWait();
     }
     private void selectedReolChanged(){
         Reol reol = lvwReol.getSelectionModel().getSelectedItem();

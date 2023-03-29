@@ -20,7 +20,6 @@ public class Fad {
     private int alder;
     private Destillat destillat;
     private ArrayList<Destillat> tidligereDestillater;
-
     private Status status;
 
 
@@ -266,6 +265,6 @@ public class Fad {
     }
 
     public String toString() {
-        return "Nr:" + nummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";
+        return "#" + nummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";
     }
 }

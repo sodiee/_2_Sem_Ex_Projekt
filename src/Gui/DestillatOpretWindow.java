@@ -81,14 +81,14 @@ public class DestillatOpretWindow extends Stage{
         txfBeskrivelse = new TextField();
         pane.add(txfBeskrivelse, 0, 15);
 
-        lblMedarbejder.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblStartDato.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblSlutDato.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblKornSort.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblRygemateriale.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblMedarbejder.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblStartDato.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblSlutDato.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblKornSort.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblRygemateriale.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
         //Buttons
         HBox hbxButtons = new HBox(5);

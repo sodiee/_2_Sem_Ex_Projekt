@@ -112,12 +112,13 @@ public class FadRedigerWindow extends Stage {
         String tidligere = txfTidligere.getText().trim();
         int brugt = Integer.parseInt(txfBrugt.getText());
         int liter = Integer.parseInt(txfLiter.getText());
-
+        //TODO: hvorfor fuck virker de ikke her, men virker i destillatOpretPane?
+        /**
         if(!Application.Controller.ValidationController.validateString(txfLev.getText(), "Medarbejder", true, false)) return;
         if(!Application.Controller.ValidationController.validateString(txfTidligere.getText(), "Tidligere Destillat", true, false)) return;
         if(!Application.Controller.ValidationController.validateInt(txfBrugt.getText(), "Antal Gange Brugt")) return;
         if(!Application.Controller.ValidationController.validateInt(txfLiter.getText(), "Antal Liter")) return;
-
+        **/
         Hyldeplads hyldeplads = Controller.findTomHyldeplads(cbxReol.getSelectionModel().getSelectedItem());
 
             if (hyldeplads == null) {
@@ -131,7 +132,6 @@ public class FadRedigerWindow extends Stage {
                 fad.setTidligereIndhold(txfTidligere.getText());
                 fad.setAntalGangeBrugt(Integer.parseInt(txfBrugt.getText()));
                 //TODO:
-
 
                 hide();
             }

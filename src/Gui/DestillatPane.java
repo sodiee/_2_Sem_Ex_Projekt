@@ -108,16 +108,18 @@ public class DestillatPane extends GridPane {
         vbxInfo.getChildren().add(lblIsDone);
         vbxInfo.getChildren().add(lblIsDone2);
 
-        lblMedarbejder.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblStartDato.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblSlutDato.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblKornSort.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblRygemateriale.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblNr.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblIsDone.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        lblMedarbejder.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblStartDato.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblSlutDato.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblKornSort.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblRygemateriale.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblNr.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblIsDone.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+
+        lvwDestilleringer.getSelectionModel().selectFirst();
     }
 
     private void selectedDestillatChanged(){this.updateControls();}
@@ -135,7 +137,12 @@ public class DestillatPane extends GridPane {
             lblStartDato2.setText(String.valueOf(destillat.getStartDato()));
             lblSlutDato2.setText(String.valueOf(destillat.getSlutDato()));
             lblKornSort2.setText(destillat.getKornSort());
-            lblRygemateriale2.setText(destillat.getRygeMateriale());
+            if(destillat.getRygeMateriale() != null){
+                lblRygemateriale2.setText(destillat.getRygeMateriale());
+            }
+            else{
+                lblRygemateriale2.setText("...");
+            }
             lblBeskrivelse2.setText(destillat.getBeskrivelse());
             lblIsDone2.setText(String.valueOf(destillat.isDone()));
         }
@@ -168,13 +175,14 @@ public class DestillatPane extends GridPane {
     private void btnRedigerAction(){
 
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
+        if(destillat == null){return;}
         DestillatRedigerWindow destillatRedigerWindow = new DestillatRedigerWindow(destillat);
         destillatRedigerWindow.showAndWait();
         lvwDestilleringer.getItems().setAll(Controller.getDestillat());
     }
     private void btnSletAction(){
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
-
+        if(destillat == null){return;}
         Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
         alertConfirmation.setTitle("Slettelse");
         alertConfirmation.setHeaderText("Er du sikker på at du vil slette destilleringen?");
@@ -196,6 +204,7 @@ public class DestillatPane extends GridPane {
     private void btnDoneAction(){
         //TODO: Evt gøre så "færdgjort bliver rettet uden at skulle markere igen
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
+        if(destillat == null){return;}
         if(!destillat.isDone()){
             DestillatFærdiggørWindow destillatFærdiggørWindow = new DestillatFærdiggørWindow(destillat);
             destillatFærdiggørWindow.showAndWait();

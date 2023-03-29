@@ -10,13 +10,15 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.util.Optional;
 
 public class FadPane extends GridPane {
 
     private ListView<Fad> lvwFad;
-    private Label lblToString, lblTidligereIndhold, lblAntalGangeBrugt, lblLager, lblAlder, lblDestillat, lblStatus, lblTidligereDestil;
+    private Label lblTidligereIndhold, lblAntalGangeBrugt, lblLager, lblAlder, lblDestillat, lblStatus, lblTidligereDestil;
     private Label LblTidligereIndholdValue, lblAntalGangeBrugtValue, lblLagerValue, lblAlderValue, lblDestillatValue, lblStatusValue;
     private ListView lvwTidligereDestil;
     private VBox vbxInfo;
@@ -40,7 +42,6 @@ public class FadPane extends GridPane {
         //listview kun så stor som antallet af tidligere destillater
 
         lvwFad = new ListView<>();
-        lblToString = new Label();
         lblTidligereIndhold = new Label("Tidligere Indhold: ");
         lblAntalGangeBrugt = new Label();
         lblLager = new Label("Lagerplads: ");
@@ -63,7 +64,6 @@ public class FadPane extends GridPane {
         btnRedigérFad = new Button("Redigér Fad");
 
         vbxInfo.getChildren().addAll(
-                lblToString,
                 lblStatus,
                 lblStatusValue,
                 lblTidligereIndhold,
@@ -76,6 +76,13 @@ public class FadPane extends GridPane {
                 lblDestillatValue,
                 lblTidligereDestil,
                 lvwTidligereDestil);
+
+        lblStatus.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblTidligereIndhold.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblLager.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblAlder.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblDestillat.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblTidligereDestil.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
         hbxButtons.getChildren().addAll(btnRegFad, btnRedigérFad, btnSletFad, btnOpretWhisky);
 
@@ -91,9 +98,11 @@ public class FadPane extends GridPane {
         ChangeListener<Fad> listener1 = (ov, oldCompny, newCompany) -> this.selectedFadChanged();
         lvwFad.getSelectionModel().selectedItemProperty().addListener(listener1);
 
+        lvwFad.setPrefWidth(300);
+
         this.add(lvwFad, 0, 0);
         this.add(vbxInfo, 1, 0);
-        this.add(hbxButtons, 0, 1, 1, 2);
+        this.add(hbxButtons, 0, 1, 2, 1);
         lvwFad.getItems().addAll(Storage.getFadArrayList());
     }
 
@@ -108,6 +117,10 @@ public class FadPane extends GridPane {
             lblDestillatValue.setText("Destillat #"+String.valueOf(selectedFad.getDestillat().getDestillatNr()));
         }
         lblStatusValue.setText(selectedFad.getStatus().name());
+        if(Controller.findLagerAfFad(selectedFad) != null){
+            lblLager.setText(Controller.findLagerAfFad(selectedFad).toString());
+        }
+
     }
 
     private void selectedFadChanged() {
@@ -143,12 +156,14 @@ public class FadPane extends GridPane {
         lvwFad.getItems().addAll(Storage.getFadArrayList());
     }
     public void redigerAction() {
+        if(lvwFad.getSelectionModel().getSelectedItem() == null){return;}
         FadRedigerWindow fadRedigerWindow = new FadRedigerWindow(lvwFad.getSelectionModel().getSelectedItem());
         fadRedigerWindow.showAndWait();
         lvwFad.getItems().clear();
         lvwFad.getItems().addAll(Storage.getFadArrayList());
     }
     public void sletAction() {
+        if(lvwFad.getSelectionModel().getSelectedItem() == null){return;}
         Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
         alertConfirmation.setTitle("Slettelse");
         alertConfirmation.setHeaderText("Er du sikker på at du vil slette fadet?");

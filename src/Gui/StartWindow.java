@@ -25,6 +25,8 @@ public class StartWindow extends Application {
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
+        stage.setHeight(650);
     }
 
     // ----------------------------------------------------
@@ -39,7 +41,7 @@ public class StartWindow extends Application {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         //StartPane
-        Tab tabStart = new Tab("Lager Status");
+        Tab tabStart = new Tab("Startside");
         tabPane.getTabs().add(tabStart);
         StartPane startPane = new StartPane();
         tabStart.setContent(startPane);

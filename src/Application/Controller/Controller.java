@@ -24,6 +24,16 @@ public class Controller {
         return Storage.getFadArrayList();
     }
     public static void deleteFad(Fad fad){Storage.deleteFad(fad);}
+
+    //TODO: virker ikke, returns null
+    public static Lager findLagerAfFad(Fad fad){
+        for(int i = 0; i < Storage.getLagerArrayList().size(); i++){
+            if(Storage.getLagerArrayList().get(i).getReoler().contains(fad.getReol())){
+                return Storage.getLagerArrayList().get(i);
+            }
+        }
+        return null;
+    }
     //endregion
 
     //region Lager
