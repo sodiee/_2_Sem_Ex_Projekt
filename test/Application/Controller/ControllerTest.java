@@ -15,10 +15,12 @@ class ControllerTest {
     void TC1_createFad() {
 
         //Arrange
-        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
-
+        Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         //Act
-        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
 
         //Assert
         Boolean actualBoolean = Storage.getFadArrayList().contains(fad);
@@ -28,12 +30,16 @@ class ControllerTest {
     @Test
     void TC2_createFad() {
         //Arrange
+        Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         //Act
         //Assert
         Exception forventet = assertThrows(RuntimeException.class, () -> {
-            Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, null);
+            Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, null);
         });
-        assertEquals(forventet.getMessage(), "Lager må ikke være null");
+        assertEquals(forventet.getMessage(), "Hyldeplads må ikke være null");
     }
 
     @Test
@@ -112,8 +118,11 @@ class ControllerTest {
     @Test
     void TC9_createDestillat() {
         //Arrange
-        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Lager lager = new Lager(2, 3, 3, "Sønderhøj 30");
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
 
         //Act
         //Assert
@@ -126,8 +135,11 @@ class ControllerTest {
     @Test
     void TC21_createWhisky() {
         //Arrange
-        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         destillat.hældDestillatPåfad(fad);
         //Act
@@ -141,8 +153,11 @@ class ControllerTest {
     @Test
     void TC22_createWhisky() {
         //Arrange
-        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = null;
 
         //Act
@@ -159,15 +174,18 @@ class ControllerTest {
     @Test
     void TC23_createWhiskyPåFlaske() {
         //Arrange
-        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         destillat.hældDestillatPåfad(fad);
         Whisky whisky = Controller.createWhisky(fad);
 
         //Act
         //Assert
-        ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15,sønderhøj);
+        ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15, lager);
 
         for (WhiskyPåFlaske wpf : whiskyPåFlaskeArrayList) {
             Boolean actualBoolean = Storage.getWhiskyPåFlaskeArrayList().contains(wpf);
@@ -178,8 +196,11 @@ class ControllerTest {
     @Test
     void TC24_createWhiskyPåFlaske() {
         //Arrange
-        Lager sønderhøj = new Lager(2, 3, 3, "Sønderhøj 30");
-        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, 130, sønderhøj);
+        Lager lager = Controller.createLager(2, 3, 3, "Sønderhøj 30");
+        Reol reol = Controller.createReol(lager, 3, 3);
+        lager.addReol(reol);
+        Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+        Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         destillat.hældDestillatPåfad(fad);
         Whisky whisky = Controller.createWhisky(fad);
@@ -187,7 +208,7 @@ class ControllerTest {
         //Act
         //Assert
         Exception forventet = assertThrows(IllegalArgumentException.class, () -> {
-            Controller.createWhiskyPåFlaske(whisky, 200, 15, sønderhøj);
+            Controller.createWhiskyPåFlaske(whisky, 200, 15, lager);
         });
         String faktisk = "Du har angivet for mange flasker i antal, i forhold til hvor meget der kan produceres";
 
