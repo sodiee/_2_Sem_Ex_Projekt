@@ -156,7 +156,7 @@ public class FadPane extends GridPane {
         //lblLagerValue.setText(selectedFad.getLager().toString());
         lblAlderValue.setText(String.valueOf(selectedFad.getAlder()));
         if (selectedFad.getDestillat() != null) {
-            lblDestillatValue.setText("Destillat #" + String.valueOf(selectedFad.getDestillat().getDestillatNr()));
+            lblDestillatValue.setText("Destillat #" + String.valueOf(selectedFad.getDestillat().getObjectNummer()));
         }
         lblStatusValue.setText(selectedFad.getStatus().name());
         if (Controller.findLagerAfFad(selectedFad) != null) {

@@ -136,6 +136,6 @@ public class Whisky extends Destillat {
     }
 
     @Override
-    public String toString(){return "#" + nummer + " " + beskrivelse + " " + alkoholProcent + "%";}
+    public String toString(){return "#" + nummer + " " + navn + " " + alkoholProcent + "%";}
 
 }
