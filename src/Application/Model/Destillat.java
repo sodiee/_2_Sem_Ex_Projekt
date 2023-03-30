@@ -2,12 +2,11 @@ package Application.Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Destillat {
 
-    private int nummer;
-    private static int destillatNr;
+    private int objectNummer;
+    private static int destillatNr = 0;
     private String medarbejder;
     private double liter;
     private double literFraStart;
@@ -31,7 +30,8 @@ public class Destillat {
         this.beskrivelse = beskrivelse;
         this.isDone = false;
         this.literFraStart = liter;
-        nummer = destillatNr + 1;
+        destillatNr++;
+        objectNummer += destillatNr;
     }
 
     //Med røg
@@ -45,8 +45,8 @@ public class Destillat {
         this.rygeMateriale = rygeMateriale;
         this.beskrivelse = beskrivelse;
         this.isDone = false;
-        nummer++;
-        destillatNr = nummer;
+        destillatNr++;
+        objectNummer = destillatNr;
     }
 
     public void setDestillatNr(int destillatNr) {
@@ -83,9 +83,13 @@ public class Destillat {
         return fade;
     }
 
-    /*public Fad getAktuelFad() {
-        return fade.get(fade.size() - 1);
-    }*/
+    public Fad getAktuelFad() {
+        Fad fad = null;
+        if (!fade.isEmpty()) {
+            return fad = fade.get(fade.size() - 1);
+        }
+        return fad;
+    }
 
     public int getDestillatAge() {
         return this.getSlutDato().getYear() - this.getStartDato().getYear();
@@ -129,8 +133,8 @@ public class Destillat {
         return isDone;
     }
 
-    public int getNummer() {
-        return destillatNr;
+    public int getObjectNummer() {
+        return objectNummer;
     }
 
     //Setters_____________________________________________________________________________________

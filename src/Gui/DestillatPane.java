@@ -164,7 +164,7 @@ public class DestillatPane extends GridPane {
 
         //indsæt information omkring valgte destillat
         if (destillat != null){
-            lblNr2.setText(String.valueOf(destillat.getDestillatNr()));
+            lblNr2.setText(String.valueOf(destillat.getObjectNummer()));
             lblMedarbejder2.setText(destillat.getMedarbejder());
             lblLiter2.setText(String.valueOf(destillat.getLiter()));
             lblAlkPro2.setText(String.valueOf(destillat.getAlkoholProcent()));

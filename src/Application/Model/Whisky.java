@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Whisky extends Destillat {
     private String navn;
     private int nummer;
+    private static int whiskyNummer = 0;
     private double alkoholProcent;
     private String beskrivelse;
     private double liter;
@@ -16,10 +17,11 @@ public class Whisky extends Destillat {
         super(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse);
         this.navn = navn;
         flasker = new ArrayList<>();
-        this.nummer = getNummer();
+        nummer++;
+        whiskyNummer = nummer;
         this.alkoholProcent = getAlkoholprocentDestillat();
         this.beskrivelse = getBeskrivelse();
-        //this.fad = getAktuelFad();
+        this.fad = getAktuelFad();
     }
 
     public Whisky(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, String navn) {
@@ -113,8 +115,8 @@ public class Whisky extends Destillat {
         return super.getAktuelFad();
     }*/
 
-    public int getNummer() {
-        return super.getNummer();
+    public int getObjectNummer() {
+        return super.getObjectNummer();
     }
 
     public double getAlkoholProcentWhisky() {
