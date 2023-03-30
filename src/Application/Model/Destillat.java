@@ -10,7 +10,7 @@ public class Destillat {
     private static int destillatNr;
     private String medarbejder;
     private double liter;
-    private int literFraStart;
+    private double literFraStart;
     private double alkoholProcent;
     private LocalDate startDato;
     private LocalDate slutDato;
@@ -21,7 +21,7 @@ public class Destillat {
     private ArrayList<Fad> fade = new ArrayList<>();
 
     //Uden røg
-    public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse) {
+    public Destillat(String medarbejder, double liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
@@ -51,7 +51,7 @@ public class Destillat {
 
     public void setDestillatNr(int destillatNr) {this.destillatNr = destillatNr;}
 
-    public int getLiterFraStart() {
+    public double getLiterFraStart() {
         return literFraStart;
     }
     public void addFad(Fad fad){

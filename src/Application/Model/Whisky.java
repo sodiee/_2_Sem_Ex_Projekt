@@ -12,7 +12,7 @@ public class Whisky extends Destillat {
     private Fad fad;
     private ArrayList<WhiskyPåFlaske> flasker;
 
-    public Whisky(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, String navn) {
+    public Whisky(String medarbejder, double liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, String navn) {
         super(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse);
         this.navn = navn;
         flasker = new ArrayList<>();

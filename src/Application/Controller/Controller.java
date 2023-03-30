@@ -188,7 +188,7 @@ public class Controller {
 
 
         fad.addDestilatTofad(destillat);
-        Whisky whisky = Controller.createWhisky(fad1); //Inaugural Release
+        Whisky whisky = Controller.createWhisky("Inaugural Release", fad1);
         ArrayList<WhiskyPåFlaske> whiskyPåFlasker = Controller.createWhiskyPåFlaske(whisky, 20, 0, sønderhøj);
     }
 }
