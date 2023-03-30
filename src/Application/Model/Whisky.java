@@ -47,10 +47,10 @@ public class Whisky {
             throw new IllegalArgumentException("Du har angivet for mange flasker i antal, i forhold til hvor meget der kan produceres");
         }
 
-        return hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIMl, flaskeStørrelseML, muligtAntal, new ArrayList<WhiskyPåFlaske>(), 1);
+        return hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIMl, flaskeStørrelseML, flasker, 1);
     }
 
-    private ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursivHjælpemetode(int antal, double fortyndelseIMl, double flaskeStørrelseML, double muligtAntal, ArrayList<WhiskyPåFlaske> flasker, int i) {
+    private ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursivHjælpemetode(int antal, double fortyndelseIMl, double flaskeStørrelseML, ArrayList<WhiskyPåFlaske> flasker, int i) {
         if (i > antal) {
             return flasker;
         }
@@ -59,7 +59,7 @@ public class Whisky {
         flasker.add(whiskyPåFlaske);
         this.setLiter(this.getLiter() - ((flaskeStørrelseML - fortyndelseIMl) / 1000));
 
-        return hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIMl, flaskeStørrelseML, muligtAntal, flasker, i + 1);
+        return hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIMl, flaskeStørrelseML, flasker, i + 1);
     }
     //endregion
 
