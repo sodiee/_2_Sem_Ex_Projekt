@@ -181,6 +181,6 @@ public class WhiskeyPane extends BorderPane {
 
     }
     public void updateControls(){
-
+        cbxProdukt.getItems().setAll(Storage.getWhiskyArrayList().toArray(new Whisky[0]));
     }
 }

@@ -27,7 +27,8 @@ import java.util.Optional;
 public class FadPane extends GridPane {
 
     private ListView<Fad> lvwFad;
-    private Label lblTidligereIndhold, lblAntalGangeBrugt, lblLager, lblAlder, lblDestillat, lblStatus, lblTidligereDestil;
+    private TextField txfWhiskyNavnValue;
+    private Label lblTidligereIndhold, lblAntalGangeBrugt, lblLager, lblAlder, lblDestillat, lblStatus, lblTidligereDestil, lblWhiskyNavn;
     private Label LblTidligereIndholdValue, lblAntalGangeBrugtValue, lblLagerValue, lblAlderValue, lblDestillatValue, lblStatusValue;
     private ListView lvwTidligereDestil;
     private VBox vbxInfo;
@@ -77,6 +78,7 @@ public class FadPane extends GridPane {
         lblDestillatValue = new Label();
         lblStatusValue = new Label();
         lblTidligereDestil = new Label("Tidligere Destillater: ");
+        lblWhiskyNavn = new Label("Whisky navn");
         lvwTidligereDestil = new ListView();
         vbxInfo = new VBox();
         hbxButtons = new HBox(10);
@@ -84,6 +86,8 @@ public class FadPane extends GridPane {
         btnOpretWhisky = new Button("Færdigør Modning");
         btnSletFad = new Button("Slet Fad");
         btnRedigérFad = new Button("Redigér Fad");
+        txfWhiskyNavnValue = new TextField();
+
 
         vbxInfo.getChildren().addAll(
                 lblStatus,
@@ -106,7 +110,7 @@ public class FadPane extends GridPane {
         lblDestillat.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblTidligereDestil.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
-        hbxButtons.getChildren().addAll(btnRegFad, btnRedigérFad, btnSletFad, btnOpretWhisky);
+        hbxButtons.getChildren().addAll(btnRegFad, btnRedigérFad, btnSletFad, btnOpretWhisky, lblWhiskyNavn, txfWhiskyNavnValue);
 
         btnRegFad.setOnAction(event -> regFadAction());
         btnRedigérFad.setOnAction(event -> redigerAction());
@@ -260,17 +264,22 @@ public class FadPane extends GridPane {
 
         if (lvwFad.getSelectionModel().getSelectedItem().getDestillat().getDestillatAge() >= 3) {
             Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+
             alertConfirmation.setTitle("Slettelse");
             alertConfirmation.setHeaderText("Er du sikker på at du vil konvertere fadets indhold fra destillat til Whisky?");
-            Optional<ButtonType> option = alertConfirmation.showAndWait();
 
-            if (option.get() == null) {
 
-            } else if (option.get() == ButtonType.OK) {
-                lvwFad.getSelectionModel().getSelectedItem().removeDestillat();
+            Optional<ButtonType> optional = alertConfirmation.showAndWait();
+
+
+            if (optional.get() == null) {
+
+            } else if (optional.get() == ButtonType.OK) {
+                Controller.convertToWhisky(lvwFad.getSelectionModel().getSelectedItem(), txfWhiskyNavnValue.getText());
+                //lvwFad.getSelectionModel().getSelectedItem().removeDestillat(txfWhiskyNavnValue.getText());
                 lvwFad.getItems().clear();
                 lvwFad.getItems().addAll(Storage.getFadArrayList());
-            } else if (option.get() == ButtonType.CANCEL) {
+            } else if (optional.get() == ButtonType.CANCEL) {
 
             }
         } else {

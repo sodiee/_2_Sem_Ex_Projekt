@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 public class Whisky extends Destillat {
     private String navn;
+    private int nummer;
     private double alkoholProcent;
+    private String beskrivelse;
     private double liter;
     private Fad fad;
     private ArrayList<WhiskyPåFlaske> flasker;
@@ -14,6 +16,10 @@ public class Whisky extends Destillat {
         super(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse);
         this.navn = navn;
         flasker = new ArrayList<>();
+        this.nummer = getNummer();
+        this.alkoholProcent = getAlkoholprocentDestillat();
+        this.beskrivelse = getBeskrivelse();
+        //this.fad = getAktuelFad();
     }
 
     public Whisky(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, String navn) {
@@ -99,9 +105,13 @@ public class Whisky extends Destillat {
         return navn;
     }
 
-    public Fad getFad(int index) {
-        return super.getFade().get(0);
+    public ArrayList<Fad> getFade(int index) {
+        return super.getFade();
     }
+
+    /*public Fad getAktuelFad() {
+        return super.getAktuelFad();
+    }*/
 
     public int getNummer() {
         return super.getNummer();

@@ -30,7 +30,7 @@ public class DestillatFærdiggørWindow extends Stage{
     private Label lblResterende, lblResterendeValue;
     private Button btnGodkend;
     private ObservableList<Fad> selectedItems;
-    private int resterendeLiter;
+    private double resterendeLiter;
     private int fadeLiter = 0;
 
     public DestillatFærdiggørWindow(Destillat destillat){
