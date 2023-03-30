@@ -142,8 +142,9 @@ class ControllerTest {
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         destillat.hældDestillatPåfad(fad);
+        String navn = "Navn";
         //Act
-        Whisky whisky = Controller.createWhisky(fad);
+        Whisky whisky = Controller.createWhisky(navn, fad);
 
         //Assert
         Boolean actualBoolean = Storage.getWhiskyArrayList().contains(whisky);
@@ -159,12 +160,13 @@ class ControllerTest {
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = null;
+        String navn = "Navn";
 
         //Act
         //Assert
 
         Exception forventet = assertThrows(NullPointerException.class, () -> {
-            Controller.createWhisky(fad);
+            Controller.createWhisky(navn, fad);
         });
         String nullPointerExceptionMsg = "Der er ikke knyttet et destillat til dette fad, så konvertering til whisky kan ikke lade sig gøre.";
 
@@ -181,7 +183,8 @@ class ControllerTest {
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         destillat.hældDestillatPåfad(fad);
-        Whisky whisky = Controller.createWhisky(fad);
+        String navn = "Navn";
+        Whisky whisky = Controller.createWhisky(navn, fad);
 
         //Act
         //Assert
@@ -203,7 +206,8 @@ class ControllerTest {
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         destillat.hældDestillatPåfad(fad);
-        Whisky whisky = Controller.createWhisky(fad);
+        String navn = "Navn";
+        Whisky whisky = Controller.createWhisky(navn, fad);
 
         //Act
         //Assert
@@ -225,7 +229,8 @@ class ControllerTest {
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
         Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         destillat.hældDestillatPåfad(fad);
-        Whisky whisky = Controller.createWhisky(fad);
+        String navn = "Navn";
+        Whisky whisky = Controller.createWhisky(navn, fad);
 
         //Act
         //Assert

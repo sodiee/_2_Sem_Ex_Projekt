@@ -2,7 +2,7 @@ package Application.Model;
 
 import java.util.ArrayList;
 
-public class OldWhisky {
+public class OldWhisky {/*
     private String navn;
 
     private static int nummer;
@@ -113,5 +113,5 @@ public class OldWhisky {
 
     @Override
     public String toString(){return "#" + nummer + " " + beskrivelse + " " + alkoholProcent + "%";}
-
+*/
 }

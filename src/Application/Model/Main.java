@@ -13,7 +13,8 @@ public class Main {
        Fad fad = Controller.createFad("h", "h", 1, 100, hyldePlads);
         Destillat destillat = Controller.createDestillat("h", 100, 40, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "h", "h");
        destillat.hældDestillatPåfad(fad);
-        Whisky whisky = Controller.createWhisky(fad);
+       String navn = "Navn";
+        Whisky whisky = Controller.createWhisky(navn, fad);
 /*
         System.out.println("dest.getliter " + destillat.getLiter());
 
