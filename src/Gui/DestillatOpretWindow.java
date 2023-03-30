@@ -124,7 +124,6 @@ public class DestillatOpretWindow extends Stage{
                     Integer.parseInt(txfLiter.getText()),
                     Double.parseDouble(txfAlkPro.getText()),
                     dpStartDato.getValue(),
-                    dpSlutDato.getValue(),
                     txfKornSort.getText(),
                     txfRygemateriale.getText(),
                     txfBeskrivelse.getText());
@@ -136,7 +135,6 @@ public class DestillatOpretWindow extends Stage{
                     Integer.parseInt(txfLiter.getText()),
                     Double.parseDouble(txfAlkPro.getText()),
                     dpStartDato.getValue(),
-                    dpSlutDato.getValue(),
                     txfKornSort.getText(),
                     txfBeskrivelse.getText());
         }

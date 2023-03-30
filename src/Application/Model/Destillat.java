@@ -12,8 +12,7 @@ public class Destillat {
     private double liter;
     private double literFraStart;
     private double alkoholProcent;
-    private LocalDate startDato;
-    private LocalDate slutDato;
+    private LocalDate datoForPåhldningPåFad;
     private String kornSort;
     private String rygeMateriale;
     private String beskrivelse;
@@ -21,12 +20,11 @@ public class Destillat {
     private ArrayList<Fad> fade = new ArrayList<>();
 
     //Uden røg
-    public Destillat(String medarbejder, double liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse) {
+    public Destillat(String medarbejder, double liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String beskrivelse) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
-        this.startDato = startDato;
-        this.slutDato = slutDato;
+        this.datoForPåhldningPåFad = datoForPåhldningPåFad;
         this.kornSort = kornSort;
         this.beskrivelse = beskrivelse;
         this.isDone = false;
@@ -35,12 +33,11 @@ public class Destillat {
     }
 
     //Med røg
-    public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse) {
+    public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String rygeMateriale, String beskrivelse) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
-        this.startDato = startDato;
-        this.slutDato = slutDato;
+        this.datoForPåhldningPåFad = datoForPåhldningPåFad;
         this.kornSort = kornSort;
         this.rygeMateriale = rygeMateriale;
         this.beskrivelse = beskrivelse;
@@ -88,7 +85,8 @@ public class Destillat {
     }*/
 
     public int getDestillatAge() {
-        return this.getSlutDato().getYear() - this.getStartDato().getYear();
+        int now = LocalDate.now().getYear();
+        return  now - this.datoForPåhldningPåFad.getYear();
     }
     public int getDestillatNr(){
         return destillatNr;
@@ -105,13 +103,11 @@ public class Destillat {
         return alkoholProcent;
     }
 
-    public LocalDate getStartDato() {
-        return startDato;
+    public LocalDate getDatoForPåhldningPåFad() {
+        return datoForPåhldningPåFad;
     }
 
-    public LocalDate getSlutDato() {
-        return slutDato;
-    }
+
 
     public String getKornSort() {
         return kornSort;
@@ -146,12 +142,7 @@ public class Destillat {
         this.alkoholProcent = alkoholProcent;
     }
 
-    public void setStartDato(LocalDate startDato) {
-        this.startDato = startDato;
-    }
-
-    public void setSlutDato(LocalDate slutDato) {
-        this.slutDato = slutDato;
+    public void setDatoForPåhldningPåFad(LocalDate datoForPåhldningPåFad) { this.datoForPåhldningPåFad = datoForPåhldningPåFad;
     }
 
     public void setKornSort(String kornSort) {

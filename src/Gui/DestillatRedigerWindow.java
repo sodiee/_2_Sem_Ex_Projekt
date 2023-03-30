@@ -18,9 +18,9 @@ import javafx.stage.StageStyle;
 
 public class DestillatRedigerWindow extends Stage {
 
-    private Label lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblSlutDato, lblKornSort, lblRygemateriale, lblBeskrivelse;
+    private Label lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblKornSort, lblRygemateriale, lblBeskrivelse;
     private TextField txfMedarbejder, txfLiter, txfAlkPro, txfKornSort, txfRygemateriale, txfBeskrivelse;
-    private DatePicker dpStartDato, dpSlutDato;
+    private DatePicker dpStartDato;
     private Button btnOpret, btnAnnuller;
 
     private Destillat destillat;
@@ -64,11 +64,6 @@ public class DestillatRedigerWindow extends Stage {
         dpStartDato = new DatePicker();
         pane.add(dpStartDato, 0, 7);
 
-        lblSlutDato = new Label("Slut Dato");
-        pane.add(lblSlutDato, 0, 8);
-        dpSlutDato = new DatePicker();
-        pane.add(dpSlutDato, 0, 9);
-
         lblKornSort = new Label("Korn Sort");
         pane.add(lblKornSort, 0, 10);
         txfKornSort = new TextField();
@@ -88,7 +83,6 @@ public class DestillatRedigerWindow extends Stage {
         lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         lblStartDato.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        lblSlutDato.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         lblKornSort.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         lblRygemateriale.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
@@ -108,8 +102,7 @@ public class DestillatRedigerWindow extends Stage {
         txfMedarbejder.setText(destillat.getMedarbejder());
         txfLiter.setText(String.valueOf(destillat.getLiter()));
         txfAlkPro.setText(String.valueOf(destillat.getAlkoholProcent()));
-        dpStartDato.setValue(destillat.getStartDato());
-        dpSlutDato.setValue(destillat.getSlutDato());
+        dpStartDato.setValue(destillat.getDatoForPåhldningPåFad());
         txfKornSort.setText(destillat.getKornSort());
         txfRygemateriale.setText(destillat.getRygeMateriale());
         txfBeskrivelse.setText(destillat.getBeskrivelse());
@@ -136,7 +129,6 @@ public class DestillatRedigerWindow extends Stage {
                     Integer.parseInt(txfLiter.getText()),
                     Double.parseDouble(txfAlkPro.getText()),
                     dpStartDato.getValue(),
-                    dpSlutDato.getValue(),
                     txfKornSort.getText(),
                     txfRygemateriale.getText(),
                     txfBeskrivelse.getText());
@@ -149,7 +141,6 @@ public class DestillatRedigerWindow extends Stage {
                     Integer.parseInt(txfLiter.getText()),
                     Double.parseDouble(txfAlkPro.getText()),
                     dpStartDato.getValue(),
-                    dpSlutDato.getValue(),
                     txfKornSort.getText(),
                     txfBeskrivelse.getText());
         }

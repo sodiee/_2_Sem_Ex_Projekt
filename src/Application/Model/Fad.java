@@ -81,7 +81,7 @@ public class Fad {
                 alertConfirmation.setHeaderText("ERROR: destillat == null");
             }
             double antalLiter = fad.opfyldtLiter - fad.beregnAngelShare(fad.getDestillat());
-            Whisky whisky = new Whisky(destillat.getMedarbejder(), antalLiter, destillat.getAlkoholProcent(), destillat.getStartDato(), destillat.getSlutDato(), destillat.getKornSort(), destillat.getBeskrivelse(), navn);
+            Whisky whisky = new Whisky(destillat.getMedarbejder(), antalLiter, destillat.getAlkoholProcent(), destillat.getDatoForPåhldningPåFad(), destillat.getKornSort(), destillat.getBeskrivelse(), navn);
             return whisky;
     }
 
@@ -124,7 +124,7 @@ public class Fad {
     public void removeDestillat() { //String navn
         if (destillat != null) {
             tidligereDestillater.add(destillat);
-            alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
+            alder += destillat.getDestillatAge();
             this.destillat = null;
       //      convertToWhisky(navn);
         }

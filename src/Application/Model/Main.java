@@ -11,7 +11,7 @@ public class Main {
         Reol reol = Controller.createReol(lager, 2, 2);
         Hyldeplads hyldePlads = reol.getHylder().get(1).getHyldepladser().get(1);
        Fad fad = Controller.createFad("h", "h", 1, 100, hyldePlads);
-        Destillat destillat = Controller.createDestillat("h", 100, 40, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "h", "h");
+        Destillat destillat = Controller.createDestillat("h", 100, 40, LocalDate.of(2001, 01, 01), "h", "h");
        destillat.hældDestillatPåfad(fad);
        String navn = "Navn";
         Whisky whisky = Controller.createWhisky(navn, fad);

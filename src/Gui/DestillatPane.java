@@ -20,8 +20,8 @@ import java.util.Optional;
 
 public class DestillatPane extends GridPane {
 
-    private Label lblNr, lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblSlutDato, lblKornSort, lblRygemateriale, lblBeskrivelse, lblIsDone;
-    private Label lblNr2, lblMedarbejder2, lblLiter2, lblAlkPro2, lblStartDato2, lblSlutDato2, lblKornSort2, lblRygemateriale2, lblBeskrivelse2, lblIsDone2;
+    private Label lblNr, lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblKornSort, lblRygemateriale, lblBeskrivelse, lblIsDone;
+    private Label lblNr2, lblMedarbejder2, lblLiter2, lblAlkPro2, lblStartDato2, lblKornSort2, lblRygemateriale2, lblBeskrivelse2, lblIsDone2;
     private ListView<Destillat> lvwDestilleringer;
     private Button btnOpretDestillering, btnRedigerDestillering, btnSletDestillering, btnDone;
     private ComboBox cbxStatus;
@@ -83,8 +83,6 @@ public class DestillatPane extends GridPane {
         lblAlkPro2 = new Label();
         lblStartDato = new Label("Start Dato");
         lblStartDato2 = new Label();
-        lblSlutDato = new Label("Slut Dato");
-        lblSlutDato2 = new Label();
         lblKornSort = new Label("Korn Sort");
         lblKornSort2 = new Label();
         lblRygemateriale = new Label("Rygemateriale");
@@ -103,8 +101,6 @@ public class DestillatPane extends GridPane {
         vbxInfo.getChildren().add(lblAlkPro2);
         vbxInfo.getChildren().add(lblStartDato);
         vbxInfo.getChildren().add(lblStartDato2);
-        vbxInfo.getChildren().add(lblSlutDato);
-        vbxInfo.getChildren().add(lblSlutDato2);
         vbxInfo.getChildren().add(lblKornSort);
         vbxInfo.getChildren().add(lblKornSort2);
         vbxInfo.getChildren().add(lblRygemateriale);
@@ -120,7 +116,6 @@ public class DestillatPane extends GridPane {
         lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblStartDato.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblSlutDato.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblKornSort.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblRygemateriale.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -168,8 +163,7 @@ public class DestillatPane extends GridPane {
             lblMedarbejder2.setText(destillat.getMedarbejder());
             lblLiter2.setText(String.valueOf(destillat.getLiter()));
             lblAlkPro2.setText(String.valueOf(destillat.getAlkoholProcent()));
-            lblStartDato2.setText(String.valueOf(destillat.getStartDato()));
-            lblSlutDato2.setText(String.valueOf(destillat.getSlutDato()));
+            lblStartDato2.setText(String.valueOf(destillat.getDatoForPåhldningPåFad()));
             lblKornSort2.setText(destillat.getKornSort());
             if(destillat.getRygeMateriale() != null){
                 lblRygemateriale2.setText(destillat.getRygeMateriale());

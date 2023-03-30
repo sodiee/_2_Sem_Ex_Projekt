@@ -12,8 +12,8 @@ public class Whisky extends Destillat {
     private Fad fad;
     private ArrayList<WhiskyPåFlaske> flasker;
 
-    public Whisky(String medarbejder, double liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, String navn) {
-        super(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse);
+    public Whisky(String medarbejder, double liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse, String navn) {
+        super(medarbejder, liter, alkoholProcent, startDato, kornSort, beskrivelse);
         this.navn = navn;
         flasker = new ArrayList<>();
         this.nummer = getNummer();
@@ -22,8 +22,8 @@ public class Whisky extends Destillat {
         //this.fad = getAktuelFad();
     }
 
-    public Whisky(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, String navn) {
-        super(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse);
+    public Whisky(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String rygeMateriale, String beskrivelse, String navn) {
+        super(medarbejder, liter, alkoholProcent, startDato, kornSort, rygeMateriale, beskrivelse);
         this.navn = navn;
         flasker = new ArrayList<>();
     }
@@ -86,11 +86,11 @@ public class Whisky extends Destillat {
     }
 
     public LocalDate getStartDato() {
-        return super.getStartDato();
+        return super.getDatoForPåhldningPåFad();
     }
 
     public LocalDate getSlutDato() {
-        return super.getSlutDato();
+        return super.getDatoForPåhldningPåFad();
     }
 
     public String getKornsort() {

@@ -18,7 +18,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(-1);
 
         //Act & Assert
@@ -36,7 +36,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(0);
 
         //Act
@@ -55,7 +55,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(1);
 
         //Act
@@ -74,7 +74,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(4);
 
         //Act
@@ -93,7 +93,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(5);
 
         //Act
@@ -112,7 +112,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(7);
 
         //Act
@@ -131,7 +131,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(8);
 
         //Act
@@ -150,7 +150,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(11);
 
         //Act
@@ -169,7 +169,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(12);
 
         //Act
@@ -188,7 +188,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(13);
 
         //Act
@@ -207,7 +207,7 @@ public class FadTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry destilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 60, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
         fad.setAlder(20);
 
         //Act
