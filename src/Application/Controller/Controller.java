@@ -134,9 +134,9 @@ public class Controller {
     //endregion
 
     //region Whisky
-    public static Whisky createWhisky(Fad fad) {
+    public static Whisky createWhisky(String navn, Fad fad) {
         if (fad.getDestillat() != null) {
-            Whisky whisky = fad.createWhisky(fad);
+            Whisky whisky = fad.createWhisky(navn,fad);
             Storage.addWhisky(whisky);
             return whisky;
         } else {

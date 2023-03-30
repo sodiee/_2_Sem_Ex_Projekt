@@ -3,6 +3,8 @@ package Application.Model;
 import java.util.ArrayList;
 
 public class Whisky {
+    private String navn;
+
     private static int nummer;
     private double alkoholProcent;
     private String beskrivelse;
@@ -10,7 +12,8 @@ public class Whisky {
     private Fad fad;
     private ArrayList<WhiskyPåFlaske> flasker;
 
-    public Whisky(double liter, String beskrivelse, Fad fad) {
+    public Whisky(String navn,double liter, String beskrivelse, Fad fad) {
+        this.navn = navn;
         this.liter = liter;
         this.nummer = nummer + 1;
         this.alkoholProcent = fad.getDestillat().getAlkoholProcent();
@@ -65,6 +68,13 @@ public class Whisky {
 
     public double getMuligeAntalFlasker(Double flaskestørrelse){return liter/flaskestørrelse;}
 
+    public String getNavn(){
+        return navn;
+    }
+
+    public void setNavn(String navn){
+        this.navn = navn;
+    }
     public int getNummer() {
         return nummer;
     }

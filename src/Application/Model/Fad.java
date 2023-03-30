@@ -74,14 +74,14 @@ public class Fad {
         return angelShareDelTotal;
     }
 
-    public Whisky createWhisky(Fad fad) {
+    public Whisky createWhisky(String navn, Fad fad) {
             if(destillat == null){
                 Alert alertConfirmation = new Alert(Alert.AlertType.ERROR);
                 alertConfirmation.setTitle("Null");
                 alertConfirmation.setHeaderText("ERROR: destillat == null");
             }
             double antalLiter = fad.opfyldtLiter - fad.beregnAngelShare(fad.getDestillat());
-            Whisky whisky = new Whisky((int) antalLiter, destillat.getBeskrivelse(), this);
+            Whisky whisky = new Whisky(navn, (int) antalLiter, destillat.getBeskrivelse(), this);
             return whisky;
     }
 
