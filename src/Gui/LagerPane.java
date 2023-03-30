@@ -73,6 +73,7 @@ public class LagerPane extends GridPane {
         lvwHyldeplads.getSelectionModel().selectedItemProperty().addListener(listener3);
         cbxLager.getSelectionModel().selectedItemProperty().addListener(listener4);
 
+
         lvwHyldeplads.setPrefHeight(200);
         lvwHylde.setPrefHeight(200);
         lvwReol.setPrefHeight(200);
@@ -136,14 +137,18 @@ public class LagerPane extends GridPane {
         lvwHylde.getItems().setAll(reol.getHylder());
     }
     private void selectedHyldeChanged(){
+
         Hylde hylde = lvwHylde.getSelectionModel().getSelectedItem();
-        lvwHyldeplads.getItems().setAll(hylde.getHyldepladser());
+        if (hylde != null) {
+            lvwHyldeplads.getItems().setAll(hylde.getHyldepladser());
+        }
+
     }
     private void selectedHyldepladsChanged(){
         //TODO: der opstår fejl fordi den her kører ved deselect, i stedet for kun select
+        Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();
+        if(hyldeplads !=  null && hyldeplads.getFad() != null ){
 
-        if(lvwHyldeplads.getSelectionModel().getSelectedItem().getFad() != null){
-            Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();
             lblFadInfo.setText(hyldeplads.getFad().getLeverandør());
         }
         else{
