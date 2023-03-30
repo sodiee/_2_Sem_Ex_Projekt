@@ -55,7 +55,7 @@ public class Whisky {
             return flasker;
         }
 
-        WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, (int)muligtAntal, fortyndelseIMl, this);
+        WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, antal, fortyndelseIMl, this);
         flasker.add(whiskyPåFlaske);
         this.setLiter(this.getLiter() - ((flaskeStørrelseML - fortyndelseIMl) / 1000));
 

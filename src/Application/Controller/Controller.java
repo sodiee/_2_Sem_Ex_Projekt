@@ -149,6 +149,7 @@ public class Controller {
             Storage.addWhiskyPåFlaske(wpf);
         }
         setWhiskyPåFlaskePåLager(whiskyPåFlasker, lager);
+        System.out.println(whiskyPåFlasker);
         return whiskyPåFlasker;
     }
 
@@ -187,9 +188,7 @@ public class Controller {
 
 
         fad.addDestilatTofad(destillat);
-        Whisky whisky = new Whisky(500, "Inaugural Release", fad);
-        WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(1, 20, 0, whisky);
-        Storage.addWhisky(whisky);
-        Storage.addWhiskyPåFlaske(whiskyPåFlaske);
+        Whisky whisky = Controller.createWhisky(fad); //Inaugural Release
+        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = Controller.createWhiskyPåFlaske(whisky, 20, 0, sønderhøj);
     }
 }

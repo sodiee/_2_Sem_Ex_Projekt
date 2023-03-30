@@ -12,6 +12,7 @@ public class Fad {
     private int antalGangeBrugt;
     //TODO: nummereringen virker ikke
     private static int nummer;
+    private int tøndeNummer;
     private int størrelseLiter;
     private int opfyldtLiter = 0;
     private Reol reol;
@@ -34,6 +35,8 @@ public class Fad {
         setHyldeplads(hyldeplads);
         alder = 0;
         status = Status.TOM;
+        tøndeNummer++;
+        nummer = tøndeNummer;
     }
 
     public double beregnAngelShare(Destillat destillat) {

@@ -1,7 +1,5 @@
 package Application.Model;
 
-import java.util.ArrayList;
-
 public class WhiskyPåFlaske {
     private int nummer;
 
