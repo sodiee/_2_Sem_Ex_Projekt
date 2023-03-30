@@ -34,6 +34,10 @@ public class Hyldeplads {
         this.hylde = hylde;
     }
 
+    public Hylde getHylde(){
+        return hylde;
+    }
+
     public boolean isOptaget() {
         return optaget;
     }

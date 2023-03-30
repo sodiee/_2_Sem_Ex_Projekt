@@ -5,9 +5,7 @@ import java.util.ArrayList;
 
 public class Whisky extends Destillat {
     private String navn;
-    private static int nummer;
     private double alkoholProcent;
-    private String beskrivelse;
     private double liter;
     private Fad fad;
     private ArrayList<WhiskyPåFlaske> flasker;
