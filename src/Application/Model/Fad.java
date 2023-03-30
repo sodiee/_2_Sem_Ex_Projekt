@@ -135,9 +135,9 @@ public class Fad {
         }
     }
 
-    public void convertToWhisky(){
+    public void convertToWhisky(String navn){
         this.setStatus(Status.WHISKY);
-        createWhisky(this);
+        createWhisky(navn, this);
     }
     public Destillat getDestillat() {
         return destillat;

@@ -1,10 +1,10 @@
 package Application.Model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Whisky extends Destillat {
+public class OldWhisky {
     private String navn;
+
     private static int nummer;
     private double alkoholProcent;
     private String beskrivelse;
@@ -12,18 +12,17 @@ public class Whisky extends Destillat {
     private Fad fad;
     private ArrayList<WhiskyPåFlaske> flasker;
 
-    public Whisky(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String beskrivelse, String navn) {
-        super(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, beskrivelse);
+    public Whisky(String navn,double liter, String beskrivelse, Fad fad) {
         this.navn = navn;
-        flasker = new ArrayList<>();
+        this.liter = liter;
+        this.nummer = nummer + 1;
+        this.alkoholProcent = fad.getDestillat().getAlkoholProcent();
+        this.beskrivelse = beskrivelse;
+        this.fad = fad;
+        this.flasker = new ArrayList<>();
     }
 
-    public Whisky(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, LocalDate slutDato, String kornSort, String rygeMateriale, String beskrivelse, String navn) {
-        super(medarbejder, liter, alkoholProcent, startDato, slutDato, kornSort, rygeMateriale, beskrivelse);
-        this.navn = navn;
-        flasker = new ArrayList<>();
-    }
-
+    //region Loop-Metode
     public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl) {
         double flaskeStørrelseML = 700;
         double muligtAntal = (((this.getLiter() * 1000) + (antal * fortyndelseIMl)) / flaskeStørrelseML);
@@ -35,7 +34,7 @@ public class Whisky extends Destillat {
             for (int i = 1; i < antal + 1; i++) {
                 WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(i, (int)muligtAntal, fortyndelseIMl, this);
                 flasker.add(whiskyPåFlaske);
-                this.setLiter((int) (this.getLiter() - (påfyldningPerFlaske / 1000)));
+                this.setLiter(this.getLiter() - (påfyldningPerFlaske / 1000));
             }
         }
         return flasker;
@@ -69,60 +68,47 @@ public class Whisky extends Destillat {
 
     public double getMuligeAntalFlasker(Double flaskestørrelse){return liter/flaskestørrelse;}
 
-    public String getMedarbejder() {
-        return super.getMedarbejder();
-    }
-
-    public double getLiter() {
-        return super.getLiter();
-    }
-
-    public double getAlkoholprocentDestillat() {
-        return super.getAlkoholProcent();
-    }
-
-    public LocalDate getStartDato() {
-        return super.getStartDato();
-    }
-
-    public LocalDate getSlutDato() {
-        return super.getSlutDato();
-    }
-
-    public String getKornsort() {
-        return super.getKornSort();
-    }
-
-    public String getRygeMateriale() {
-        return super.getRygeMateriale();
-    }
-
-    public String getNavn() {
+    public String getNavn(){
         return navn;
     }
 
-    public Fad getFad(int index) {
-        return super.getFade().get(0);
+    public void setNavn(String navn){
+        this.navn = navn;
     }
-
     public int getNummer() {
-        return super.getNummer();
+        return nummer;
     }
 
-    public double getAlkoholProcentWhisky() {
-        return this.alkoholProcent;
+    public void setNummer(int nummer) {
+        this.nummer = nummer;
+    }
+
+    public double getAlkoholProcent() {
+        return alkoholProcent;
+    }
+
+    public void setAlkoholProcent(double alkoholProcent) {
+        this.alkoholProcent = alkoholProcent;
+    }
+
+    public String getBeskrivelse() {
+        return beskrivelse;
+    }
+
+    public void setBeskrivelse(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
+    }
+
+    public double getLiter() {
+        return liter;
+    }
+
+    public void setLiter(double liter) {
+        this.liter = liter;
     }
 
     public ArrayList<WhiskyPåFlaske> getFlasker() {
         return flasker;
-    }
-
-    public double getSuperLiter() {
-        return super.getLiter();
-    }
-
-    public double getWhiskyLiter() {
-        return this.liter;
     }
 
     @Override

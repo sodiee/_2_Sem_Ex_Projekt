@@ -6,9 +6,10 @@ import java.util.Date;
 
 public class Destillat {
 
-    private int destillatNr;
+    private int nummer;
+    private static int destillatNr;
     private String medarbejder;
-    private int liter;
+    private double liter;
     private int literFraStart;
     private double alkoholProcent;
     private LocalDate startDato;
@@ -30,7 +31,7 @@ public class Destillat {
         this.beskrivelse = beskrivelse;
         this.isDone = false;
         this.literFraStart = liter;
-        destillatNr = destillatNr + 1;
+        nummer = destillatNr + 1;
     }
 
     //Med røg
@@ -44,7 +45,8 @@ public class Destillat {
         this.rygeMateriale = rygeMateriale;
         this.beskrivelse = beskrivelse;
         this.isDone = false;
-        destillatNr = destillatNr + 1;
+        nummer++;
+        destillatNr = nummer;
     }
 
     public void setDestillatNr(int destillatNr) {this.destillatNr = destillatNr;}
@@ -89,7 +91,7 @@ public class Destillat {
         return medarbejder;
     }
 
-    public int getLiter() {
+    public double getLiter() {
         return liter;
     }
 
@@ -121,12 +123,16 @@ public class Destillat {
         return isDone;
     }
 
+    public int getNummer() {
+        return destillatNr;
+    }
+
     //Setters_____________________________________________________________________________________
     public void setMedarbejder(String medarbejder) {
         this.medarbejder = medarbejder;
     }
 
-    public void setLiter(int liter) {
+    public void setLiter(double liter) {
         this.liter = liter;
     }
 
