@@ -27,7 +27,7 @@ import java.util.Random;
 public class WhiskeyPane extends BorderPane {
 
     private Label lblTitle;
-    private ComboBox<WhiskyPåFlaske> cbxProdukt;
+    private ComboBox<Whisky> cbxProdukt;
     private Image image1, image2, image3, image4, image5;
     private ImageView imageView;
 
@@ -142,7 +142,7 @@ public class WhiskeyPane extends BorderPane {
     }
     private void initData(){
 
-        cbxProdukt.getItems().setAll(Storage.getWhiskyPåFlaskeArrayList());
+        cbxProdukt.getItems().setAll(Storage.getWhiskyArrayList());
         cbxProdukt.getSelectionModel().selectFirst();
 
         //tag whiskiens nummer 1-5, derefter reset int og tag billeder 1-5 igen
@@ -152,7 +152,7 @@ public class WhiskeyPane extends BorderPane {
         imageView.setImage(images.get(imgselect));
         cbxProdukt.getSelectionModel().selectFirst();
 
-        WhiskyPåFlaske whiskyPåFlaske = cbxProdukt.getSelectionModel().getSelectedItem();
+        WhiskyPåFlaske whiskyPåFlaske = cbxProdukt.getSelectionModel().getSelectedItem().getFlasker().get(0);
         //lblNummerValue.setText(String.valueOf(whiskyPåFlaske.getNummer()));
         lblTotalNummerValue.setText(String.valueOf(whiskyPåFlaske.getTotalNummer()));
         lblFortyndelseValue.setText(String.valueOf(whiskyPåFlaske.getFortyndelseIML()));
@@ -168,8 +168,8 @@ public class WhiskeyPane extends BorderPane {
         whiskeyPåFlaskeOpretWindow.showAndWait();
     }
     private void redigerAction(){
-        if(cbxProdukt.getSelectionModel().getSelectedItem().getWhisky() == null){return;}
-        Whisky whisky = cbxProdukt.getSelectionModel().getSelectedItem().getWhisky();
+        if(cbxProdukt.getSelectionModel().getSelectedItem() == null){return;}
+        Whisky whisky = cbxProdukt.getSelectionModel().getSelectedItem();
         WhiskeyRedigerWindow whiskeyRedigerWindow = new WhiskeyRedigerWindow(whisky);
         whiskeyRedigerWindow.showAndWait();
     }

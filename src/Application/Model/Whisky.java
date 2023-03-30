@@ -97,6 +97,10 @@ public class Whisky {
         this.liter = liter;
     }
 
+    public ArrayList<WhiskyPåFlaske> getFlasker() {
+        return flasker;
+    }
+
     @Override
     public String toString(){return "#" + nummer + " " + beskrivelse + " " + alkoholProcent + "%";}
 
