@@ -5,6 +5,8 @@ import Application.Model.Destillat;
 import Application.Model.Fad;
 import Application.Model.Lager;
 import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -18,10 +20,12 @@ import java.util.Optional;
 
 public class DestillatPane extends GridPane {
 
-    private Label lblDestilleringer, lblNr, lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblSlutDato, lblKornSort, lblRygemateriale, lblBeskrivelse, lblIsDone;
+    private Label lblNr, lblMedarbejder, lblLiter, lblAlkPro, lblStartDato, lblSlutDato, lblKornSort, lblRygemateriale, lblBeskrivelse, lblIsDone;
     private Label lblNr2, lblMedarbejder2, lblLiter2, lblAlkPro2, lblStartDato2, lblSlutDato2, lblKornSort2, lblRygemateriale2, lblBeskrivelse2, lblIsDone2;
     private ListView<Destillat> lvwDestilleringer;
     private Button btnOpretDestillering, btnRedigerDestillering, btnSletDestillering, btnDone;
+    private ComboBox cbxStatus;
+    private ObservableList<String> cbxValues = FXCollections.observableArrayList("Klar til Fadpåfyldning", "Historiske Destillater", "Alle");
 
     public DestillatPane() {
         this.setPadding(new Insets(10));
@@ -34,14 +38,18 @@ public class DestillatPane extends GridPane {
 
     //TODO: Gør således at beskrivelsesfeltet laver ny linje, i stedet for at køre uendeligt til højre
     private void initGUI(){
-        lblDestilleringer = new Label("Destilleringer");
-        this.add(lblDestilleringer, 0, 0);
+
+        cbxStatus = new ComboBox(cbxValues);
+        this.add(cbxStatus, 0, 0);
+        ChangeListener<String> listener = (ov, oldCompany, newCompany) -> this.selectedStateChanged();
+        cbxStatus.getSelectionModel().selectedItemProperty().addListener(listener);
+
 
         lvwDestilleringer = new ListView();
         this.add(lvwDestilleringer, 0, 1);
-        ChangeListener<Destillat> listener = (ov, oldCompny, newCompany) -> this.selectedDestillatChanged();
-        lvwDestilleringer.getSelectionModel().selectedItemProperty().addListener(listener);
-        lvwDestilleringer.getItems().setAll(Controller.getDestillat());
+        ChangeListener<Destillat> listener1 = (ov, oldCompny, newCompany) -> this.selectedDestillatChanged();
+        lvwDestilleringer.getSelectionModel().selectedItemProperty().addListener(listener1);
+        cbxStatus.getSelectionModel().selectFirst();
 
         //Buttons
         btnOpretDestillering = new Button("Opret Ny");
@@ -123,6 +131,32 @@ public class DestillatPane extends GridPane {
     }
 
     private void selectedDestillatChanged(){this.updateControls();}
+
+    private void selectedStateChanged(){
+
+        if(lvwDestilleringer != null){
+            lvwDestilleringer.getItems().clear();
+        }
+
+
+        if(cbxStatus.getSelectionModel().getSelectedItem() == "Historiske Destillater"){
+            for(Destillat destillat : Controller.getDestillat()){
+                if(destillat.isDone()){
+                    lvwDestilleringer.getItems().add(destillat);
+                }
+            }
+        }
+        if(cbxStatus.getSelectionModel().getSelectedItem() == "Klar til Fadpåfyldning"){
+            for(Destillat destillat : Controller.getDestillat()){
+                if(!destillat.isDone()){
+                    lvwDestilleringer.getItems().add(destillat);
+                }
+            }
+        }
+        if(cbxStatus.getSelectionModel().getSelectedItem() == "Alle"){
+            lvwDestilleringer.getItems().addAll(Controller.getDestillat());
+        }
+    }
 
     public void updateControls(){
 
@@ -208,7 +242,10 @@ public class DestillatPane extends GridPane {
         if(!destillat.isDone()){
             DestillatFærdiggørWindow destillatFærdiggørWindow = new DestillatFærdiggørWindow(destillat);
             destillatFærdiggørWindow.showAndWait();
-            lvwDestilleringer.getItems().setAll(Controller.getDestillat());
+            //lvwDestilleringer.getItems().setAll(Controller.getDestillat());
+            updateControls();
+            selectedStateChanged();
+            lvwDestilleringer.getSelectionModel().selectFirst();
 
         } else if (destillat.isDone()) {
             Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);

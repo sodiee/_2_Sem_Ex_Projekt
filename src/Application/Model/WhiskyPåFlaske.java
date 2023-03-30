@@ -32,8 +32,33 @@ public class WhiskyPåFlaske {
         lager.addFlaske(this);
     }
 
+    public int getNummer() {
+        return nummer;
+    }
+
+    public int getTotalNummer() {
+        return totalNummer;
+    }
+
+    public double getFortyndelseIML() {
+        return fortyndelseIML;
+    }
+
+    public double getLiter() {
+        return liter;
+    }
+
+    public Whisky getWhisky() {
+        return whisky;
+    }
+
+    public Lager getLager() {
+        return lager;
+    }
+
     @Override
     public String toString() {
         return "Flaske nummer " + nummer + "/" + totalNummer;
     }
 }
+

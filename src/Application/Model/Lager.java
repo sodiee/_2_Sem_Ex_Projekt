@@ -44,4 +44,7 @@ public class Lager {
         }
     }
 
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
 }

@@ -1,17 +1,17 @@
 package Gui;
 
+import Application.Controller.Controller;
 import Application.Model.*;
 import Storage.Storage;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.util.Optional;
 
 public class LagerPane extends GridPane {
 
@@ -21,7 +21,7 @@ public class LagerPane extends GridPane {
     private ListView<Hylde> lvwHylde;
     private ListView<Hyldeplads> lvwHyldeplads;
     private HBox hbxButtons;
-    private Button btnOpret;
+    private Button btnOpret, btnRediger, btnSlet;
 
     public LagerPane(){
         this.setPadding(new Insets(10));
@@ -42,10 +42,12 @@ public class LagerPane extends GridPane {
         lvwHylde = new ListView();
         lvwHyldeplads = new ListView();
         lblFadInfo = new Label();
-        hbxButtons = new HBox();
-        btnOpret = new Button("Opret");
+        hbxButtons = new HBox(10);
+        btnOpret = new Button("Opret Lagerhus");
+        btnRediger = new Button("Redigér Lagerhus");
+        btnSlet = new Button("Slet Lagerhus");
 
-        this.add(lblLager, 0, 0);
+        //this.add(lblLager, 0, 0);
         this.add(cbxLager, 0, 1);
         this.add(lblReol, 0, 2);
         this.add(lvwReol, 0, 3);
@@ -58,13 +60,14 @@ public class LagerPane extends GridPane {
         this.add(hbxButtons, 0, 6);
 
         btnOpret.setOnAction(event -> btnOpretLagerAction());
-        hbxButtons.getChildren().add(btnOpret);
+        btnRediger.setOnAction(event -> btnRedigerLagerAction());
+        btnSlet.setOnAction(event -> btnSletLagerAction());
+        hbxButtons.getChildren().addAll(btnOpret, btnRediger, btnSlet);
 
-
-        ChangeListener<Reol> listener1 = (ov, oldCompny, newCompany) -> this.selectedReolChanged();
-        ChangeListener<Hylde> listener2 = (ov, oldCompny, newCompany) -> this.selectedHyldeChanged();
-        ChangeListener<Hyldeplads> listener3 = (ov, oldCompny, newCompany) -> this.selectedHyldepladsChanged();
-        ChangeListener<Lager> listener4 = (ov, oldCompny, newCompany) -> this.selectedLagerChanged();
+        ChangeListener<Reol> listener1 = (ov1, oldCompny, newCompany) -> this.selectedReolChanged();
+        ChangeListener<Hylde> listener2 = (ov2, oldCompny, newCompany) -> this.selectedHyldeChanged();
+        ChangeListener<Hyldeplads> listener3 = (ov3, oldCompny, newCompany) -> this.selectedHyldepladsChanged();
+        ChangeListener<Lager> listener4 = (ov4, oldCompny, newCompany) -> this.selectedLagerChanged();
         lvwReol.getSelectionModel().selectedItemProperty().addListener(listener1);
         lvwHylde.getSelectionModel().selectedItemProperty().addListener(listener2);
         lvwHyldeplads.getSelectionModel().selectedItemProperty().addListener(listener3);
@@ -75,6 +78,7 @@ public class LagerPane extends GridPane {
         lvwReol.setPrefHeight(200);
 
         cbxLager.getItems().addAll(Storage.getLagerArrayList());
+        cbxLager.getSelectionModel().selectFirst();
 
         lblFad.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblLager.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -89,8 +93,45 @@ public class LagerPane extends GridPane {
     public void btnOpretLagerAction(){
         LagerOpretWindow lagerOpretWindow = new LagerOpretWindow();
         lagerOpretWindow.showAndWait();
+        cbxLager.getItems().setAll(Storage.getLagerArrayList());
+        cbxLager.getSelectionModel().selectLast();
+    }
+    public void btnRedigerLagerAction(){
+        if(cbxLager.getSelectionModel().getSelectedItem() == null){return;}
+        LagerRedigerWindow lagerRedigerWindow = new LagerRedigerWindow(cbxLager.getSelectionModel().getSelectedItem());
+        lagerRedigerWindow.showAndWait();
+        cbxLager.getItems().setAll(Storage.getLagerArrayList());
+        //TODO: sæt den til at vælge den man lige har redigeret
+        cbxLager.getSelectionModel().selectLast();
+    }
+    public void btnSletLagerAction(){
+        Lager lager = cbxLager.getSelectionModel().getSelectedItem();
+
+        if(lager == null){return;}
+        Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirmation.setTitle("Slettelse");
+        alertConfirmation.setHeaderText("Er du sikker på at du vil slette lageret?");
+        Optional<ButtonType> option = alertConfirmation.showAndWait();
+
+        if (option.get() == null) {
+            //no selection
+        } else if (option.get() == ButtonType.OK) {
+            Controller.deleteLager(lager);
+        } else if (option.get() == ButtonType.CANCEL) {
+            //cancelled
+        } else {
+
+        }
+
+        cbxLager.getItems().setAll(Storage.getLagerArrayList());
+        cbxLager.getSelectionModel().selectLast();
     }
     private void selectedReolChanged(){
+        lvwHyldeplads.getSelectionModel().clearSelection();
+        lvwHyldeplads.getItems().clear();
+        lvwHylde.getSelectionModel().clearSelection();
+        lvwHylde.getItems().clear();
+
         Reol reol = lvwReol.getSelectionModel().getSelectedItem();
         lvwHylde.getItems().setAll(reol.getHylder());
     }
@@ -99,8 +140,15 @@ public class LagerPane extends GridPane {
         lvwHyldeplads.getItems().setAll(hylde.getHyldepladser());
     }
     private void selectedHyldepladsChanged(){
-        Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();
-        lblFadInfo.setText(hyldeplads.getFad().toString());
+        //TODO: der opstår fejl fordi den her kører ved deselect, i stedet for kun select
+
+        if(lvwHyldeplads.getSelectionModel().getSelectedItem().getFad() != null){
+            Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();
+            lblFadInfo.setText(hyldeplads.getFad().getLeverandør());
+        }
+        else{
+            lblFadInfo.setText("Pladsen er tom");
+        }
     }
     private void selectedLagerChanged(){
         Lager lager = cbxLager.getSelectionModel().getSelectedItem();

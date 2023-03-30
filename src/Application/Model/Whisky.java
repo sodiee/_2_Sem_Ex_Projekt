@@ -63,6 +63,8 @@ public class Whisky {
     }
     //endregion
 
+    public double getMuligeAntalFlasker(Double flaskestørrelse){return liter/flaskestørrelse;}
+
     public int getNummer() {
         return nummer;
     }
@@ -94,5 +96,8 @@ public class Whisky {
     public void setLiter(double liter) {
         this.liter = liter;
     }
+
+    @Override
+    public String toString(){return "#" + nummer + " " + beskrivelse + " " + alkoholProcent + "%";}
 
 }

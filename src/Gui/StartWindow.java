@@ -47,13 +47,6 @@ public class StartWindow extends Application {
         tabStart.setContent(startPane);
         tabStart.setOnSelectionChanged(event -> startPane.updateControls());
 
-        //DestillatPane
-        Tab tabDestillat = new Tab("Destilleringer");
-        tabPane.getTabs().add(tabDestillat);
-        DestillatPane destillatPane = new DestillatPane();
-        tabDestillat.setContent(destillatPane);
-        tabDestillat.setOnSelectionChanged(event -> destillatPane.updateControls());
-
         //LagerPane
         Tab tabLager = new Tab("Lagerhuse");
         tabPane.getTabs().add(tabLager);
@@ -61,7 +54,12 @@ public class StartWindow extends Application {
         tabLager.setContent(lagerPane);
         tabLager.setOnSelectionChanged(event -> lagerPane.updateControls());
 
-        //WhiskyPane
+        //DestillatPane
+        Tab tabDestillat = new Tab("Destilleringer");
+        tabPane.getTabs().add(tabDestillat);
+        DestillatPane destillatPane = new DestillatPane();
+        tabDestillat.setContent(destillatPane);
+        tabDestillat.setOnSelectionChanged(event -> destillatPane.updateControls());
 
         //FadPane
         Tab tabFad = new Tab("Fade");
@@ -69,6 +67,13 @@ public class StartWindow extends Application {
         FadPane fadPane = new FadPane();
         tabFad.setContent(fadPane);
         tabFad.setOnSelectionChanged(event -> fadPane.updateControls());
+
+        //WhiskyPane
+        Tab tabWhisky = new Tab("Whisky");
+        tabPane.getTabs().add(tabWhisky);
+        WhiskeyPane whiskeyPane = new WhiskeyPane();
+        tabWhisky.setContent(whiskeyPane);
+        tabWhisky.setOnSelectionChanged(event -> whiskeyPane.updateControls());
 
     }
 }

@@ -1,18 +1,27 @@
 package Gui;
 
 import Application.Controller.Controller;
+import Application.Model.Destillat;
 import Application.Model.Fad;
 import Application.Model.Status;
 import Storage.Storage;
 import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 public class FadPane extends GridPane {
@@ -25,6 +34,9 @@ public class FadPane extends GridPane {
     private HBox hbxButtons;
     private Button btnRegFad, btnSletFad, btnRedigérFad, btnOpretWhisky;
     private Fad selectedFad;
+    private ComboBox cbxStatus;
+    private Image image;
+    private ImageView imageView;
 
     public FadPane() {
         this.setPadding(new Insets(10));
@@ -37,9 +49,19 @@ public class FadPane extends GridPane {
     }
 
     private void initGUI() {
-        //kun labels til ting ikke I toString()
-        //labelLager = "Lager - reol hylde hyldeplads
-        //listview kun så stor som antallet af tidligere destillater
+
+        //TODO: listview kun så stor som antallet af tidligere destillater
+        try{
+            InputStream stream = new FileInputStream("resources/barrel.png");
+            image = new Image(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        imageView = new ImageView();
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(100);
+        imageView.setPreserveRatio(true);
+        imageView.setImage(image);
 
         lvwFad = new ListView<>();
         lblTidligereIndhold = new Label("Tidligere Indhold: ");
@@ -97,20 +119,34 @@ public class FadPane extends GridPane {
 
         ChangeListener<Fad> listener1 = (ov, oldCompny, newCompany) -> this.selectedFadChanged();
         lvwFad.getSelectionModel().selectedItemProperty().addListener(listener1);
-
         lvwFad.setPrefWidth(300);
 
-        this.add(lvwFad, 0, 0);
-        this.add(vbxInfo, 1, 0);
-        this.add(hbxButtons, 0, 1, 2, 1);
-        lvwFad.getItems().addAll(Storage.getFadArrayList());
+        //ComboBox:
+        Status[] statuser = Status.class.getEnumConstants();
+        ObservableList statusList = FXCollections.observableArrayList();
+        for(Status status : statuser){
+            statusList.add(status.name());
+        }
+        statusList.add("ALLE");
+        cbxStatus = new ComboBox(statusList);
+        this.add(cbxStatus, 0, 0);
+        ChangeListener<String> listener = (ov, oldCompany, newCompany) -> this.selectedStateChanged();
+        cbxStatus.getSelectionModel().selectedItemProperty().addListener(listener);
+
+        this.add(lvwFad, 0, 1, 1, 2);
+        this.add(imageView, 1, 1);
+        this.add(vbxInfo, 1, 2);
+        this.add(hbxButtons, 0, 3, 2, 1);
+
+        GridPane.setHalignment(imageView, HPos.CENTER);
+
+        cbxStatus.getSelectionModel().select("ALLE");
     }
 
     private void initData() {
 
-        if (selectedFad == null) {
-            return;
-        }
+        if (selectedFad == null) {return;}
+
         LblTidligereIndholdValue.setText(selectedFad.getTidligereIndhold());
         lblAntalGangeBrugtValue.setText(String.valueOf(selectedFad.getAntalGangeBrugt()));
         //lblLagerValue.setText(selectedFad.getLager().toString());
@@ -122,14 +158,12 @@ public class FadPane extends GridPane {
         if (Controller.findLagerAfFad(selectedFad) != null) {
             lblLager.setText(Controller.findLagerAfFad(selectedFad).toString());
         }
-
     }
 
     private void selectedFadChanged() {
 
-        if (lvwFad.getSelectionModel().getSelectedItem() == null) {
-            return;
-        }
+        if (lvwFad.getSelectionModel().getSelectedItem() == null) {return;}
+
         if (lvwFad.getSelectionModel().getSelectedItem().getStatus() == Status.DESTILLAT && lvwFad.getSelectionModel().getSelectedItem() != null) {
             btnOpretWhisky.setDisable(false);
         } else {
@@ -146,6 +180,35 @@ public class FadPane extends GridPane {
         } else {
             btnRedigérFad.setDisable(true);
             btnSletFad.setDisable(true);
+        }
+    }
+    private void selectedStateChanged(){
+
+        if(lvwFad != null){lvwFad.getItems().clear();}
+
+        if(cbxStatus.getSelectionModel().getSelectedItem() == "WHISKY"){
+            for(Fad fad : Storage.getFadArrayList()){
+                if(fad.getStatus().equals(Status.WHISKY)){
+                    lvwFad.getItems().add(fad);
+                }
+            }
+        }
+        if(cbxStatus.getSelectionModel().getSelectedItem() == "DESTILLAT"){
+            for(Fad fad : Storage.getFadArrayList()){
+                if(fad.getStatus().equals(Status.DESTILLAT)){
+                    lvwFad.getItems().add(fad);
+                }
+            }
+        }
+        if(cbxStatus.getSelectionModel().getSelectedItem() == "TOM"){
+            for(Fad fad : Storage.getFadArrayList()){
+                if(fad.getStatus().equals(Status.TOM)){
+                    lvwFad.getItems().add(fad);
+                }
+            }
+        }
+        if(cbxStatus.getSelectionModel().getSelectedItem() == "ALLE"){
+            lvwFad.getItems().addAll(Storage.getFadArrayList());
         }
     }
 

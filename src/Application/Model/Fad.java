@@ -10,6 +10,7 @@ public class Fad {
     private String leverandør;
     private String tidligereIndhold;
     private int antalGangeBrugt;
+    //TODO: nummereringen virker ikke
     private static int nummer;
     private int størrelseLiter;
     private int opfyldtLiter = 0;
@@ -28,7 +29,6 @@ public class Fad {
         this.leverandør = leverandør;
         this.tidligereIndhold = tidligereIndhold;
         this.antalGangeBrugt = antalGangeBrugt;
-        nummer = nummer + 1;
         this.størrelseLiter = størrelseLiter;
         this.tidligereDestillater = new ArrayList<>();
         setHyldeplads(hyldeplads);

@@ -10,7 +10,6 @@ public class Controller {
 
     //region Fad
     public static Fad createFad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int størrelseLiter, Hyldeplads hyldeplads) {
-        //TODO: tjek om det er sådan her man sørger for at lageret ikke er null
         if (hyldeplads == null){
             throw new IllegalArgumentException("Hyldeplads må ikke være null");
         }
@@ -44,6 +43,11 @@ public class Controller {
     }
     public static ArrayList<Lager> getLager(){
         return Storage.getLagerArrayList();
+    }
+
+    public static void deleteLager(Lager lager){
+        //TODO: få den til at gøre noget ved alle de ting som har lageret associeret?
+        Storage.getLagerArrayList().remove(lager);
     }
     public static Reol createReol(Lager lager, int antalHylder, int antalHyldepladser){
         Reol reol = new Reol(lager.getReoler().size()+1, lager);
@@ -180,5 +184,12 @@ public class Controller {
         Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever");
         destillat.hældDestillatPåfad(fad1);
         Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2017, 2, 14), LocalDate.of(2021, 1, 19), "Byg", "Strå", "I can't believe its not whiskey");
+
+
+        fad.addDestilatTofad(destillat);
+        Whisky whisky = new Whisky(500, "Inaugural Release", fad);
+        WhiskyPåFlaske whiskyPåFlaske = new WhiskyPåFlaske(1, 20, 0, whisky);
+        Storage.addWhisky(whisky);
+        Storage.addWhiskyPåFlaske(whiskyPåFlaske);
     }
 }

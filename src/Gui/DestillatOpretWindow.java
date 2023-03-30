@@ -30,8 +30,7 @@ public class DestillatOpretWindow extends Stage{
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
         this.setScene(scene);
-        //this.setHeight(300);
-        //TODO: bliver ikke stor nok i højden
+        this.setHeight(570);
         this.initGUI(pane);
     }
 
@@ -128,9 +127,7 @@ public class DestillatOpretWindow extends Stage{
                     dpSlutDato.getValue(),
                     txfKornSort.getText(),
                     txfRygemateriale.getText(),
-                    txfBeskrivelse.getText()
-                    );
-
+                    txfBeskrivelse.getText());
         }
         //Hvis røg ikke er angivet
         else if(txfRygemateriale.getLength() == 0){
@@ -141,8 +138,7 @@ public class DestillatOpretWindow extends Stage{
                     dpStartDato.getValue(),
                     dpSlutDato.getValue(),
                     txfKornSort.getText(),
-                    txfBeskrivelse.getText()
-                    );
+                    txfBeskrivelse.getText());
         }
         this.hide();
     }

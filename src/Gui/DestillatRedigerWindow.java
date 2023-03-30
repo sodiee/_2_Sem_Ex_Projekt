@@ -33,7 +33,7 @@ public class DestillatRedigerWindow extends Stage {
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
         this.setScene(scene);
-        //this.setHeight(300);
+        this.setHeight(600);
         this.initGUI(pane);
         this.initData(destillat);
     }
