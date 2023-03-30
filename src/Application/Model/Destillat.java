@@ -49,7 +49,9 @@ public class Destillat {
         destillatNr = nummer;
     }
 
-    public void setDestillatNr(int destillatNr) {this.destillatNr = destillatNr;}
+    public void setDestillatNr(int destillatNr) {
+        this.destillatNr = destillatNr;
+    }
 
     public double getLiterFraStart() {
         return literFraStart;
@@ -80,6 +82,10 @@ public class Destillat {
     public ArrayList<Fad> getFade() {
         return fade;
     }
+
+    /*public Fad getAktuelFad() {
+        return fade.get(fade.size() - 1);
+    }*/
 
     public int getDestillatAge() {
         return this.getSlutDato().getYear() - this.getStartDato().getYear();

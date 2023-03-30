@@ -131,6 +131,12 @@ public class Controller {
     public static void deleteDestillat(Destillat destillat){
         Storage.deleteDestillat(destillat);
     }
+
+    public static void convertToWhisky(Fad fad, String navn) {
+        fad.convertToWhisky(navn);
+        Controller.createWhisky(navn, fad);
+        fad.removeDestillat();
+    }
     //endregion
 
     //region Whisky
@@ -171,11 +177,11 @@ public class Controller {
         Reol reol4 = createReol(sørenFrichsVej, 3, 8);
         Reol reol5 = createReol(sørenFrichsVej, 7, 8);
 
-        Hylde hylde = new Hylde(1,reol);
-        Hyldeplads hyldeplads1 = new Hyldeplads(1,hylde);
-        Hyldeplads hyldeplads2 = new Hyldeplads(2,hylde);
-        Hyldeplads hyldeplads3 = new Hyldeplads(3,hylde);
-        Hyldeplads hyldeplads4 = new Hyldeplads(4,hylde);
+        Hylde hylde = reol.getHylder().get(0);
+        Hyldeplads hyldeplads1 = reol.getHylder().get(1).getHyldepladser().get(1); //new Hyldeplads(1,hylde);
+        Hyldeplads hyldeplads2 = reol.getHylder().get(1).getHyldepladser().get(1); //new Hyldeplads(2,hylde);
+        Hyldeplads hyldeplads3 = reol.getHylder().get(1).getHyldepladser().get(1); //new Hyldeplads(3,hylde);
+        Hyldeplads hyldeplads4 = reol.getHylder().get(1).getHyldepladser().get(1); //new Hyldeplads(4,hylde);
 
         Fad fad = createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, hyldeplads1);
         Fad fad1 = createFad("Bourbon distilleri, Texas", "Bourbon", 1, 500,  hyldeplads2);
@@ -183,11 +189,10 @@ public class Controller {
         Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54,  hyldeplads4);
 
         Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), LocalDate.of(2023, 4, 14), "Rug", "Bedste Whiskey ever");
-        destillat.hældDestillatPåfad(fad1);
         Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2017, 2, 14), LocalDate.of(2021, 1, 19), "Byg", "Strå", "I can't believe its not whiskey");
 
+        destillat.hældDestillatPåfad(fad1);
 
-        fad.addDestilatTofad(destillat);
         Whisky whisky = Controller.createWhisky("Inaugural Release", fad1);
         ArrayList<WhiskyPåFlaske> whiskyPåFlasker = Controller.createWhiskyPåFlaske(whisky, 20, 0, sønderhøj);
     }

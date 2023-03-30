@@ -275,7 +275,8 @@ public class FadPane extends GridPane {
             if (optional.get() == null) {
 
             } else if (optional.get() == ButtonType.OK) {
-                lvwFad.getSelectionModel().getSelectedItem().removeDestillat(txfWhiskyNavnValue.getText());
+                Controller.convertToWhisky(lvwFad.getSelectionModel().getSelectedItem(), txfWhiskyNavnValue.getText());
+                //lvwFad.getSelectionModel().getSelectedItem().removeDestillat(txfWhiskyNavnValue.getText());
                 lvwFad.getItems().clear();
                 lvwFad.getItems().addAll(Storage.getFadArrayList());
             } else if (optional.get() == ButtonType.CANCEL) {

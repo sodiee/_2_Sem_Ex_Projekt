@@ -121,12 +121,12 @@ public class Fad {
         }
     }
 
-    public void removeDestillat(String navn) {
+    public void removeDestillat() { //String navn
         if (destillat != null) {
             tidligereDestillater.add(destillat);
             alder += destillat.getSlutDato().getYear() - destillat.getStartDato().getYear();
             this.destillat = null;
-            convertToWhisky(navn);
+      //      convertToWhisky(navn);
         }
         else {
             Alert alertConfirmation = new Alert(Alert.AlertType.ERROR);
@@ -137,7 +137,7 @@ public class Fad {
 
     public void convertToWhisky(String navn){
         this.setStatus(Status.WHISKY);
-        createWhisky(navn, this);
+        //createWhisky(navn, this);
     }
     public Destillat getDestillat() {
         return destillat;
