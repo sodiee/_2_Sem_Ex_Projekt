@@ -54,6 +54,23 @@ public class WhiskyPåFlaske {
         return lager;
     }
 
+    public String getHistorik() {
+        String navn = whisky.getNavn() + " ";
+        String nummer = String.valueOf(getNummer()) + "";
+        String totalNummer = String.valueOf(getTotalNummer()) + " ";
+        String alkoholProcent = String.valueOf(whisky.getAlkoholprocentDestillat()) + " ";
+        String beskrivelse = whisky.getBeskrivelse() + " ";
+        String liter = String.valueOf(this.getLiter()) + " ";
+        String fortyndelseIML = String.valueOf(this.fortyndelseIML) + " ";
+        String rygeMateriale = whisky.getRygeMateriale() + " ";
+        String kornSort = whisky.getKornSort() + " ";
+        String fad = whisky.getAktuelFad() + " ";
+        String leverandør = whisky.getFad().getLeverandør() + " ";
+        //String literPåOprindeligDestillat = whisky.getDestillat().getLiterFraStart() + "";
+
+        return "****" + "\nNavn: " + navn + "\nNummer: " + nummer + "/" + totalNummer + "\nAlkoholprocent: " + alkoholProcent + "\nBeskrivelse: " + beskrivelse + "\nLiter: " + liter + "\nFortyndelse i ML: " + fortyndelseIML + "\nRygemateriale: " + rygeMateriale + "\nKornsort: " + kornSort + "\nFad: " + fad + "\nLeverandør: " + leverandør + "\n******";
+    }
+
     @Override
     public String toString() {
         return "Flaske nummer " + nummer + "/" + totalNummer;

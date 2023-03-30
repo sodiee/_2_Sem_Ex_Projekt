@@ -10,7 +10,6 @@ public class Fad {
     private String leverandør;
     private String tidligereIndhold;
     private int antalGangeBrugt;
-    //TODO: nummereringen virker ikke
     private static int nummer;
     private int tøndeNummer;
     private int størrelseLiter;
@@ -23,8 +22,6 @@ public class Fad {
     private Destillat destillat;
     private ArrayList<Destillat> tidligereDestillater;
     private Status status;
-
-
 
     public Fad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int størrelseLiter, Hyldeplads hyldeplads) {
         this.leverandør = leverandør;

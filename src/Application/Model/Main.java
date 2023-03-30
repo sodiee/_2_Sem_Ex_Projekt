@@ -10,11 +10,17 @@ public class Main {
         Lager lager = Controller.createLager(1, 1, 1, "h");
         Reol reol = Controller.createReol(lager, 2, 2);
         Hyldeplads hyldePlads = reol.getHylder().get(1).getHyldepladser().get(1);
-       Fad fad = Controller.createFad("h", "h", 1, 100, hyldePlads);
+        Fad fad = Controller.createFad("h", "h", 1, 100, hyldePlads);
         Destillat destillat = Controller.createDestillat("h", 100, 40, LocalDate.of(2001, 01, 01), "h", "h");
-       destillat.hældDestillatPåfad(fad);
-       String navn = "Navn";
+        destillat.hældDestillatPåfad(fad);
+        String navn = "hei whisky";
         Whisky whisky = Controller.createWhisky(navn, fad);
+
+        ArrayList<WhiskyPåFlaske> wpf = whisky.hældWhiskyPåFlaske(2, 15);
+
+        for (WhiskyPåFlaske flaske : wpf) {
+            System.out.println(flaske.getHistorik());
+        }
 /*
         System.out.println("dest.getliter " + destillat.getLiter());
 
@@ -67,9 +73,9 @@ public class Main {
 */
         //System.out.println(whisky.getLiter());
 
-       // ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15, lager);
-       // System.out.println(whiskyPåFlaskeArrayList);
-       // System.out.println(whisky.getLiter());
+        // ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15, lager);
+        // System.out.println(whiskyPåFlaskeArrayList);
+        // System.out.println(whisky.getLiter());
 
     }
 }

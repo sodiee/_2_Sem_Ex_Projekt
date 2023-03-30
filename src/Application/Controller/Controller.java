@@ -132,7 +132,7 @@ public class Controller {
 
     public static void convertToWhisky(Fad fad, String navn) {
         fad.convertToWhisky(navn);
-        Controller.createWhisky(navn, fad);
+        Whisky whisky = Controller.createWhisky(navn, fad);
         fad.removeDestillat();
     }
     //endregion
@@ -141,6 +141,7 @@ public class Controller {
     public static Whisky createWhisky(String navn, Fad fad) {
         if (fad.getDestillat() != null) {
             Whisky whisky = fad.createWhisky(navn,fad);
+            whisky.setFad(fad);
             Storage.addWhisky(whisky);
             return whisky;
         } else {
@@ -162,6 +163,14 @@ public class Controller {
             wpf.setLager(lager);
         }
     }
+    //endregion
+
+    //region Historik
+
+    public static String getHistorik(WhiskyPåFlaske whiskyPåFlaske) {
+        return whiskyPåFlaske.getHistorik();
+    }
+
     //endregion
 
 

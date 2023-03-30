@@ -15,6 +15,7 @@ public class Whisky extends Destillat {
 
     public Whisky(String medarbejder, double liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse, String navn) {
         super(medarbejder, liter, alkoholProcent, startDato, kornSort, beskrivelse);
+        this.fad = super.getAktuelFad();
         this.navn = navn;
         flasker = new ArrayList<>();
         nummer++;
@@ -28,6 +29,11 @@ public class Whisky extends Destillat {
         super(medarbejder, liter, alkoholProcent, startDato, kornSort, rygeMateriale, beskrivelse);
         this.navn = navn;
         flasker = new ArrayList<>();
+        nummer++;
+        whiskyNummer = nummer;
+        this.alkoholProcent = getAlkoholprocentDestillat();
+        this.beskrivelse = getBeskrivelse();
+        this.fad = getAktuelFad();
     }
 
     public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl) {
@@ -111,9 +117,9 @@ public class Whisky extends Destillat {
         return super.getFade();
     }
 
-    /*public Fad getAktuelFad() {
-        return super.getAktuelFad();
-    }*/
+    public Fad getAktuelFad() {
+        return fad;
+    }
 
     public int getObjectNummer() {
         return super.getObjectNummer();
@@ -131,9 +137,25 @@ public class Whisky extends Destillat {
         return super.getLiter();
     }
 
+    public void setFad(Fad fad) {
+        this.fad = fad;
+    }
+
+    public Fad getFad() {
+        return this.fad;
+    }
+
     public double getWhiskyLiter() {
         return this.liter;
     }
+
+    public String getBeskrivelse() {
+        return super.getBeskrivelse();
+    }
+
+   /* public Destillat getDestillat() {
+        return fad.getTidligereDestillater().get(fad.getTidligereDestillater().size() - 1);
+    }*/
 
     @Override
     public String toString(){return "#" + nummer + " " + navn + " " + alkoholProcent + "%";}
