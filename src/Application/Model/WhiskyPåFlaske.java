@@ -5,6 +5,7 @@ public class WhiskyPåFlaske {
 
     private int totalNummer;
     private double fortyndelseIML;
+    private double AlkoholProcent;
 
     private double liter;
 
@@ -53,6 +54,8 @@ public class WhiskyPåFlaske {
     public Lager getLager() {
         return lager;
     }
+
+    public double getAlkoholProcent() {return AlkoholProcent;}
 
     public String getHistorik() {
         String navn = whisky.getNavn() + " ";

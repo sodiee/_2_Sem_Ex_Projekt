@@ -139,13 +139,14 @@ public class LagerPane extends GridPane {
     private void selectedHyldeChanged(){
 
         Hylde hylde = lvwHylde.getSelectionModel().getSelectedItem();
+        lvwHyldeplads.getItems().clear();
+        lvwHyldeplads.getSelectionModel().clearSelection();
         if (hylde != null) {
             lvwHyldeplads.getItems().setAll(hylde.getHyldepladser());
         }
 
     }
     private void selectedHyldepladsChanged(){
-        //TODO: der opstår fejl fordi den her kører ved deselect, i stedet for kun select
         Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();
         if(hyldeplads !=  null && hyldeplads.getFad() != null ){
 

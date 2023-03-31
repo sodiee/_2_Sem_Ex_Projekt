@@ -32,8 +32,8 @@ public class WhiskeyPane extends BorderPane {
     private ImageView imageView;
 
     //VenstreInfo
-    private Label lblNummer, lblTotalNummer, lblFortyndelse, lblLiter;
-    private Label lblNummerValue, lblTotalNummerValue, lblFortyndelseValue, lblLiterValue;
+    private Label lblResterende, lblTotalNummer, lblFortyndelse, lblLiter;
+    private Label lblResterendeValue, lblTotalNummerValue, lblFortyndelseValue, lblLiterValue;
     //HøjreInfo
     private Label lblWhisky, lblAlkPro, lblBeskrivelse, lblLager;
     private Label lblWhiskyValue, lblAlkProValue, lblBeskrivelseValue, lblLagerValue;
@@ -84,11 +84,11 @@ public class WhiskeyPane extends BorderPane {
         vbxCenter.setAlignment(Pos.CENTER);
         //vbxCenter.setPrefHeight(500);
 
-        lblNummer = new Label("N/A");
+        lblResterende = new Label("Liter Tilbage");
         lblTotalNummer = new Label("Antal Flasker");
         lblFortyndelse = new Label("Fortyndelse i ml");
         lblLiter = new Label("Flaske Liter");
-        lblNummerValue  = new Label();
+        lblResterendeValue = new Label();
         lblTotalNummerValue = new Label();
         lblFortyndelseValue = new Label();
         lblLiterValue = new Label();
@@ -102,7 +102,7 @@ public class WhiskeyPane extends BorderPane {
         lblLagerValue = new Label();
 
         vbxLeft = new VBox(5);
-        vbxLeft.getChildren().addAll(lblNummer, lblNummerValue, lblTotalNummer, lblTotalNummerValue, lblFortyndelse, lblFortyndelseValue, lblLiter, lblLiterValue);
+        vbxLeft.getChildren().addAll(lblResterende, lblResterendeValue, lblTotalNummer, lblTotalNummerValue, lblFortyndelse, lblFortyndelseValue, lblLiter, lblLiterValue);
         vbxRight = new VBox(5);
         vbxRight.getChildren().addAll(lblWhisky, lblWhiskyValue, lblAlkPro, lblAlkProValue, lblBeskrivelse, lblBeskrivelseValue, lblLager, lblLagerValue);
         hbxInfo = new HBox(150);
@@ -129,7 +129,7 @@ public class WhiskeyPane extends BorderPane {
 
         this.setBottom(vbxCombine);
 
-        lblNummer.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblResterende.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblTotalNummer.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblFortyndelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -153,7 +153,7 @@ public class WhiskeyPane extends BorderPane {
         cbxProdukt.getSelectionModel().selectFirst();
 
         WhiskyPåFlaske whiskyPåFlaske = cbxProdukt.getSelectionModel().getSelectedItem().getFlasker().get(0);
-        //lblNummerValue.setText(String.valueOf(whiskyPåFlaske.getNummer()));
+        lblResterendeValue.setText("0 / " + String.valueOf(Math.floor(cbxProdukt.getSelectionModel().getSelectedItem().getLiter())));
         lblTotalNummerValue.setText(String.valueOf(whiskyPåFlaske.getTotalNummer()));
         lblFortyndelseValue.setText(String.valueOf(whiskyPåFlaske.getFortyndelseIML()));
         lblLiterValue.setText(String.valueOf(whiskyPåFlaske.getLiter()));

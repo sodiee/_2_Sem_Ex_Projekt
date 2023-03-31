@@ -27,6 +27,7 @@ public class StartWindow extends Application {
         stage.show();
         stage.setResizable(false);
         stage.setHeight(650);
+        stage.setWidth(600);
     }
 
     // ----------------------------------------------------
@@ -74,6 +75,11 @@ public class StartWindow extends Application {
         WhiskeyPane whiskeyPane = new WhiskeyPane();
         tabWhisky.setContent(whiskeyPane);
         tabWhisky.setOnSelectionChanged(event -> whiskeyPane.updateControls());
+
+        Tab tabWhiskyFlasker = new Tab("Whisky Flasker");
+        tabPane.getTabs().add(tabWhiskyFlasker);
+        WhiskeyPåFlaskePane whiskeyPåFlaskePane = new WhiskeyPåFlaskePane();
+        tabWhiskyFlasker.setContent(whiskeyPåFlaskePane);
 
     }
 }
