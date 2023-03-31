@@ -19,7 +19,7 @@ public class Destillat {
     private ArrayList<Fad> fade = new ArrayList<>();
 
     //Uden røg
-    public Destillat(String medarbejder, double liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String beskrivelse) {
+    public Destillat(String medarbejder, double liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String beskrivelse, String rygeMateriale) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
@@ -30,10 +30,11 @@ public class Destillat {
         this.literFraStart = liter;
         destillatNr++;
         objectNummer += destillatNr;
+        this.rygeMateriale = rygeMateriale;
     }
 
     //Med røg
-    public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String rygeMateriale, String beskrivelse) {
+    /*public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String rygeMateriale, String beskrivelse) {
         this.medarbejder = medarbejder;
         this.liter = liter;
         this.alkoholProcent = alkoholProcent;
@@ -44,7 +45,7 @@ public class Destillat {
         this.isDone = false;
         destillatNr++;
         objectNummer = destillatNr;
-    }
+    }*/
 
     public void setDestillatNr(int destillatNr) {
         this.destillatNr = destillatNr;

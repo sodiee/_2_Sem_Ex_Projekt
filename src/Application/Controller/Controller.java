@@ -87,26 +87,17 @@ public class Controller {
 
     //region Destillat
     //TODO: i stedet for at have 2 forskellige constructere, kunne man vel bare have én, hvor den uden indeholder en tom streng?
-    public static Destillat createDestillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse){
-        if (liter <= 0 || alkoholProcent < 0 ){
+    public static Destillat createDestillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse, String rygeMateriale){
+        if (liter <= 0 || alkoholProcent < 0 || startDato.isEqual(LocalDate.now())) {
             throw new IllegalArgumentException("Ugyldig data");
         } else {
-            Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, kornSort, beskrivelse);
+            Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, kornSort, beskrivelse, rygeMateriale);
             destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
             Storage.addDestillat(destillat);
             return destillat;
         }
     }
-    public static Destillat createDestillatRøg(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String rygeMateriale, String beskrivelse){
-        if (liter <= 0 || alkoholProcent < 0) {
-            throw new IllegalArgumentException("Ugyldig data");
-        } else {
-            Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, kornSort, rygeMateriale, beskrivelse);
-            destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
-            Storage.addDestillat(destillat);
-            return destillat;
-        }
-    }
+
     public static ArrayList<Destillat> getDestillat(){return Storage.getDestillatArrayList();}
     public static ArrayList<Fad> getDestillatFade(Destillat destillat){return destillat.getFade();}
     public static void redigerDestillat(Destillat destillat, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse){
@@ -134,11 +125,12 @@ public class Controller {
         fad.convertToWhisky(navn);
         Whisky whisky = Controller.createWhisky(navn, fad);
         fad.removeDestillat();
+        fad.addDestilatTofad(whisky);
     }
     //endregion
 
     //region Whisky
-    public static Whisky createWhisky(String navn, Fad fad) {
+    private static Whisky createWhisky(String navn, Fad fad) {
         if (fad.getDestillat() != null) {
             Whisky whisky = fad.createWhisky(navn,fad);
             whisky.setFad(fad);
@@ -195,8 +187,8 @@ public class Controller {
         Fad fad2 = createFad("Sherry distilleri, Madrid", "Sherry", 2, 2,  hyldeplads3);
         Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54,  hyldeplads4);
 
-        Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), "Rug", "Bedste Whiskey ever");
-        Destillat destillat2 = createDestillatRøg("Bingo Dorte", 600, 60, LocalDate.of(2017, 2, 14), "Byg", "Strå", "I can't believe its not whiskey");
+        Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), "Rug", "Bedste Whiskey ever", null);
+        Destillat destillat2 = createDestillat("Bingo Dorte", 600, 60, LocalDate.of(2017, 2, 14), "Byg",  "I can't believe its not whiskey", "Strå");
 
         destillat.hældDestillatPåfad(fad1);
 

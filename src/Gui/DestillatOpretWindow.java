@@ -119,7 +119,7 @@ public class DestillatOpretWindow extends Stage{
 
         //Hvis røg er angivet
         if(txfRygemateriale.getLength() != 0){
-            Controller.createDestillatRøg(
+            Controller.createDestillat(
                     txfMedarbejder.getText(),
                     Integer.parseInt(txfLiter.getText()),
                     Double.parseDouble(txfAlkPro.getText()),
@@ -136,7 +136,8 @@ public class DestillatOpretWindow extends Stage{
                     Double.parseDouble(txfAlkPro.getText()),
                     dpStartDato.getValue(),
                     txfKornSort.getText(),
-                    txfBeskrivelse.getText());
+                    txfBeskrivelse.getText(),
+                    txfRygemateriale.getText());
         }
         this.hide();
     }

@@ -64,11 +64,11 @@ public class WhiskyPåFlaske {
         String fortyndelseIML = String.valueOf(this.fortyndelseIML) + " ";
         String rygeMateriale = whisky.getRygeMateriale() + " ";
         String kornSort = whisky.getKornSort() + " ";
-        String fad = whisky.getAktuelFad() + " ";
+        String fad = "Tøndenummer: " + whisky.getAktuelFad() + " ";
         String leverandør = whisky.getFad().getLeverandør() + " ";
-        //String literPåOprindeligDestillat = whisky.getDestillat().getLiterFraStart() + "";
+        String literPåOprindeligDestillat = whisky.getFad().getTidligereDestillater().get(whisky.getFad().getTidligereDestillater().size() - 1).getLiterFraStart() + "";
 
-        return "****" + "\nNavn: " + navn + "\nNummer: " + nummer + "/" + totalNummer + "\nAlkoholprocent: " + alkoholProcent + "\nBeskrivelse: " + beskrivelse + "\nLiter: " + liter + "\nFortyndelse i ML: " + fortyndelseIML + "\nRygemateriale: " + rygeMateriale + "\nKornsort: " + kornSort + "\nFad: " + fad + "\nLeverandør: " + leverandør + "\n******";
+        return "****" + "\nNavn: " + navn + "\nNummer: " + nummer + "/" + totalNummer + "\nAlkoholprocent: " + alkoholProcent + "\nBeskrivelse: " + beskrivelse + "\nLiter: " + liter + "\nFortyndelse i ML: " + fortyndelseIML + "\nRygemateriale: " + rygeMateriale + "\nKornsort: " + kornSort + "\nFad: " + fad + "\nLeverandør: " + leverandør + "\n" + "LiterPåOprindeligDestillat: " + literPåOprindeligDestillat + "\n******";
     }
 
     @Override

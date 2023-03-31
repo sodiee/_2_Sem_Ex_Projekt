@@ -60,7 +60,7 @@ class ControllerTest {
         //Arrange
 
         //Act
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 20, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 20, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
 
         //Assert
         Boolean actualBoolean = Storage.getDestillatArrayList().contains(destillat);
@@ -73,8 +73,8 @@ class ControllerTest {
 
         //Act
         //Assert
-        Exception forventet = assertThrows(RuntimeException.class, () -> {
-            Controller.createDestillat("Bingo Dorthe", 100, 20, LocalDate.of(2004, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Exception forventet = assertThrows(IllegalArgumentException.class, () -> {
+            Controller.createDestillat("Bingo Dorthe", 100, 20, LocalDate.now(), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         });
         assertEquals(forventet.getMessage(), "Ugyldig data");
     }
@@ -86,7 +86,7 @@ class ControllerTest {
         //Act
         //Assert
         Exception forventet = assertThrows(RuntimeException.class, () -> {
-            Controller.createDestillat("Bingo Dorthe", 0, 20, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+            Controller.createDestillat("Bingo Dorthe", 0, 20, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         });
         assertEquals(forventet.getMessage(), "Ugyldig data");
     }
@@ -98,7 +98,7 @@ class ControllerTest {
         //Act
         //Assert
         Exception forventet = assertThrows(RuntimeException.class, () -> {
-            Controller.createDestillat("Bingo Dorthe", -1, 20, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+            Controller.createDestillat("Bingo Dorthe", -1, 20, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         });
         assertEquals(forventet.getMessage(), "Ugyldig data");
     }
@@ -108,7 +108,7 @@ class ControllerTest {
         //Arrange
 
         //Act
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
 
         //Assert
         Boolean actualBoolean = Storage.getDestillatArrayList().contains(destillat);
@@ -127,7 +127,7 @@ class ControllerTest {
         //Act
         //Assert
         Exception forventet = assertThrows(RuntimeException.class, () -> {
-            Controller.createDestillat("Bingo Dorthe", 100, -1, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+            Controller.createDestillat("Bingo Dorthe", 100, -1, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         });
         assertEquals(forventet.getMessage(), "Ugyldig data");
     }
@@ -140,11 +140,12 @@ class ControllerTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         destillat.hældDestillatPåfad(fad);
         String navn = "Navn";
         //Act
-        Whisky whisky = Controller.createWhisky(navn, fad);
+        Controller.convertToWhisky(fad, navn);
+        Whisky whisky = (Whisky) fad.getDestillat();
 
         //Assert
         Boolean actualBoolean = Storage.getWhiskyArrayList().contains(whisky);
@@ -166,7 +167,7 @@ class ControllerTest {
         //Assert
 
         Exception forventet = assertThrows(NullPointerException.class, () -> {
-            Controller.createWhisky(navn, fad);
+            Controller.convertToWhisky(fad, navn);
         });
         String nullPointerExceptionMsg = "Der er ikke knyttet et destillat til dette fad, så konvertering til whisky kan ikke lade sig gøre.";
 
@@ -181,10 +182,11 @@ class ControllerTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         destillat.hældDestillatPåfad(fad);
         String navn = "Navn";
-        Whisky whisky = Controller.createWhisky(navn, fad);
+        Controller.convertToWhisky(fad, navn);
+        Whisky whisky = (Whisky) fad.getDestillat();
 
         //Act
         //Assert
@@ -204,10 +206,11 @@ class ControllerTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         destillat.hældDestillatPåfad(fad);
         String navn = "Navn";
-        Whisky whisky = Controller.createWhisky(navn, fad);
+        Controller.convertToWhisky(fad, navn);
+        Whisky whisky = (Whisky) fad.getDestillat();
 
         //Act
         //Assert
@@ -227,10 +230,11 @@ class ControllerTest {
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
-        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød");
+        Destillat destillat = Controller.createDestillat("Bingo Dorthe", 100, 0, LocalDate.of(2001, 01, 01), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         destillat.hældDestillatPåfad(fad);
         String navn = "Navn";
-        Whisky whisky = Controller.createWhisky(navn, fad);
+        Controller.convertToWhisky(fad, navn);
+        Whisky whisky = (Whisky) fad.getDestillat();
 
         //Act
         //Assert
