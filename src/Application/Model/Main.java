@@ -1,6 +1,7 @@
 package Application.Model;
 
 import Application.Controller.Controller;
+import javafx.scene.control.Alert;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class Main {
         ArrayList<WhiskyPåFlaske> wpf = whisky.hældWhiskyPåFlaske(2, 15);
 
         for (WhiskyPåFlaske flaske : wpf) {
-          System.out.println(flaske.getHistorik());
+            System.out.println(flaske.getHistorik());
         }
 /*
         System.out.println("dest.getliter " + destillat.getLiter());
@@ -79,6 +80,5 @@ public class Main {
         // ArrayList<WhiskyPåFlaske> whiskyPåFlaskeArrayList = Controller.createWhiskyPåFlaske(whisky, 50, 15, lager);
         // System.out.println(whiskyPåFlaskeArrayList);
         // System.out.println(whisky.getLiter());
-
     }
 }

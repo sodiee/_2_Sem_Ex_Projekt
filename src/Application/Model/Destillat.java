@@ -33,20 +33,6 @@ public class Destillat {
         this.rygeMateriale = rygeMateriale;
     }
 
-    //Med røg
-    /*public Destillat(String medarbejder, int liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String rygeMateriale, String beskrivelse) {
-        this.medarbejder = medarbejder;
-        this.liter = liter;
-        this.alkoholProcent = alkoholProcent;
-        this.datoForPåhldningPåFad = datoForPåhldningPåFad;
-        this.kornSort = kornSort;
-        this.rygeMateriale = rygeMateriale;
-        this.beskrivelse = beskrivelse;
-        this.isDone = false;
-        destillatNr++;
-        objectNummer = destillatNr;
-    }*/
-
     public void setDestillatNr(int destillatNr) {
         this.destillatNr = destillatNr;
     }

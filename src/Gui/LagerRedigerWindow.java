@@ -4,6 +4,7 @@ import Application.Controller.Controller;
 import Application.Model.Lager;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -62,7 +63,14 @@ public class LagerRedigerWindow extends Stage {
     }
     private void btnOkAction(){
         //validate
-        if(!Application.Controller.ValidationController.validateString(txfAdresse.getText(), "Adresse", true, true)) return;
+        String stringValue = txfAdresse.getText();
+        String fieldName = lblAdresse.getText();
+        Boolean allowSpace = true;
+        Boolean allowSymbol = true;
+
+        Application.Controller.ValidationController.validateStringException(stringValue, fieldName, allowSpace, allowSymbol);
+            validateString(stringValue, fieldName, allowSpace, allowSymbol);
+
         lager.setAdresse(txfAdresse.getText());
 
         this.hide();
@@ -70,5 +78,47 @@ public class LagerRedigerWindow extends Stage {
     }
     private void btnCancelAction(){
         this.hide();
+    }
+
+    private static Boolean validateString(String stringValue, String fieldName, Boolean allowSpace, Boolean allowSymbol) {
+
+        //Hvis strengen er tom
+        if (stringValue.length() == 0) {
+            Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
+            alertIntEmpty.setTitle("Tomt felt");
+            alertIntEmpty.setHeaderText(fieldName + " er tom!");
+            alertIntEmpty.showAndWait();
+            return false;
+        } else {
+
+            char[] chars = stringValue.toCharArray();
+            for (char c : chars) {
+                //Hvis strengen indeholder et tal
+                if (Character.isDigit(c)) {
+                    Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
+                    alertIntEmpty.setTitle("Ikke Gyldigt Input");
+                    alertIntEmpty.setHeaderText(fieldName + " må kun indeholde bogstaver");
+                    alertIntEmpty.showAndWait();
+                    return false;
+                }
+                //Hvis strengen indeholder et mellemrum
+                if (c == ' ' && allowSpace == false) {
+                    Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
+                    alertIntEmpty.setTitle("Ikke Gyldigt Input");
+                    alertIntEmpty.setHeaderText(fieldName + " må ikke indeholde mellemrum");
+                    alertIntEmpty.showAndWait();
+                    return false;
+                }
+                //Hvis strengen indeholder et symbol/tegn
+                if (!stringValue.matches("^[A-Za-z0-9 ]*$") && allowSymbol == false) {
+                    Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
+                    alertIntEmpty.setTitle("Ikke Gyldigt Input");
+                    alertIntEmpty.setHeaderText(fieldName + " må ikke indeholde symboler/tegn");
+                    alertIntEmpty.showAndWait();
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

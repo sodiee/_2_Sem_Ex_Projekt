@@ -33,7 +33,6 @@ public class Storage {
     private static ArrayList<Destillat> destillatArrayList = new ArrayList<>();
     public static void addDestillat(Destillat destillat){destillatArrayList.add(destillat); destillatTæller++;}
     public static ArrayList<Destillat> getDestillatArrayList(){return destillatArrayList;}
-    public static int getDestillatTæller(){return destillatTæller;}
     public static void deleteDestillat(Destillat destillat){destillatArrayList.remove(destillat);}
 
     //endregion

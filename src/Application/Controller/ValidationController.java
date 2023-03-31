@@ -7,22 +7,82 @@ import javafx.scene.control.Alert;
  */
 public class ValidationController {
 
-    public static Boolean validateString(String stringValue, String fieldName, Boolean allowSpace, Boolean allowSymbol){
+    public static void validateStringException(String stringValue, String fieldName, Boolean allowSpace, Boolean allowSymbol) {
+        //Hvis strengen er tom
+        if (stringValue.length() == 0) {
+            throw new IllegalArgumentException("Ugyldigt input. Der er et tomt felt");
+        } else {
+            char[] chars = stringValue.toCharArray();
+            for (char c : chars) {
+                //Hvis strengen indeholder et tal
+                if (Character.isDigit(c)) {
+                    throw new IllegalArgumentException("Ugyldigt input. Der må ikke indsættes tal.");
+                } //Hvis strengen indeholder et mellemrum
+                if (c == ' ' && allowSpace == false) {
+                    throw new IllegalArgumentException("Ugyldigt inpit. Der må ikke indsættes mellemrum");
+                }
+                //Hvis strengen indeholder et symbol/tegn
+                if (!stringValue.matches("^[A-Za-z0-9 ]*$") && allowSymbol == false) {
+                    throw new IllegalArgumentException("Ugyldig input Der må ikke indsættes symbol/tegn.");
+                }
+            }
+        }
+
+    }
+
+    public static void validateIntException(String stringValue, String fieldName) throws IllegalArgumentException {
+        //Hvis tallet er tomt
+        if (stringValue.length() == 0) {
+            throw new IllegalArgumentException("Ugyldigt input. Tekstfeltet er tomt.");
+        } else {
+            int value = -1;
+            if (stringValue.matches("-?\\d+")) {
+                value = Integer.parseInt(stringValue.trim());
+            } else {
+                // Hvis inputtet ikke er et tal
+                throw new NumberFormatException("Ugyldigt input. Der må kun indsættes tal.");
+            }
+            //Hvis det er et negativt tal
+            if (value < 0) {
+                throw new IllegalArgumentException("Ugyldigt input. Der må ikke indsættes negative tal.");
+            }
+        }
+    }
+
+    public static void validateDoubleException(String stringValue, String fieldName){
+        //Hvis tallet er tomt
+        if(stringValue.length() == 0){
+            throw new IllegalArgumentException("Ugyldigt input. Tekstfeltet er tomt.");
+        }
+        else{
+            double value = -1;
+            if (stringValue.matches("-?\\d+")) {
+                value = Integer.parseInt(stringValue.trim());
+            } else {
+                // Hvis inputtet ikke er et tal
+                throw new NumberFormatException("Ugyldigt input. Der må kun indsættes tal.");
+            }
+            if(value < 0){
+                throw new IllegalArgumentException("Ugyldigt input. Der må ikke indsættes negative tal.");
+            }
+        }
+    }
+
+    private static Boolean validateString(String stringValue, String fieldName, Boolean allowSpace, Boolean allowSymbol) {
 
         //Hvis strengen er tom
-        if(stringValue.length() == 0){
+        if (stringValue.length() == 0) {
             Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
-            alertIntEmpty.setTitle("Tomt feldt");
+            alertIntEmpty.setTitle("Tomt felt");
             alertIntEmpty.setHeaderText(fieldName + " er tom!");
             alertIntEmpty.showAndWait();
             return false;
-        }
-        else{
+        } else {
 
             char[] chars = stringValue.toCharArray();
-            for(char c : chars){
+            for (char c : chars) {
                 //Hvis strengen indeholder et tal
-                if(Character.isDigit(c)){
+                if (Character.isDigit(c)) {
                     Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
                     alertIntEmpty.setTitle("Ikke Gyldigt Input");
                     alertIntEmpty.setHeaderText(fieldName + " må kun indeholde bogstaver");
@@ -30,7 +90,7 @@ public class ValidationController {
                     return false;
                 }
                 //Hvis strengen indeholder et mellemrum
-                if(c == ' ' && allowSpace == false){
+                if (c == ' ' && allowSpace == false) {
                     Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
                     alertIntEmpty.setTitle("Ikke Gyldigt Input");
                     alertIntEmpty.setHeaderText(fieldName + " må ikke indeholde mellemrum");
@@ -38,14 +98,13 @@ public class ValidationController {
                     return false;
                 }
                 //Hvis strengen indeholder et symbol/tegn
-                //TODO: Virker ikke
-                /** if(!stringValue.matches("[^A-Za-z0-9 ]") && allowSymbol == false){
+                if (!stringValue.matches("^[A-Za-z0-9 ]*$") && allowSymbol == false) {
                     Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
                     alertIntEmpty.setTitle("Ikke Gyldigt Input");
                     alertIntEmpty.setHeaderText(fieldName + " må ikke indeholde symboler/tegn");
                     alertIntEmpty.showAndWait();
                     return false;
-                }**/
+                }
             }
         }
         return true;
@@ -125,5 +184,7 @@ public class ValidationController {
         }
         return true;
     }
+
+
 }
 

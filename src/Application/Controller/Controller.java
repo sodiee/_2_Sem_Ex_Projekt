@@ -92,7 +92,6 @@ public class Controller {
             throw new IllegalArgumentException("Ugyldig data");
         } else {
             Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, kornSort, beskrivelse, rygeMateriale);
-            destillat.setDestillatNr(Storage.getDestillatTæller() + 1);
             Storage.addDestillat(destillat);
             return destillat;
         }
