@@ -15,13 +15,12 @@ public class StartWindow extends Application {
     public void init() {
         Controller.initStorage();
     }
-
     @Override
     public void start(Stage stage) {
+        //TODO: Nogengange starter programmet med forkert størrelse? (Høj prioritet)
         stage.setTitle("Sall Whisky");
         BorderPane pane = new BorderPane();
         this.initContent(pane);
-
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
@@ -29,15 +28,11 @@ public class StartWindow extends Application {
         stage.setHeight(650);
         stage.setWidth(600);
     }
-
-    // ----------------------------------------------------
-
     private void initContent(BorderPane pane) {
         TabPane tabPane = new TabPane();
         this.initTabPane(tabPane);
         pane.setCenter(tabPane);
     }
-
     private void initTabPane(TabPane tabPane) {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 

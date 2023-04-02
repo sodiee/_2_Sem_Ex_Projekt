@@ -165,7 +165,6 @@ public class Controller {
 
     //endregion
 
-
     public static void initStorage() {
         Lager sønderhøj = createLager(2, 3, 3, "Sønderhøj 30");
         Lager sørenFrichsVej = createLager(3, 2, 2, "Søren Frichs Vej");

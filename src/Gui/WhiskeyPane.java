@@ -3,6 +3,7 @@ package Gui;
 import Application.Model.Whisky;
 import Application.Model.WhiskyPåFlaske;
 import Storage.Storage;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -13,44 +14,33 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Random;
 
 public class WhiskeyPane extends BorderPane {
-
-    private Label lblTitle;
-    private ComboBox<Whisky> cbxProdukt;
+    //region Global Variables
+    private ComboBox<Whisky> cbxWhisky;
     private Image image1, image2, image3, image4, image5;
     private ImageView imageView;
-
-    //VenstreInfo
     private Label lblResterende, lblTotalNummer, lblFortyndelse, lblLiter;
     private Label lblResterendeValue, lblTotalNummerValue, lblFortyndelseValue, lblLiterValue;
-    //HøjreInfo
     private Label lblWhisky, lblAlkPro, lblBeskrivelse, lblLager;
     private Label lblWhiskyValue, lblAlkProValue, lblBeskrivelseValue, lblLagerValue;
     private VBox vbxLeft, vbxRight, vbxCenter, vbxCombine;
     private HBox hbxInfo, hbxButtons;
-    private Button btnAftap, btnRediger, btnSlet, btnSeAlle;
-
+    private Button btnAftap, btnRediger, btnSlet;
+    //endregion
     public WhiskeyPane(){
         this.setPadding(new Insets(10));
-
         this.initGUI();
         this.initData();
-        //this.getCenter().prefHeight(400);
     }
-
     private void initGUI(){
-
         //region Image & ComboBox
         try{
             InputStream stream = new FileInputStream("resources/WhiskyIcons/Whisky1.png");
@@ -70,13 +60,14 @@ public class WhiskeyPane extends BorderPane {
         imageView.setFitWidth(200);
         imageView.setFitHeight(200);
         imageView.setPreserveRatio(true);
-        cbxProdukt = new ComboBox();
+        cbxWhisky = new ComboBox();
+        ChangeListener<Whisky> listener = (ov, oldCompany, newCompany) -> this.selectedWhiskyChanged();
+        cbxWhisky.getSelectionModel().selectedItemProperty().addListener(listener);
         vbxCenter = new VBox(10);
-        vbxCenter.getChildren().addAll(imageView, cbxProdukt);
+        vbxCenter.getChildren().addAll(imageView, cbxWhisky);
         this.setCenter(vbxCenter);
         vbxCenter.setAlignment(Pos.CENTER);
         //endregion
-
         //region Label
         lblResterende = new Label("Liter Tilbage");
         lblTotalNummer = new Label("Antal Flasker");
@@ -104,7 +95,6 @@ public class WhiskeyPane extends BorderPane {
         lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblLager.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         //endregion
-
         //region Buttons
         btnAftap = new Button("Aftap Whisky");
         btnAftap.setOnAction(event -> aftapAction());
@@ -112,12 +102,10 @@ public class WhiskeyPane extends BorderPane {
         btnRediger.setOnAction(event -> redigerAction());
         btnSlet = new Button("Slet Whisky");
         btnSlet.setOnAction(event -> sletAction());
-        btnSeAlle = new Button("Flaskeoversigt");
 
         hbxButtons = new HBox(10);
         hbxButtons.getChildren().addAll(btnAftap, btnRediger, btnSlet);
         //endregion
-
         //region Vbox & Hbox
         vbxLeft = new VBox(5);
         vbxLeft.getChildren().addAll(lblResterende, lblResterendeValue, lblTotalNummer, lblTotalNummerValue, lblFortyndelse, lblFortyndelseValue, lblLiter, lblLiterValue);
@@ -133,22 +121,21 @@ public class WhiskeyPane extends BorderPane {
         hbxInfo.setAlignment(Pos.CENTER);
         this.setBottom(vbxCombine);
         //endregion
-
     }
     private void initData(){
 
-        cbxProdukt.getItems().setAll(Storage.getWhiskyArrayList());
-        cbxProdukt.getSelectionModel().selectFirst();
+        cbxWhisky.getItems().setAll(Storage.getWhiskyArrayList());
+        cbxWhisky.getSelectionModel().selectFirst();
 
         //tag whiskiens nummer 1-5, derefter reset int og tag billeder 1-5 igen
         ObservableList<Image> images = FXCollections.observableArrayList(image1, image2, image3, image4, image5);
 
-        int imgselect = cbxProdukt.getSelectionModel().getSelectedIndex();
+        int imgselect = cbxWhisky.getSelectionModel().getSelectedIndex();
         imageView.setImage(images.get(imgselect));
-        cbxProdukt.getSelectionModel().selectFirst();
+        cbxWhisky.getSelectionModel().selectFirst();
 
-        WhiskyPåFlaske whiskyPåFlaske = cbxProdukt.getSelectionModel().getSelectedItem().getFlasker().get(0);
-        lblResterendeValue.setText("0 / " + String.valueOf(Math.floor(cbxProdukt.getSelectionModel().getSelectedItem().getLiter())));
+        WhiskyPåFlaske whiskyPåFlaske = cbxWhisky.getSelectionModel().getSelectedItem().getFlasker().get(0);
+        lblResterendeValue.setText("0 / " + String.valueOf(Math.floor(cbxWhisky.getSelectionModel().getSelectedItem().getLiter())));
         lblTotalNummerValue.setText(String.valueOf(whiskyPåFlaske.getTotalNummer()));
         lblFortyndelseValue.setText(String.valueOf(whiskyPåFlaske.getFortyndelseIML()));
         lblLiterValue.setText(String.valueOf(whiskyPåFlaske.getLiter()));
@@ -158,24 +145,50 @@ public class WhiskeyPane extends BorderPane {
         if(whiskyPåFlaske.getLager() != null){lblLagerValue.setText(whiskyPåFlaske.getLager().toString());}
 
     }
+    private void selectedWhiskyChanged(){
+        clearFields();
+        if(cbxWhisky.getSelectionModel().getSelectedItem() == null){return;}
+        Whisky whisky = cbxWhisky.getSelectionModel().getSelectedItem();
+        if(!whisky.getFlasker().isEmpty()){
+            WhiskyPåFlaske whiskyPåFlaske = cbxWhisky.getSelectionModel().getSelectedItem().getFlasker().get(0);
+            lblResterendeValue.setText("0 / " + String.valueOf(Math.floor(cbxWhisky.getSelectionModel().getSelectedItem().getLiter())));
+            lblTotalNummerValue.setText(String.valueOf(whiskyPåFlaske.getTotalNummer()));
+            lblFortyndelseValue.setText(String.valueOf(whiskyPåFlaske.getFortyndelseIML()));
+            lblLiterValue.setText(String.valueOf(whiskyPåFlaske.getLiter()));
+            lblWhiskyValue.setText(whiskyPåFlaske.getWhisky().toString());
+            lblAlkProValue.setText(String.valueOf(whiskyPåFlaske.getWhisky().getAlkoholProcent()));
+            lblBeskrivelseValue.setText(whiskyPåFlaske.getWhisky().getBeskrivelse());
+            if(whiskyPåFlaske.getLager() != null){lblLagerValue.setText(whiskyPåFlaske.getLager().toString());}
+        }
+        else{
+            //hvis hvis der ikke er nogen flasker oprettet af whiskien
+        }
+    }
+    private void clearFields(){
+        lblResterendeValue.setText("");
+        lblTotalNummerValue.setText("");
+        lblFortyndelseValue.setText("");
+        lblLiterValue.setText("");
+        lblWhiskyValue.setText("");
+        lblAlkProValue.setText("");
+        lblBeskrivelseValue.setText("");
+    }
+
     private void aftapAction(){
         WhiskeyPåFlaskeOpretWindow whiskeyPåFlaskeOpretWindow = new WhiskeyPåFlaskeOpretWindow();
         whiskeyPåFlaskeOpretWindow.showAndWait();
     }
     private void redigerAction(){
-        if(cbxProdukt.getSelectionModel().getSelectedItem() == null){return;}
-        Whisky whisky = cbxProdukt.getSelectionModel().getSelectedItem();
+        if(cbxWhisky.getSelectionModel().getSelectedItem() == null){return;}
+        Whisky whisky = cbxWhisky.getSelectionModel().getSelectedItem();
         WhiskeyRedigerWindow whiskeyRedigerWindow = new WhiskeyRedigerWindow(whisky);
         whiskeyRedigerWindow.showAndWait();
     }
     private void sletAction(){
         //TODO:
     }
-
-    private void seAlleAction(){
-
-    }
     public void updateControls(){
-        cbxProdukt.getItems().setAll(Storage.getWhiskyArrayList().toArray(new Whisky[0]));
+        cbxWhisky.getItems().setAll(Storage.getWhiskyArrayList().toArray(new Whisky[0]));
+        cbxWhisky.getSelectionModel().selectFirst();
     }
 }
