@@ -37,6 +37,7 @@ public class Controller {
 
     //region Lager
     public static Lager createLager(int reoler, int hylder, int pladsPåHylde, String adresse) {
+        //Todo: Reoler, hylder, pladser, osv bliver ikke oprettet og sat ind i lageret? (lav prioritet)
         Lager lager = new Lager(reoler, hylder, pladsPåHylde, adresse);
         Storage.addLager(lager);
         return lager;

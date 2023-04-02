@@ -38,7 +38,10 @@ public class DestillatOpretWindow extends Stage {
         pane.setHgap(10);
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
+        txfBeskrivelse = new TextField();
+        pane.add(txfBeskrivelse, 0, 13);
 
+        //region Label
         lblMedarbejder = new Label("Medarbejder");
         pane.add(lblMedarbejder, 0, 0);
         txfMedarbejder = new TextField();
@@ -71,8 +74,6 @@ public class DestillatOpretWindow extends Stage {
 
         lblBeskrivelse = new Label("Beskrivelse");
         pane.add(lblBeskrivelse, 0, 12);
-        txfBeskrivelse = new TextField();
-        pane.add(txfBeskrivelse, 0, 13);
 
         lblMedarbejder.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -81,8 +82,9 @@ public class DestillatOpretWindow extends Stage {
         lblKornSort.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblRygemateriale.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        //endregion
 
-        //Buttons
+        //region Button
         HBox hbxButtons = new HBox(5);
         pane.add(hbxButtons, 0, 16);
         btnOpret = new Button("Godkend");
@@ -90,6 +92,7 @@ public class DestillatOpretWindow extends Stage {
         hbxButtons.getChildren().add(btnOpret);
         btnAnnuller = new Button("Annuller");
         btnAnnuller.setOnAction(event -> annullerAction());
+        //endregion
 
     }
 
@@ -232,7 +235,6 @@ public class DestillatOpretWindow extends Stage {
             }
         }
     }
-
 
     public static void validateInt(String stringValue, String fieldName) {
 

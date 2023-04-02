@@ -3,25 +3,30 @@ package Gui;
 import Application.Controller.Controller;
 import Application.Model.*;
 import Storage.Storage;
+import com.sun.source.tree.Tree;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 public class LagerPane extends GridPane {
 
     private ComboBox<Lager> cbxLager;
-    private Label lblLager, lblReol, lblHylde, lblHyldeplads, lblFad, lblFadInfo;
-    private ListView<Reol> lvwReol;
-    private ListView<Hylde> lvwHylde;
-    private ListView<Hyldeplads> lvwHyldeplads;
+    private Image rootImage, reolImage, hyldeImage, fadEmptyImage, fadImage;
     private HBox hbxButtons;
     private Button btnOpret, btnRediger, btnSlet;
+    TreeView<CustomUnit> treeView;
+
 
     public LagerPane(){
         this.setPadding(new Insets(10));
@@ -32,65 +37,130 @@ public class LagerPane extends GridPane {
     }
     private void initGUI(){
 
+        //region Images
+        try{
+            InputStream stream1 = new FileInputStream("resources/warehouse.png");
+            rootImage = new Image(stream1);
+
+            InputStream stream2 = new FileInputStream("resources/shelf.png");
+            reolImage = new Image(stream2);
+
+            InputStream stream3 = new FileInputStream("resources/shelf(hylde).png");
+            hyldeImage = new Image(stream3);
+
+            InputStream stream4 = new FileInputStream("resources/barrelEmpty.png");
+            fadEmptyImage = new Image(stream4);
+
+            InputStream stream5 = new FileInputStream("resources/barrel.png");
+            fadImage = new Image(stream5);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //endregion
+
+        //region Instantiate Nodes
         cbxLager = new ComboBox();
-        lblLager = new Label("Lager");
-        lblReol = new Label("Reol");
-        lblHylde = new Label("Hylde");
-        lblHyldeplads = new Label("Hyldeplads");
-        lblFad = new Label("Fad");
-        lvwReol = new ListView();
-        lvwHylde = new ListView();
-        lvwHyldeplads = new ListView();
-        lblFadInfo = new Label();
         hbxButtons = new HBox(10);
         btnOpret = new Button("Opret Lagerhus");
         btnRediger = new Button("Redigér Lagerhus");
         btnSlet = new Button("Slet Lagerhus");
 
-        //this.add(lblLager, 0, 0);
-        this.add(cbxLager, 0, 1);
-        this.add(lblReol, 0, 2);
-        this.add(lvwReol, 0, 3);
-        this.add(lblHylde, 1, 2);
-        this.add(lvwHylde, 1, 3);
-        this.add(lblHyldeplads, 0, 4);
-        this.add(lvwHyldeplads, 0, 5);
-        this.add(lblFad, 1, 4);
-        this.add(lblFadInfo, 1, 5);
-        this.add(hbxButtons, 0, 6);
 
+        hbxButtons.getChildren().addAll(btnOpret, btnRediger, btnSlet);
+        cbxLager.getItems().addAll(Storage.getLagerArrayList());
+        //endregion
+
+        //region Add nodes
+        this.add(cbxLager, 0, 1);
+//        this.add(lblReol, 0, 2);
+//        this.add(lblFadInfo, 1, 5);
+        this.add(hbxButtons, 0, 6);
+        //endregion
+
+        //region Events & Listeners
         btnOpret.setOnAction(event -> btnOpretLagerAction());
         btnRediger.setOnAction(event -> btnRedigerLagerAction());
         btnSlet.setOnAction(event -> btnSletLagerAction());
-        hbxButtons.getChildren().addAll(btnOpret, btnRediger, btnSlet);
-
-        ChangeListener<Reol> listener1 = (ov1, oldCompny, newCompany) -> this.selectedReolChanged();
-        ChangeListener<Hylde> listener2 = (ov2, oldCompny, newCompany) -> this.selectedHyldeChanged();
-        ChangeListener<Hyldeplads> listener3 = (ov3, oldCompny, newCompany) -> this.selectedHyldepladsChanged();
         ChangeListener<Lager> listener4 = (ov4, oldCompny, newCompany) -> this.selectedLagerChanged();
-        lvwReol.getSelectionModel().selectedItemProperty().addListener(listener1);
-        lvwHylde.getSelectionModel().selectedItemProperty().addListener(listener2);
-        lvwHyldeplads.getSelectionModel().selectedItemProperty().addListener(listener3);
         cbxLager.getSelectionModel().selectedItemProperty().addListener(listener4);
-
-
-        lvwHyldeplads.setPrefHeight(200);
-        lvwHylde.setPrefHeight(200);
-        lvwReol.setPrefHeight(200);
-
-        cbxLager.getItems().addAll(Storage.getLagerArrayList());
         cbxLager.getSelectionModel().selectFirst();
 
-        lblFad.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblLager.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblHylde.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblFad.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblHyldeplads.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblReol.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-    }
-    public void updateControls(){
+        ChangeListener<TreeItem> listenerTree = (ov, old, neww) -> this.selectedTreeItemChanged();
+        treeView.getSelectionModel().selectedItemProperty().addListener(listenerTree);
+        //endregion
+
 
     }
+    private void selectedLagerChanged() {
+
+        Lager lager = cbxLager.getSelectionModel().getSelectedItem();
+        if (lager == null) {
+            return;
+        }
+        ImageView rootImageView = new ImageView(rootImage);
+        rootImageView.setFitWidth(25);
+        rootImageView.setFitHeight(25);
+        CustomUnit customUnit = new CustomUnit(lager.toString(), "lager", "none");
+        TreeItem<CustomUnit> stockUnit = new TreeItem<>(customUnit, rootImageView);
+
+            for (Reol reol : lager.getReoler()) {
+
+                ImageView reolImageView = new ImageView(reolImage);
+                reolImageView.setFitWidth(20);
+                reolImageView.setFitHeight(20);
+                CustomUnit customUnit1 = new CustomUnit("Reol " + String.valueOf(reol.getReolNr()), "Reol", lager.toString());
+                TreeItem<CustomUnit> reolUnit = new TreeItem<>(customUnit1, reolImageView);
+                stockUnit.getChildren().add(reolUnit);
+
+                for (Hylde hylde : reol.getHylder()){
+
+                     ImageView hyldeImageView = new ImageView(hyldeImage);
+                     hyldeImageView.setFitWidth(20);
+                     hyldeImageView.setFitHeight(20);
+                     CustomUnit customUnitHylde = new CustomUnit("Hylde " + String.valueOf(hylde.getHyldeNr()), "Hylde", String.valueOf(reol.getReolNr()));
+                     TreeItem<CustomUnit> hyldeUnit = new TreeItem<>(customUnitHylde, hyldeImageView);
+                     reolUnit.getChildren().add(hyldeUnit);
+
+                    for (Hyldeplads hyldeplads : hylde.getHyldepladser()){
+
+                        ImageView fadImageView = new ImageView(fadImage);
+                        ImageView fadEmptyImageView = new ImageView(fadEmptyImage);
+                        fadEmptyImageView.setFitWidth(20);
+                        fadEmptyImageView.setFitHeight(20);
+                        fadImageView.setFitHeight(20);
+                        fadImageView.setFitWidth(20);
+                        CustomUnit customUnitHyldeplads = new CustomUnit("Plads " + String.valueOf(hyldeplads.getHyldepladsNr()), "Hyldeplads", String.valueOf(hylde.getHyldeNr()));
+
+                        if(hyldeplads.getFad() != null){
+                            TreeItem<CustomUnit> hyldeUnitplads = new TreeItem<>(customUnitHyldeplads, fadImageView);
+                            hyldeUnit.getChildren().add(hyldeUnitplads);
+                        }
+                        else if(hyldeplads.getFad() == null){
+                            TreeItem<CustomUnit> hyldeUnitplads = new TreeItem<>(customUnitHyldeplads, fadEmptyImageView);
+                            hyldeUnit.getChildren().add(hyldeUnitplads);
+                        }
+                        customUnitHyldeplads.setFad(hyldeplads.getFad());
+                    }
+                }
+            }
+            stockUnit.setExpanded(true);
+            treeView = new TreeView<CustomUnit>(stockUnit);
+            this.add(treeView, 0, 3);
+        }
+
+    private void selectedTreeItemChanged(){
+        CustomUnit customUnit = treeView.getSelectionModel().getSelectedItem().getValue();
+        if(customUnit.type == "Hyldeplads"){
+            System.out.println(customUnit.fad);
+        }
+        else{
+            System.out.println("no fad");
+        }
+    }
+
+    public void updateControls(){}
     public void btnOpretLagerAction(){
         LagerOpretWindow lagerOpretWindow = new LagerOpretWindow();
         lagerOpretWindow.showAndWait();
@@ -102,7 +172,7 @@ public class LagerPane extends GridPane {
         LagerRedigerWindow lagerRedigerWindow = new LagerRedigerWindow(cbxLager.getSelectionModel().getSelectedItem());
         lagerRedigerWindow.showAndWait();
         cbxLager.getItems().setAll(Storage.getLagerArrayList());
-        //TODO: sæt den til at vælge den man lige har redigeret
+        //TODO: sæt den til at vælge den man lige har redigeret? (lav prioritet)
         cbxLager.getSelectionModel().selectLast();
     }
     public void btnSletLagerAction(){
@@ -114,52 +184,35 @@ public class LagerPane extends GridPane {
         alertConfirmation.setHeaderText("Er du sikker på at du vil slette lageret?");
         Optional<ButtonType> option = alertConfirmation.showAndWait();
 
-        if (option.get() == null) {
-            //no selection
-        } else if (option.get() == ButtonType.OK) {
-            Controller.deleteLager(lager);
-        } else if (option.get() == ButtonType.CANCEL) {
-            //cancelled
-        } else {
-
-        }
+        if (option.get() == null) {} else if (option.get() == ButtonType.OK) {Controller.deleteLager(lager);}
 
         cbxLager.getItems().setAll(Storage.getLagerArrayList());
         cbxLager.getSelectionModel().selectLast();
     }
-    private void selectedReolChanged(){
-        lvwHyldeplads.getSelectionModel().clearSelection();
-        lvwHyldeplads.getItems().clear();
-        lvwHylde.getSelectionModel().clearSelection();
-        lvwHylde.getItems().clear();
 
-        Reol reol = lvwReol.getSelectionModel().getSelectedItem();
-        lvwHylde.getItems().setAll(reol.getHylder());
-    }
-    private void selectedHyldeChanged(){
+    private class CustomUnit{
+        String navn;
+        String type;
+        String parent;
+        Fad fad;
 
-        Hylde hylde = lvwHylde.getSelectionModel().getSelectedItem();
-        lvwHyldeplads.getItems().clear();
-        lvwHyldeplads.getSelectionModel().clearSelection();
-        if (hylde != null) {
-            lvwHyldeplads.getItems().setAll(hylde.getHyldepladser());
+        public CustomUnit(String navn, String type, String parent) {
+            this.navn = navn;
+            this.type = type;
+            this.parent = parent;
         }
 
-    }
-    private void selectedHyldepladsChanged(){
-        Hyldeplads hyldeplads = lvwHyldeplads.getSelectionModel().getSelectedItem();
-        if(hyldeplads !=  null && hyldeplads.getFad() != null ){
+        public Fad getFad() {
+            return fad;
+        }
 
-            lblFadInfo.setText(hyldeplads.getFad().getLeverandør());
+        public void setFad(Fad fad) {
+            this.fad = fad;
         }
-        else{
-            lblFadInfo.setText("Pladsen er tom");
-        }
+
+        @Override
+        public String toString(){return navn;}
     }
-    private void selectedLagerChanged(){
-        Lager lager = cbxLager.getSelectionModel().getSelectedItem();
-        if(lager != null) {
-            lvwReol.getItems().setAll(lager.getReoler());
-        }
-    }
+
+
 }

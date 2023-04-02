@@ -149,19 +149,20 @@ public class WhiskeyPåFlaskePane extends GridPane {
     }
 
    private void lvwFlaskerChanged(){
-//        FlaskeListCell w = lvwFlasker.getSelectionModel().getSelectedItem();
-//        if(w == null){return;}
+        FlaskeListCell f = lvwFlasker.getSelectionModel().getSelectedItem();
+        Whisky w = cbxWhisky.getSelectionModel().getSelectedItem();
+        if(w == null){return;}
 
-//       lblNavnVal.setText(w.getWhisky().getNavn());
-//       lblNummerVal.setText(String.valueOf(w.getNummer()));
-//       lblAlkProVal.setText(String.valueOf(Math.floor(w.getWhisky().getAlkoholprocentDestillat())));
-//       lblBeskrivelseVal.setText(w.getWhisky().getBeskrivelse());
-//       lblLiterVal.setText(String.valueOf(w.getLiter()));
-//       lblFortyndelseVal.setText(String.valueOf(Math.floor(w.getFortyndelseIML())));
-//       lblRygeMaterialeVal.setText(w.getWhisky().getRygeMateriale());
-//       lblKornSortVal.setText(w.getWhisky().getKornsort());
-//       lblFadVal.setText(w.getWhisky().getFade().toString());
-//       lblLiterDestilVal.setText(String.valueOf(Math.floor(w.getWhisky().getLiter())));
+       lblNavnVal.setText(w.getNavn());
+       lblNummerVal.setText(String.valueOf(f.lblNr.getText()));
+       lblAlkProVal.setText(String.valueOf(Math.floor(w.getAlkoholprocentDestillat())));
+       lblBeskrivelseVal.setText(w.getBeskrivelse());
+       lblLiterVal.setText(String.valueOf(Math.floor(w.getLiter())));
+       lblFortyndelseVal.setText(String.valueOf(f.lblFortyndelse.getText()));
+       lblRygeMaterialeVal.setText(w.getRygeMateriale());
+       lblKornSortVal.setText(w.getKornsort());
+       lblFadVal.setText(w.getFade().toString());
+       lblLiterDestilVal.setText(String.valueOf(Math.floor(w.getLiter())));
 
     }
 
@@ -248,7 +249,7 @@ public class WhiskeyPåFlaskePane extends GridPane {
 
             TilePane node = new TilePane(Orientation.VERTICAL, 55, 50, imageView, lblNr, lblAlkPro, lblFortyndelse, lblStørrelse);
 
-            //TODO: centrering virker ikke
+            //TODO: centrering virker ikke (lav prioritet)
             TilePane.setAlignment(node, Pos.BASELINE_CENTER);
             setGraphic(node);
         }
@@ -261,6 +262,7 @@ public class WhiskeyPåFlaskePane extends GridPane {
          * @param stø
          */
         private FlaskeListCell(String nr, String alk, String fortynd, String stø){
+            //TODO: tror bare kan slette den her, tror ikke man kan centrere ordene. Måske bare en enkelt streng? "Whiskyer på flaske: " (Mellem prioritet)
             imageView = new ImageView(WhiskeyPåFlaskePane.this.image);
             lblNr = new Label(nr);
             lblAlkPro = new Label(alk);
@@ -279,7 +281,7 @@ public class WhiskeyPåFlaskePane extends GridPane {
 
             TilePane node = new TilePane(Orientation.VERTICAL, 55, 5, imageView, lblNr, lblAlkPro, lblFortyndelse, lblStørrelse);
 
-            //TODO: centrering virker ikke
+
             //TilePane.setAlignment(node, Pos.BASELINE_CENTER);
             setGraphic(node);
         }

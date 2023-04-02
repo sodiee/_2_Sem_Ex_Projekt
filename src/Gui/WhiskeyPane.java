@@ -51,6 +51,7 @@ public class WhiskeyPane extends BorderPane {
 
     private void initGUI(){
 
+        //region Image & ComboBox
         try{
             InputStream stream = new FileInputStream("resources/WhiskyIcons/Whisky1.png");
             image1 = new Image(stream);
@@ -65,25 +66,18 @@ public class WhiskeyPane extends BorderPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /**
-        lblTitle = new Label("Flaskens Navn?");
-        this.setTop(lblTitle);
-        BorderPane.setAlignment(lblTitle, Pos.CENTER);
-        **/
-
         imageView = new ImageView();
         imageView.setFitWidth(200);
         imageView.setFitHeight(200);
         imageView.setPreserveRatio(true);
-
         cbxProdukt = new ComboBox();
         vbxCenter = new VBox(10);
         vbxCenter.getChildren().addAll(imageView, cbxProdukt);
         this.setCenter(vbxCenter);
         vbxCenter.setAlignment(Pos.CENTER);
-        //vbxCenter.setPrefHeight(500);
+        //endregion
 
+        //region Label
         lblResterende = new Label("Liter Tilbage");
         lblTotalNummer = new Label("Antal Flasker");
         lblFortyndelse = new Label("Fortyndelse i ml");
@@ -101,13 +95,17 @@ public class WhiskeyPane extends BorderPane {
         lblLager = new Label("Lager");
         lblLagerValue = new Label();
 
-        vbxLeft = new VBox(5);
-        vbxLeft.getChildren().addAll(lblResterende, lblResterendeValue, lblTotalNummer, lblTotalNummerValue, lblFortyndelse, lblFortyndelseValue, lblLiter, lblLiterValue);
-        vbxRight = new VBox(5);
-        vbxRight.getChildren().addAll(lblWhisky, lblWhiskyValue, lblAlkPro, lblAlkProValue, lblBeskrivelse, lblBeskrivelseValue, lblLager, lblLagerValue);
-        hbxInfo = new HBox(150);
-        hbxInfo.getChildren().addAll(vbxLeft, vbxRight);
+        lblResterende.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblTotalNummer.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblFortyndelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblWhisky.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        lblLager.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        //endregion
 
+        //region Buttons
         btnAftap = new Button("Aftap Whisky");
         btnAftap.setOnAction(event -> aftapAction());
         btnRediger = new Button("Redigér Whisky");
@@ -118,26 +116,23 @@ public class WhiskeyPane extends BorderPane {
 
         hbxButtons = new HBox(10);
         hbxButtons.getChildren().addAll(btnAftap, btnRediger, btnSlet);
+        //endregion
 
+        //region Vbox & Hbox
+        vbxLeft = new VBox(5);
+        vbxLeft.getChildren().addAll(lblResterende, lblResterendeValue, lblTotalNummer, lblTotalNummerValue, lblFortyndelse, lblFortyndelseValue, lblLiter, lblLiterValue);
+        vbxRight = new VBox(5);
+        vbxRight.getChildren().addAll(lblWhisky, lblWhiskyValue, lblAlkPro, lblAlkProValue, lblBeskrivelse, lblBeskrivelseValue, lblLager, lblLagerValue);
+        hbxInfo = new HBox(150);
+        hbxInfo.getChildren().addAll(vbxLeft, vbxRight);
         vbxCombine = new VBox(10);
         vbxCombine.getChildren().addAll(hbxInfo, hbxButtons);
-
         BorderPane.setAlignment(vbxCombine, Pos.CENTER);
         vbxCombine.setAlignment(Pos.CENTER);
         hbxButtons.setAlignment(Pos.CENTER);
         hbxInfo.setAlignment(Pos.CENTER);
-
         this.setBottom(vbxCombine);
-
-        lblResterende.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblTotalNummer.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblFortyndelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-
-        lblWhisky.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblAlkPro.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblBeskrivelse.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        lblLager.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        //endregion
 
     }
     private void initData(){
