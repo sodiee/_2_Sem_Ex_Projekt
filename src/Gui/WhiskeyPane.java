@@ -1,5 +1,6 @@
 package Gui;
 
+import Application.Controller.Controller;
 import Application.Model.Whisky;
 import Application.Model.WhiskyPåFlaske;
 import Storage.Storage;
@@ -8,9 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -21,6 +20,7 @@ import javafx.scene.text.FontWeight;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 
 public class WhiskeyPane extends BorderPane {
     //region Global Variables
@@ -173,7 +173,6 @@ public class WhiskeyPane extends BorderPane {
         lblAlkProValue.setText("");
         lblBeskrivelseValue.setText("");
     }
-
     private void aftapAction(){
         WhiskeyPåFlaskeOpretWindow whiskeyPåFlaskeOpretWindow = new WhiskeyPåFlaskeOpretWindow();
         whiskeyPåFlaskeOpretWindow.showAndWait();
@@ -185,7 +184,15 @@ public class WhiskeyPane extends BorderPane {
         whiskeyRedigerWindow.showAndWait();
     }
     private void sletAction(){
-        //TODO:
+        Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirmation.setTitle("Slettelse");
+        alertConfirmation.setHeaderText("Er du sikker på at du vil slette Whiskyen?");
+        Optional<ButtonType> option = alertConfirmation.showAndWait();
+
+        if (option.get() == null) {
+        } else if (option.get() == ButtonType.OK) {
+            Controller.deleteWhisky(cbxWhisky.getSelectionModel().getSelectedItem());
+            updateControls();}
     }
     public void updateControls(){
         cbxWhisky.getItems().setAll(Storage.getWhiskyArrayList().toArray(new Whisky[0]));

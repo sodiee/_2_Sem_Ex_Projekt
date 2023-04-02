@@ -140,6 +140,7 @@ public class Controller {
             throw new NullPointerException("Der er ikke knyttet et destillat til dette fad, så konvertering til whisky kan ikke lade sig gøre.");
         }
     }
+    public static void deleteWhisky(Whisky whisky){Storage.removeWhisky(whisky);}
     public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML, Lager lager) {
         ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIML);
         for(WhiskyPåFlaske wpf : whiskyPåFlasker) {
@@ -149,7 +150,6 @@ public class Controller {
         System.out.println(whiskyPåFlasker);
         return whiskyPåFlasker;
     }
-
     public static void setWhiskyPåFlaskePåLager(ArrayList<WhiskyPåFlaske> flasker, Lager lager) {
         for (WhiskyPåFlaske wpf : flasker) {
             wpf.setLager(lager);

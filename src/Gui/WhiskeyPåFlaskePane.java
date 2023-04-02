@@ -25,16 +25,15 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class WhiskeyPåFlaskePane extends GridPane {
-
+    //region Global Variables
     private ComboBox<Whisky> cbxWhisky;
     private TextField txfSearch;
     private ListView<FlaskeListCell> lvwFlasker = new ListView<>();
     public Font font = Font.font("Verdana", FontWeight.BOLD, 12);;
     private Label lblNavn,lblNummer, lblAlkPro, lblBeskrivelse, lblLiter, lblFortyndelse, lblRygeMateriale, lblKornSort, lblFad, lblLiterDestil;
     private Label lblNavnVal,lblNummerVal, lblAlkProVal, lblBeskrivelseVal, lblLiterVal, lblFortyndelseVal, lblRygeMaterialeVal, lblKornSortVal, lblFadVal, lblLiterDestilVal;
-
-    ImageView imageView = new ImageView();
-    Image image;
+    private Image image;
+    //endregion
 
     public WhiskeyPåFlaskePane(){
         this.setPadding(new Insets(10));
@@ -132,51 +131,43 @@ public class WhiskeyPåFlaskePane extends GridPane {
         //generate QR code med info om selve whiskien
         //knap til historik for valgte flaske
     }
-
-
     private void initData(){
 
-        //MonthListCell[] listCell = Stream.of(Month.values()).map(MonthListCell::new).toArray(MonthListCell[]::new);
-
-        //create new class element for each
-
-        //cant stream wrong class
-//        FlaskeListCell[] listCell = Stream.of(cbxWhisky.getSelectionModel().getSelectedItem().getFlasker()).toArray(FlaskeListCell[]::new);
-//        ObservableList<FlaskeListCell> items = FXCollections.observableArrayList (listCell);
-//
-//        lvwFlasker.getItems().setAll(items);
-//        lvwFlasker.getSelectionModel().selectFirst();
     }
-
-   private void lvwFlaskerChanged(){
+    private void lvwFlaskerChanged(){
         FlaskeListCell f = lvwFlasker.getSelectionModel().getSelectedItem();
         Whisky w = cbxWhisky.getSelectionModel().getSelectedItem();
-        if(w == null){return;}
-
-       lblNavnVal.setText(w.getNavn());
-       lblNummerVal.setText(String.valueOf(f.lblNr.getText()));
-       lblAlkProVal.setText(String.valueOf(Math.floor(w.getAlkoholprocentDestillat())));
-       lblBeskrivelseVal.setText(w.getBeskrivelse());
-       lblLiterVal.setText(String.valueOf(Math.floor(w.getLiter())));
-       lblFortyndelseVal.setText(String.valueOf(f.lblFortyndelse.getText()));
-       lblRygeMaterialeVal.setText(w.getRygeMateriale());
-       lblKornSortVal.setText(w.getKornsort());
-       lblFadVal.setText(w.getFade().toString());
-       lblLiterDestilVal.setText(String.valueOf(Math.floor(w.getLiter())));
-
+        if(w == null || f == null){
+            lblNavnVal.setText("");
+            lblNummerVal.setText("");
+            lblAlkProVal.setText("");
+            lblBeskrivelseVal.setText("");
+            lblLiterVal.setText("");
+            lblFortyndelseVal.setText("");
+            lblRygeMaterialeVal.setText("");
+            lblKornSortVal.setText("");
+            lblFadVal.setText("");
+            lblLiterDestilVal.setText("");
+        }
+        else{
+            lblNavnVal.setText(w.getNavn());
+            lblNummerVal.setText(String.valueOf(f.lblNr.getText()));
+            lblAlkProVal.setText(String.valueOf(Math.floor(w.getAlkoholprocentDestillat())));
+            lblBeskrivelseVal.setText(w.getBeskrivelse());
+            lblLiterVal.setText(String.valueOf(Math.floor(w.getLiter())));
+            lblFortyndelseVal.setText(String.valueOf(f.lblFortyndelse.getText()));
+            lblRygeMaterialeVal.setText(w.getRygeMateriale());
+            lblKornSortVal.setText(w.getKornsort());
+            lblFadVal.setText(w.getFade().toString());
+            lblLiterDestilVal.setText(String.valueOf(Math.floor(w.getLiter())));
+        }
     }
-
-
-
     private void  cbxWhiskyChanged(){
         if(cbxWhisky.getSelectionModel().getSelectedItem() == null){return;}
         if(lvwFlasker == null){return;}
         //TODO: gør så de kun viser flasker fra den rigtige whisky
 
         ArrayList<FlaskeListCell> nyeFlasker = new ArrayList<>();
-        //ListViewHeader
-        FlaskeListCell flaskeHeader = new FlaskeListCell("n", "a", "f", "s");
-        nyeFlasker.add(flaskeHeader);
 
         for(WhiskyPåFlaske w : cbxWhisky.getSelectionModel().getSelectedItem().getFlasker()){
             Flaske flaske = new Flaske(w.getNummer(), w.getAlkoholProcent(), w.getFortyndelseIML(), w.getLiter());
@@ -185,12 +176,12 @@ public class WhiskeyPåFlaskePane extends GridPane {
             nyeFlasker.add(flaskeListCell);
         }
         ObservableList<FlaskeListCell> items = FXCollections.observableArrayList (nyeFlasker);
-
         lvwFlasker.getItems().setAll(items);
-
-
     }
-
+    public void updateControls(){
+        cbxWhisky.getItems().setAll(Storage.getWhiskyArrayList());
+        cbxWhisky.getSelectionModel().selectFirst();
+    }
     class Flaske{
 
         private Image image;
@@ -228,8 +219,6 @@ public class WhiskeyPåFlaskePane extends GridPane {
             return flaskeStø;
         }
     }
-
-
     class FlaskeListCell extends ListCell<Flaske>{
         private final ImageView imageView;
         private final Label lblNr;
@@ -253,51 +242,5 @@ public class WhiskeyPåFlaskePane extends GridPane {
             TilePane.setAlignment(node, Pos.BASELINE_CENTER);
             setGraphic(node);
         }
-
-        /**
-         * Opret Flaske-celle til at display en header i ListView
-         * @param nr
-         * @param alk
-         * @param fortynd
-         * @param stø
-         */
-        private FlaskeListCell(String nr, String alk, String fortynd, String stø){
-            //TODO: tror bare kan slette den her, tror ikke man kan centrere ordene. Måske bare en enkelt streng? "Whiskyer på flaske: " (Mellem prioritet)
-            imageView = new ImageView(WhiskeyPåFlaskePane.this.image);
-            lblNr = new Label(nr);
-            lblAlkPro = new Label(alk);
-            lblFortyndelse = new Label(fortynd);
-            lblStørrelse = new Label(stø);
-            imageView.setFitWidth(50);
-            imageView.setFitHeight(50);
-            imageView.visibleProperty().set(false);
-
-            lblNr.setFont(WhiskeyPåFlaskePane.this.font);
-            lblAlkPro.setFont(WhiskeyPåFlaskePane.this.font);
-            lblFortyndelse.setFont(WhiskeyPåFlaskePane.this.font);
-            lblStørrelse.setFont(WhiskeyPåFlaskePane.this.font);
-
-            this.setStyle("-fx-background-color: transparent");
-
-            TilePane node = new TilePane(Orientation.VERTICAL, 55, 5, imageView, lblNr, lblAlkPro, lblFortyndelse, lblStørrelse);
-
-
-            //TilePane.setAlignment(node, Pos.BASELINE_CENTER);
-            setGraphic(node);
-        }
-//        @Override
-//        public void updateItem(Flaske flaske, boolean empty) {
-//            super.updateItem(flaske, empty);
-//            if (empty) {
-//                setText(null);
-//                setGraphic(null);
-//            } else {
-//                imageView.setImage(new Image(flaske.getImage()));
-//                lblNr.setText(month.name());
-//            }
-//
-//    }
-
-
     }
 }
