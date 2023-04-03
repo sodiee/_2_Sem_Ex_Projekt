@@ -142,7 +142,7 @@ public class Controller {
     }
     public static void deleteWhisky(Whisky whisky){Storage.removeWhisky(whisky);}
     public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML, Lager lager) {
-        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIML);
+        ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaskeRekursivMetode(antal, fortyndelseIML);
         for(WhiskyPåFlaske wpf : whiskyPåFlasker) {
             Storage.addWhiskyPåFlaske(wpf);
         }

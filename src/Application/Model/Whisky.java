@@ -55,7 +55,7 @@ public class Whisky extends Destillat {
     //endregion
 
     //region Rekursiv-metode
-    public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursivHjælpemetode(int antal, double fortyndelseIMl) {
+    public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursivMetode(int antal, double fortyndelseIMl) {
         double flaskeStørrelseML = 700;
         double muligtAntal = (((this.getLiter() * 1000) + (antal * fortyndelseIMl)) / flaskeStørrelseML);
 
@@ -66,7 +66,8 @@ public class Whisky extends Destillat {
         return hældWhiskyPåFlaskeRekursivHjælpemetode(antal, fortyndelseIMl, flaskeStørrelseML, flasker, 1);
     }
 
-    private ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursivHjælpemetode(int antal, double fortyndelseIMl, double flaskeStørrelseML, ArrayList<WhiskyPåFlaske> flasker, int i) {
+    private ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursivHjælpemetode(int antal, double fortyndelseIMl, double flaskeStørrelseML,
+                                                                             ArrayList<WhiskyPåFlaske> flasker, int i) {
         if (i > antal) {
             return flasker;
         }
