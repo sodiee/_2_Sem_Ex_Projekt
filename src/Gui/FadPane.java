@@ -32,7 +32,7 @@ public class FadPane extends GridPane {
     private ListView lvwTidligereDestil;
     private VBox vbxInfo;
     private HBox hbxButtons;
-    private Button btnRegFad, btnSletFad, btnRedigérFad, btnOpretWhisky;
+    private Button btnRegFad, btnSletFad, btnRedigérFad, btnOpretWhisky, btnMix;
     private Fad selectedFad;
     private ComboBox cbxStatus;
     private Image image;
@@ -84,6 +84,7 @@ public class FadPane extends GridPane {
         btnOpretWhisky = new Button("Færdigør Modning");
         btnSletFad = new Button("Slet Fad");
         btnRedigérFad = new Button("Redigér Fad");
+        btnMix = new Button("Mix Fade");
         //endregion
 
         //region vbox/hbox add
@@ -100,7 +101,7 @@ public class FadPane extends GridPane {
                 lblDestillatValue,
                 lblTidligereDestil,
                 lvwTidligereDestil);
-        hbxButtons.getChildren().addAll(btnRegFad, btnRedigérFad, btnSletFad, btnOpretWhisky);
+        hbxButtons.getChildren().addAll(btnRegFad, btnRedigérFad, btnSletFad, btnOpretWhisky, btnMix);
         //endregion
 
         //region font
@@ -119,6 +120,7 @@ public class FadPane extends GridPane {
         btnOpretWhisky.setOnAction(event -> opretWhiskyAction());
         ChangeListener<Fad> listener1 = (ov, oldCompny, newCompany) -> this.selectedFadChanged();
         lvwFad.getSelectionModel().selectedItemProperty().addListener(listener1);
+        btnMix.setOnAction(event -> mixFadAction());
         //endregion
 
         //region ComboBox
@@ -137,6 +139,7 @@ public class FadPane extends GridPane {
         btnRedigérFad.setDisable(true);
         btnOpretWhisky.setDisable(true);
         btnSletFad.setDisable(true);
+        btnMix.setDisable(true);
         lvwFad.setPrefWidth(300);
         GridPane.setHalignment(imageView, HPos.CENTER);
         cbxStatus.getSelectionModel().select("ALLE");
@@ -161,6 +164,10 @@ public class FadPane extends GridPane {
             lblLager.setText(Controller.findLagerAfFad(selectedFad).toString());
         }
     }
+    private void mixFadAction(){
+        FadMixWindow fadMixWindow = new FadMixWindow(lvwFad.getSelectionModel().getSelectedItem());
+        fadMixWindow.showAndWait();
+    }
     private void selectedFadChanged() {
 
         if (lvwFad.getSelectionModel().getSelectedItem() == null) {return;}
@@ -174,7 +181,7 @@ public class FadPane extends GridPane {
         if (lvwFad.getSelectionModel().getSelectedItem() != null) {
             btnRedigérFad.setDisable(false);
             btnSletFad.setDisable(false);
-
+            if(lvwFad.getSelectionModel().getSelectedItem().getOpfyldtLiter() > 0){btnMix.setDisable(false);} else{btnMix.setDisable(true);}
             selectedFad = lvwFad.getSelectionModel().getSelectedItem();
             initData();
 
