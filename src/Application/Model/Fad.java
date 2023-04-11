@@ -3,7 +3,6 @@ package Application.Model;
 
 
 import javafx.scene.control.Alert;
-
 import java.util.ArrayList;
 
 public class Fad {
