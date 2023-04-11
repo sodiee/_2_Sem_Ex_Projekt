@@ -45,7 +45,7 @@ public class WhiskeyPåFlaskeOpretWindow extends Stage {
         pane.setGridLinesVisible(false);
 
         lblNummer = new Label("Muligt Antal Flasker");
-        lblTotalNummer = new Label("Antal Flasker");
+        lblTotalNummer = new Label("Antal Flasker der ønskes tappet");
         lblFortyndelse = new Label("Fortyndelse i ml");
         lblLiter = new Label("Flaske Liter");
         lblNummerValue = new Label("...");
@@ -63,7 +63,7 @@ public class WhiskeyPåFlaskeOpretWindow extends Stage {
         hbx.getChildren().addAll(btnGodkend, btnAnnuller);
 
         vbx = new VBox(5);
-        vbx.getChildren().addAll(cbxWhisky, lblNummer, lblNummerValue, lblLiter, txfLiterValue, lblTotalNummer, txfTotalNummerValue, lblFortyndelse, txfFortyndelseValue, hbx);
+        vbx.getChildren().addAll(cbxWhisky, lblNummer, lblNummerValue, lblLiter, txfLiterValue, lblFortyndelse, txfFortyndelseValue, lblTotalNummer, txfTotalNummerValue, hbx);
         pane.add(vbx, 0, 0);
 
         lblNummer.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -72,6 +72,7 @@ public class WhiskeyPåFlaskeOpretWindow extends Stage {
         lblLiter.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
         txfLiterValue.textProperty().addListener((observable, oldValue, newValue) -> literChanged());
+        txfFortyndelseValue.textProperty().addListener((observable, oldValue, newValue) -> literChanged());
     }
     private void initData(){
         cbxWhisky.getItems().setAll(Storage.Storage.getWhiskyArrayList());
@@ -83,7 +84,11 @@ public class WhiskeyPåFlaskeOpretWindow extends Stage {
 
         try{Double.parseDouble(txfLiterValue.getText());
             lblNummerValue.setText(String.valueOf(
-                    Math.floor(cbxWhisky.getSelectionModel().getSelectedItem().getMuligeAntalFlasker(Double.parseDouble(txfLiterValue.getText())))));
+                    Math.floor(cbxWhisky.getSelectionModel().getSelectedItem().
+                            getMuligeAntalFlasker(
+                                    Double.parseDouble(txfLiterValue.getText()),
+                                    Double.parseDouble(txfFortyndelseValue.getText()) / 1000
+                            ))));
         }
         catch(NumberFormatException e){
             lblNummerValue.setText("...");

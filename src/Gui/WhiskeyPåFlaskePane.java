@@ -1,5 +1,6 @@
 package Gui;
 
+import Application.Model.Fad;
 import Application.Model.Whisky;
 import Application.Model.WhiskyPåFlaske;
 import Storage.Storage;
@@ -50,8 +51,6 @@ public class WhiskeyPåFlaskePane extends GridPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
         txfSearch = new TextField();
 
@@ -158,7 +157,7 @@ public class WhiskeyPåFlaskePane extends GridPane {
             lblFortyndelseVal.setText(String.valueOf(f.lblFortyndelse.getText()));
             lblRygeMaterialeVal.setText(w.getRygeMateriale());
             lblKornSortVal.setText(w.getKornsort());
-            lblFadVal.setText(w.getFade().toString());
+            lblFadVal.setText(w.getAktuelFad().getLeverandør());
             lblLiterDestilVal.setText(String.valueOf(Math.floor(w.getLiter())));
         }
     }
