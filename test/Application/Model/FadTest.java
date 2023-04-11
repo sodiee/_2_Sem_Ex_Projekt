@@ -1,4 +1,4 @@
-package Model;
+package Application.Model;
 
 import Application.Controller.Controller;
 import Application.Model.*;
