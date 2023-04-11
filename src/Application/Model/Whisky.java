@@ -25,17 +25,6 @@ public class Whisky extends Destillat {
         this.fad = getAktuelFad();
     }
 
-    public Whisky(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String rygeMateriale, String beskrivelse, String navn) {
-        super(medarbejder, liter, alkoholProcent, startDato, kornSort, rygeMateriale, beskrivelse);
-        this.navn = navn;
-        flasker = new ArrayList<>();
-        nummer++;
-        whiskyNummer = nummer;
-        this.alkoholProcent = getAlkoholprocentDestillat();
-        this.beskrivelse = getBeskrivelse();
-        this.fad = getAktuelFad();
-    }
-
     public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaske(int antal, double fortyndelseIMl) {
         double flaskeStørrelseML = 700;
         double muligtAntal = (((this.getLiter() * 1000) + (antal * fortyndelseIMl)) / flaskeStørrelseML);
