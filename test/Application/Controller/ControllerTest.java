@@ -19,6 +19,7 @@ class ControllerTest {
         Reol reol = Controller.createReol(lager, 3, 3);
         lager.addReol(reol);
         Hyldeplads hyldeplads = reol.getHylder().get(1).getHyldepladser().get(1);
+
         //Act
         Fad fad = Controller.createFad("Sherry distilleri, Lissabon", "Sherry", 1, 130, hyldeplads);
 
