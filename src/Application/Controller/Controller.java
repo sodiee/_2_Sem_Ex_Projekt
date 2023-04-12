@@ -89,7 +89,7 @@ public class Controller {
     //region Destillat
     //TODO: i stedet for at have 2 forskellige constructere, kunne man vel bare have én, hvor den uden indeholder en tom streng?
     public static Destillat createDestillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse, String rygeMateriale){
-        if (liter <= 0 || alkoholProcent < 0 || startDato.isEqual(LocalDate.now())) {
+        if (liter <= 0 || alkoholProcent < 0 || startDato.isAfter(LocalDate.now().plusDays(1))) {
             throw new IllegalArgumentException("Ugyldig data");
         } else {
             Destillat destillat = new Destillat(medarbejder, liter, alkoholProcent, startDato, kornSort, beskrivelse, rygeMateriale);
