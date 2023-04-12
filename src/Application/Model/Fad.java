@@ -1,7 +1,5 @@
 package Application.Model;
 
-
-
 import javafx.scene.control.Alert;
 import java.util.ArrayList;
 
@@ -71,11 +69,6 @@ public class Fad {
     }
 
     public Whisky createWhisky(String navn, Fad fad) {
-        /*if(destillat == null){
-            Alert alertConfirmation = new Alert(Alert.AlertType.ERROR);
-            alertConfirmation.setTitle("Null");
-            alertConfirmation.setHeaderText("ERROR: destillat == null");
-        } */
             double antalLiter = fad.opfyldtLiter - fad.beregnAngelShare(fad.getDestillat());
             Whisky whisky = new Whisky(destillat.getMedarbejder(), antalLiter, destillat.getAlkoholProcent(), destillat.getDatoForPåhldningPåFad(), destillat.getKornSort(), destillat.getBeskrivelse(), destillat.getRygeMateriale(), navn);
             return whisky;
@@ -122,11 +115,6 @@ public class Fad {
             tidligereDestillater.add(destillat);
             alder += destillat.getDestillatAge();
             this.destillat = null;
-        }
-        else {
-            Alert alertConfirmation = new Alert(Alert.AlertType.ERROR);
-            alertConfirmation.setTitle("Null");
-            alertConfirmation.setHeaderText("ERROR: destillat == null");
         }
     }
 

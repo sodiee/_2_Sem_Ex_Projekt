@@ -121,10 +121,7 @@ public class DestillatFærdiggørWindow extends Stage{
         } else if (option.get() == ButtonType.OK) {
 
             for(Fad fad : selectedItems){
-                fad.setOpfyldtLiter(fad.getStørrelseLiter()); //PROBLEM HER, DEN BLIVER 0
-                fad.setStatus(Status.DESTILLAT);
-                fad.setDestillat(destillat);
-                fad.getDestillat().setLiter(0);
+                destillat.hældDestillatPåfad(fad);
             }
             destillat.setDone(true);
             this.hide();

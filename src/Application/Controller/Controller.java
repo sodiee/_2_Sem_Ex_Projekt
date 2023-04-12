@@ -40,6 +40,9 @@ public class Controller {
         //Todo: Reoler, hylder, pladser, osv bliver ikke oprettet og sat ind i lageret? (lav prioritet)
         Lager lager = new Lager(reoler, hylder, pladsPåHylde, adresse);
         Storage.addLager(lager);
+        for (int i = 0; i < reoler; i++) {
+            createReol(lager, hylder, pladsPåHylde);
+        }
         return lager;
     }
     public static ArrayList<Lager> getLager(){

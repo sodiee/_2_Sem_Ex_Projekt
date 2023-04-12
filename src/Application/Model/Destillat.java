@@ -18,7 +18,6 @@ public class Destillat {
     private boolean isDone;
     private ArrayList<Fad> fade = new ArrayList<>();
 
-    //Uden røg
     public Destillat(String medarbejder, double liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String beskrivelse, String rygeMateriale) {
         this.medarbejder = medarbejder;
         this.liter = liter;
