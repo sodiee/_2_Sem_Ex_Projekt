@@ -7,7 +7,7 @@ public class Fad {
     private String leverandør;
     private String tidligereIndhold;
     private int antalGangeBrugt;
-    private static int nummer;
+    private static int lastNummer;
     private int tøndeNummer;
     private int størrelseLiter;
     private int opfyldtLiter = 0;
@@ -29,8 +29,8 @@ public class Fad {
         setHyldeplads(hyldeplads);
         alder = 0;
         status = Status.TOM;
-        tøndeNummer++;
-        nummer = tøndeNummer;
+        lastNummer++;
+        tøndeNummer = lastNummer;
     }
 
     public double beregnAngelShare(Destillat destillat) {
@@ -143,6 +143,10 @@ public class Fad {
         return leverandør;
     }
 
+    public int getTøndeNummer() {
+        return tøndeNummer;
+    }
+
     public void setLeverandør(String leverandør) {
         this.leverandør = leverandør;
     }
@@ -163,13 +167,6 @@ public class Fad {
         this.antalGangeBrugt = antalGangeBrugt;
     }
 
-    public int getNummer() {
-        return nummer;
-    }
-
-    public void setNummer(int nummer) {
-        this.nummer = nummer;
-    }
 
     public void setStørrelseLiter(int størrelseLiter) {
         this.størrelseLiter = størrelseLiter;
@@ -200,6 +197,6 @@ public class Fad {
     }
 
     public String toString() {
-        return "#" + nummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";
+        return "#" + tøndeNummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";
     }
 }
