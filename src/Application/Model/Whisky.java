@@ -41,7 +41,6 @@ public class Whisky extends Destillat {
         }
         return flasker;
     }
-    //endregion
 
     //region Rekursiv-metode
     public ArrayList<WhiskyPåFlaske> hældWhiskyPåFlaskeRekursivMetode(int antal, double fortyndelseIMl) {
@@ -69,7 +68,8 @@ public class Whisky extends Destillat {
     }
     //endregion
 
-    public double getMuligeAntalFlasker(Double flaskestørrelse){return liter/flaskestørrelse;}
+    public double getMuligeAntalFlasker(Double flaskestørrelse, double fortyndelse){
+        return getLiter() / (flaskestørrelse - fortyndelse);}
 
     public String getMedarbejder() {
         return super.getMedarbejder();
