@@ -174,8 +174,8 @@ public class DestillatOpretWindow extends Stage {
                             Double.parseDouble(txfAlkPro.getText()),
                             dpStartDato.getValue(),
                             txfKornSort.getText(),
-                            txfRygemateriale.getText(),
-                            txfBeskrivelse.getText());
+                            txfBeskrivelse.getText(),
+                            txfRygemateriale.getText());
                 }
                 //Hvis røg ikke er angivet
                 else if (txfRygemateriale.getLength() == 0) {
