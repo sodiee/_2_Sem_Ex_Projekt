@@ -75,7 +75,7 @@ class ControllerTest {
         //Act
         //Assert
         Exception forventet = assertThrows(IllegalArgumentException.class, () -> {
-            Controller.createDestillat("Bingo Dorthe", 100, 20, LocalDate.now(), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
+            Controller.createDestillat("Bingo Dorthe", 100, 20, LocalDate.now().plusDays(2), "Byg", "Whisky lavet på byg, whiskyen er rød", null);
         });
         assertEquals(forventet.getMessage(), "Ugyldig data");
     }
