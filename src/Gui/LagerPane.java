@@ -164,6 +164,7 @@ public class LagerPane extends GridPane {
     public void btnOpretLagerAction(){
         LagerOpretWindow lagerOpretWindow = new LagerOpretWindow();
         lagerOpretWindow.showAndWait();
+
         cbxLager.getItems().setAll(Storage.getLagerArrayList());
         cbxLager.getSelectionModel().selectLast();
     }
@@ -172,7 +173,6 @@ public class LagerPane extends GridPane {
         LagerRedigerWindow lagerRedigerWindow = new LagerRedigerWindow(cbxLager.getSelectionModel().getSelectedItem());
         lagerRedigerWindow.showAndWait();
         cbxLager.getItems().setAll(Storage.getLagerArrayList());
-        //TODO: sæt den til at vælge den man lige har redigeret? (lav prioritet)
         cbxLager.getSelectionModel().selectLast();
     }
     public void btnSletLagerAction(){

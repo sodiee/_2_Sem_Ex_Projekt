@@ -9,6 +9,15 @@ import java.util.ArrayList;
 public class Controller {
 
     //region Fad
+    /**
+     * Opretter et fad Objekt, som whisky lagres på
+     * @param leverandør fadets oprindelse
+     * @param tidligereIndhold det som før har været i fadet
+     * @param antalGangeBrugt hvor mange gange der har været alkohol i fadet
+     * @param størrelseLiter fadets kapacitet
+     * @param hyldeplads fadets lokation
+     * @return Fad objekt
+     */
     public static Fad createFad(String leverandør, String tidligereIndhold, int antalGangeBrugt, int størrelseLiter, Hyldeplads hyldeplads) {
         if (hyldeplads == null){
             throw new IllegalArgumentException("Hyldeplads må ikke være null");
@@ -24,8 +33,13 @@ public class Controller {
     }
     public static void deleteFad(Fad fad){Storage.deleteFad(fad);}
 
-    //TODO: virker ikke, returns null
+    /**
+     * Søger efter hvilket lagerhus fadet ligger på
+     * @param fad fadet der ønskes oprindelse af
+     * @return Lager objekt if not null
+     */
     public static Lager findLagerAfFad(Fad fad){
+        //TODO: virker ikke, returns null
         for(int i = 0; i < Storage.getLagerArrayList().size(); i++){
             if(Storage.getLagerArrayList().get(i).getReoler().contains(fad.getReol())){
                 return Storage.getLagerArrayList().get(i);
@@ -36,8 +50,15 @@ public class Controller {
     //endregion
 
     //region Lager
+    /**
+     * Opretter et lager objekt, som Reoler > Hylder > Hyldepladser > Fade, kan ligge på
+     * @param reoler Antal reoler lagerhuset skal have
+     * @param hylder Antal hylder på hver reol
+     * @param pladsPåHylde Antal pladser på en hylde
+     * @param adresse Adressen på lagerhuset
+     * @return Lager objektet
+     */
     public static Lager createLager(int reoler, int hylder, int pladsPåHylde, String adresse) {
-        //Todo: Reoler, hylder, pladser, osv bliver ikke oprettet og sat ind i lageret? (lav prioritet)
         Lager lager = new Lager(reoler, hylder, pladsPåHylde, adresse);
         Storage.addLager(lager);
         for (int i = 0; i < reoler; i++) {
@@ -53,6 +74,14 @@ public class Controller {
         //TODO: få den til at gøre noget ved alle de ting som har lageret associeret?
         Storage.getLagerArrayList().remove(lager);
     }
+
+    /**
+     * Opretter et Reol objekt, som ligger på lager-objekter, og indeholder hylder
+     * @param lager lageret som hylderne oprettes på
+     * @param antalHylder Antal af hylder til oprettelse for denne reol
+     * @param antalHyldepladser Antal hyldepladser for hver hylde
+     * @return Reol Objektet
+     */
     public static Reol createReol(Lager lager, int antalHylder, int antalHyldepladser){
         Reol reol = new Reol(lager.getReoler().size()+1, lager);
 
@@ -72,7 +101,7 @@ public class Controller {
 
     /**
      * Finder en tom hyldeplads på en reol, hvis det kan lade sig gøre
-     * @param reol
+     * @param reol Reol objektet som der ønskes undersøgt
      * @return hyldeplads, hvis en er ledig
      */
     public static Hyldeplads findTomHyldeplads(Reol reol){
@@ -90,7 +119,18 @@ public class Controller {
     //endregion
 
     //region Destillat
-    //TODO: i stedet for at have 2 forskellige constructere, kunne man vel bare have én, hvor den uden indeholder en tom streng?
+
+    /**
+     * Opretter et destillat objekt, der kan lagres på fad indtil det kan konverteres til whisky
+     * @param medarbejder Navnet på medarbjederen som producerer destillatet
+     * @param liter Antal Liter der er produceret
+     * @param alkoholProcent Alkohol koncentrationen
+     * @param startDato Dagen destillatet blev oprettet på
+     * @param kornSort Typen af korn alkohollen er oprettet af
+     * @param beskrivelse Diverse beskrivelse af destilleringen
+     * @param rygeMateriale Materialet brugt til at ryge destilleringen
+     * @return Destillat objektet
+     */
     public static Destillat createDestillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse, String rygeMateriale){
         if (liter <= 0 || alkoholProcent < 0 || startDato.isAfter(LocalDate.now().plusDays(1))) {
             throw new IllegalArgumentException("Ugyldig data");
@@ -124,6 +164,11 @@ public class Controller {
         Storage.deleteDestillat(destillat);
     }
 
+    /**
+     * Omdanner indholdet af et fad til at blive whisky, frem for destillat
+     * @param fad fadet hvis indhold skal ændres
+     * @param navn navnet på den nyoprettede whisky
+     */
     public static void convertToWhisky(Fad fad, String navn) {
         fad.convertToWhisky(navn);
         Whisky whisky = Controller.createWhisky(navn, fad);
@@ -161,15 +206,16 @@ public class Controller {
     //endregion
 
     //region Historik
-
     public static String getHistorik(WhiskyPåFlaske whiskyPåFlaske) {
         return whiskyPåFlaske.getHistorik();
     }
-
     //endregion
 
+    /**
+     * Opretter testdata til systemet
+     */
     public static void initStorage() {
-        Lager sønderhøj = createLager(2, 3, 3, "Sønderhøj 30");
+        Lager sønderhøj = createLager(0, 0, 0, "Sønderhøj 30");
         Lager sørenFrichsVej = createLager(3, 2, 2, "Søren Frichs Vej");
 
         Reol reol = createReol(sønderhøj, 5, 8);
@@ -179,10 +225,10 @@ public class Controller {
         Reol reol5 = createReol(sørenFrichsVej, 7, 8);
 
         Hylde hylde = reol.getHylder().get(0);
-        Hyldeplads hyldeplads1 = reol.getHylder().get(1).getHyldepladser().get(1); //new Hyldeplads(1,hylde);
-        Hyldeplads hyldeplads2 = reol.getHylder().get(1).getHyldepladser().get(1); //new Hyldeplads(2,hylde);
-        Hyldeplads hyldeplads3 = reol.getHylder().get(1).getHyldepladser().get(1); //new Hyldeplads(3,hylde);
-        Hyldeplads hyldeplads4 = reol.getHylder().get(1).getHyldepladser().get(1); //new Hyldeplads(4,hylde);
+        Hyldeplads hyldeplads1 = reol.getHylder().get(0).getHyldepladser().get(1); //new Hyldeplads(1,hylde);
+        Hyldeplads hyldeplads2 = reol.getHylder().get(1).getHyldepladser().get(2); //new Hyldeplads(2,hylde);
+        Hyldeplads hyldeplads3 = reol.getHylder().get(2).getHyldepladser().get(3); //new Hyldeplads(3,hylde);
+        Hyldeplads hyldeplads4 = reol.getHylder().get(3).getHyldepladser().get(4); //new Hyldeplads(4,hylde);
 
         Fad fad = createFad("Sherry distilleri, Lissabon", "Sherry", 1, 64, hyldeplads1);
         Fad fad1 = createFad("Bourbon distilleri, Texas", "Bourbon", 1, 500,  hyldeplads2);
@@ -190,7 +236,7 @@ public class Controller {
         Fad fad3 = createFad("Rødvin farm, Paris", "Rødvin", 1, 54,  hyldeplads4);
 
         Destillat destillat = createDestillat("John Dillermand", 500, 80.0, LocalDate.of(2022, 5, 20), "Rug", "Bedste Whiskey ever", null);
-        Destillat destillat2 = createDestillat("Bingo Dorte", 600, 60, LocalDate.of(2017, 2, 14), "Byg",  "I can't believe its not whiskey", "Strå");
+        Destillat destillat2 = createDestillat("Bingo Dorte", 600, 60, LocalDate.of(2017, 2, 14), "Byg",  "Benzin", "Strå");
 
         destillat.hældDestillatPåfad(fad1);
 

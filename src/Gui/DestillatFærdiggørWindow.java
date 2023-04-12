@@ -49,7 +49,6 @@ public class DestillatFærdiggørWindow extends Stage{
     }
 
     private void initGUI(GridPane pane){
-
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
@@ -88,9 +87,7 @@ public class DestillatFærdiggørWindow extends Stage{
         hbx1.getChildren().add(btnGodkend);
 
     }
-
     private void selectedFadChanged(){
-        //TODO: Kalder den korrekt, når der bliver valgt til eller fra?
         btnGodkend.setDisable(false);
         selectedItems = lvwFad.getSelectionModel().getSelectedItems();
         fadeLiter = 0;
@@ -109,7 +106,6 @@ public class DestillatFærdiggørWindow extends Stage{
         }
     }
     private void btnGodkendAction(){
-
         Alert alertConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
         alertConfirmation.setTitle("Hæld destillat på fad");
         alertConfirmation.setHeaderText("Er du sikker på at du vil hælde destilleringen på valgte fad, og smide " + (resterendeLiter-fadeLiter) + " overflødige liter ud?");

@@ -2,6 +2,7 @@ package Gui;
 
 import Application.Controller.Controller;
 import Application.Controller.ValidationController;
+import Application.Model.Lager;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -117,11 +118,13 @@ public class LagerOpretWindow extends Stage {
         }
 
         if (!exceptionCatched) {
-            Controller.createLager(
+
+           Lager lager =  Controller.createLager(
                     Integer.valueOf(txfAntalReoler.getText()),
                     Integer.valueOf(txfAntalHylderPrReol.getText()),
                     Integer.valueOf(txfAntalPladserPåHylde.getText()),
                     txfAdresse.getText());
+
             this.hide();
         }
 
@@ -201,39 +204,6 @@ public class LagerOpretWindow extends Stage {
                 alertIntNegative.setTitle("Negative Number");
                 alertIntNegative.setHeaderText(fieldName + " cannot be a negative number");
                 alertIntNegative.showAndWait();
-                return false;
-            } else {
-
-            }
-
-        }
-        return true;
-    }
-
-    public static Boolean validateDouble(String stringValue, String fieldName) {
-
-        if (stringValue.length() == 0) {
-            Alert alertIntEmpty = new Alert(Alert.AlertType.ERROR);
-            alertIntEmpty.setTitle("Empty Field");
-            alertIntEmpty.setHeaderText(fieldName + " is Empty!");
-            alertIntEmpty.showAndWait();
-            return false;
-        } else {
-            double value = -1;
-            try {
-                value = Double.parseDouble(stringValue.trim());
-            } catch (NumberFormatException exception) {
-                Alert alertDoubleNotNr = new Alert(Alert.AlertType.ERROR);
-                alertDoubleNotNr.setTitle("Not a number");
-                alertDoubleNotNr.setHeaderText(fieldName + " is not a number");
-                alertDoubleNotNr.showAndWait();
-                return false;
-            }
-            if (value < 0) {
-                Alert alertDoubleNegative = new Alert(Alert.AlertType.ERROR);
-                alertDoubleNegative.setTitle("Negative Number");
-                alertDoubleNegative.setHeaderText(fieldName + " cannot be a negative number");
-                alertDoubleNegative.showAndWait();
                 return false;
             } else {
 

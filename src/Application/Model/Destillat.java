@@ -32,24 +32,11 @@ public class Destillat {
         this.rygeMateriale = rygeMateriale;
     }
 
-    public void setDestillatNr(int destillatNr) {
-        this.destillatNr = destillatNr;
-    }
-
-    public double getLiterFraStart() {
-        return literFraStart;
-    }
     public void addFad(Fad fad){
         if(!fade.contains(fad)){
         fade.add(fad);
         fad.setDestillat(this);
     }}
-
-    public Destillat færdigørDestillat(Fad fad){
-        isDone = true;
-        hældDestillatPåfad(fad);
-        return this;
-    }
 
     public void hældDestillatPåfad(Fad fad){
         while(liter > 0) {
@@ -61,11 +48,10 @@ public class Destillat {
         }
     }
 
-    //Getters_____________________________________________________________________________________
+    //region Getters
     public ArrayList<Fad> getFade() {
         return fade;
     }
-
     public Fad getAktuelFad() {
         Fad fad = null;
         if (!fade.isEmpty()) {
@@ -73,7 +59,9 @@ public class Destillat {
         }
         return fad;
     }
-
+    public double getLiterFraStart() {
+        return literFraStart;
+    }
     public int getDestillatAge() {
         int now = LocalDate.now().getYear();
         return  now - this.datoForPåhldningPåFad.getYear();
@@ -84,79 +72,60 @@ public class Destillat {
     public String getMedarbejder() {
         return medarbejder;
     }
-
     public double getLiter() {
         return liter;
     }
-
     public double getAlkoholProcent() {
         return alkoholProcent;
     }
-
     public LocalDate getDatoForPåhldningPåFad() {
         return datoForPåhldningPåFad;
     }
-
-
-
     public String getKornSort() {
         return kornSort;
     }
-
     public String getRygeMateriale() {
         return rygeMateriale;
     }
-
     public String getBeskrivelse() {
         return beskrivelse;
     }
-
     public boolean isDone() {
         return isDone;
     }
-
     public int getObjectNummer() {
         return objectNummer;
     }
+    //endregion
 
-    //Setters_____________________________________________________________________________________
+    //region setters
     public void setMedarbejder(String medarbejder) {
         this.medarbejder = medarbejder;
     }
-
     public void setLiter(double liter) {
         this.liter = liter;
     }
-
     public void setAlkoholProcent(double alkoholProcent) {
         this.alkoholProcent = alkoholProcent;
     }
-
-    public void setDatoForPåhldningPåFad(LocalDate datoForPåhldningPåFad) { this.datoForPåhldningPåFad = datoForPåhldningPåFad;
-    }
-
+    public void setDatoForPåhldningPåFad(LocalDate datoForPåhldningPåFad) { this.datoForPåhldningPåFad = datoForPåhldningPåFad;}
     public void setKornSort(String kornSort) {
         this.kornSort = kornSort;
     }
-
     public void setRygeMateriale(String rygeMateriale) {
         this.rygeMateriale = rygeMateriale;
     }
-
     public void setBeskrivelse(String beskrivelse) {
         this.beskrivelse = beskrivelse;
     }
-
     public void setDone(boolean done) {
         isDone = done;
     }
-
     public void setFade(ArrayList<Fad> fade) {
         this.fade = fade;
     }
-
     public String toString(){
         return beskrivelse;
     }
-
+    //endregion
 }
