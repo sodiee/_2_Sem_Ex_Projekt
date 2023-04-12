@@ -125,10 +125,6 @@ public class WhiskeyPåFlaskePane extends GridPane {
         lblFad.setFont(font);
         lblLiterDestil.setFont(font);
         //endregion
-
-        //TODO: Insæt flere elementer i listviewen, så det virker (CellFactory shit)
-        //generate QR code med info om selve whiskien
-        //knap til historik for valgte flaske
     }
     private void initData(){
 
@@ -169,7 +165,7 @@ public class WhiskeyPåFlaskePane extends GridPane {
         ArrayList<FlaskeListCell> nyeFlasker = new ArrayList<>();
 
         for(WhiskyPåFlaske w : cbxWhisky.getSelectionModel().getSelectedItem().getFlasker()){
-            Flaske flaske = new Flaske(w.getNummer(), w.getAlkoholProcent(), w.getFortyndelseIML(), w.getLiter());
+            Flaske flaske = new Flaske(w.getNummer(), w.getWhisky().getAlkoholProcent(), w.getFortyndelseIML(), w.getLiter());
             FlaskeListCell flaskeListCell = new FlaskeListCell(flaske);
 
             nyeFlasker.add(flaskeListCell);
