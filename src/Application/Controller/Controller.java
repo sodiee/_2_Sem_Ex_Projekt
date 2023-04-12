@@ -61,7 +61,6 @@ public class Controller {
             Hylde hylde = new Hylde(i+1, reol);
             for(int j = 0; j < antalHyldepladser; j++){
                 Hyldeplads hyldeplads = new Hyldeplads(j + 1, hylde);
-                hyldeplads.setOptaget(false);
                 hylde.addHyldePlads(hyldeplads);
             }
             reol.addHylde(hylde);
@@ -90,7 +89,6 @@ public class Controller {
     //endregion
 
     //region Destillat
-    //TODO: i stedet for at have 2 forskellige constructere, kunne man vel bare have én, hvor den uden indeholder en tom streng?
     public static Destillat createDestillat(String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse, String rygeMateriale){
         if (liter <= 0 || alkoholProcent < 0 || startDato.isAfter(LocalDate.now().plusDays(1))) {
             throw new IllegalArgumentException("Ugyldig data");
@@ -150,7 +148,6 @@ public class Controller {
             Storage.addWhiskyPåFlaske(wpf);
         }
         setWhiskyPåFlaskePåLager(whiskyPåFlasker, lager);
-        System.out.println(whiskyPåFlasker);
         return whiskyPåFlasker;
     }
     public static void setWhiskyPåFlaskePåLager(ArrayList<WhiskyPåFlaske> flasker, Lager lager) {

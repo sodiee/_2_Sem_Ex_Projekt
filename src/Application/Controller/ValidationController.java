@@ -68,6 +68,7 @@ public class ValidationController {
         }
     }
 
+    /*
     private static Boolean validateString(String stringValue, String fieldName, Boolean allowSpace, Boolean allowSymbol) {
 
         //Hvis strengen er tom
@@ -183,7 +184,7 @@ public class ValidationController {
 
         }
         return true;
-    }
+    } */
 
 
 }
