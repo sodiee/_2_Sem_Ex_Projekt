@@ -10,7 +10,7 @@ public class Controller {
 
     //region Fad
     /**
-     * Opretter et fad Objekt, som whisky lagres på
+     * Opretter et fad Objekt, som whisky lagres på, og tilføjes til storage
      * @param leverandør fadets oprindelse
      * @param tidligereIndhold det som før har været i fadet
      * @param antalGangeBrugt hvor mange gange der har været alkohol i fadet
@@ -51,7 +51,8 @@ public class Controller {
 
     //region Lager
     /**
-     * Opretter et lager objekt, som Reoler > Hylder > Hyldepladser > Fade, kan ligge på
+     * Opretter et lager objekt, som Reoler > Hylder > Hyldepladser > Fade, kan ligge på.
+     * Tilføjes til storage.
      * @param reoler Antal reoler lagerhuset skal have
      * @param hylder Antal hylder på hver reol
      * @param pladsPåHylde Antal pladser på en hylde
@@ -121,7 +122,8 @@ public class Controller {
     //region Destillat
 
     /**
-     * Opretter et destillat objekt, der kan lagres på fad indtil det kan konverteres til whisky
+     * Opretter et destillat objekt, der kan lagres på fad indtil det kan konverteres til whisky,
+     * og lagres på Storage
      * @param medarbejder Navnet på medarbjederen som producerer destillatet
      * @param liter Antal Liter der er produceret
      * @param alkoholProcent Alkohol koncentrationen
@@ -140,7 +142,6 @@ public class Controller {
             return destillat;
         }
     }
-
     public static ArrayList<Destillat> getDestillat(){return Storage.getDestillatArrayList();}
     public static ArrayList<Fad> getDestillatFade(Destillat destillat){return destillat.getFade();}
     public static void redigerDestillat(Destillat destillat, String medarbejder, int liter, double alkoholProcent, LocalDate startDato, String kornSort, String beskrivelse){
@@ -170,7 +171,7 @@ public class Controller {
      * @param navn navnet på den nyoprettede whisky
      */
     public static void convertToWhisky(Fad fad, String navn) {
-        fad.convertToWhisky(navn);
+        fad.convertToWhisky();
         Whisky whisky = Controller.createWhisky(navn, fad);
         fad.removeDestillat();
         fad.addDestilatTofad(whisky);
@@ -178,6 +179,13 @@ public class Controller {
     //endregion
 
     //region Whisky
+
+    /**
+     * Opretter et whisky opbjekt ud fra et fads destillat indhold, og tilføjes til storage
+     * @param navn navnet på den færdige whisky
+     * @param fad fadet som aftappes
+     * @return whisky objektet
+     */
     private static Whisky createWhisky(String navn, Fad fad) {
         if (fad.getDestillat() != null) {
             Whisky whisky = fad.createWhisky(navn,fad);
@@ -188,7 +196,15 @@ public class Controller {
             throw new NullPointerException("Der er ikke knyttet et destillat til dette fad, så konvertering til whisky kan ikke lade sig gøre.");
         }
     }
-    public static void deleteWhisky(Whisky whisky){Storage.removeWhisky(whisky);}
+
+    /**
+     * Opretter whiskyflaske objekter, der aftappes fra et whisky object. Tilføjes til storage
+     * @param whisky Whiskien der ønskes aftappet
+     * @param antal antallet af flasker der skal oprettes
+     * @param fortyndelseIML eventuel fortyndelse (0 hvis ingen)
+     * @param lager lageret fadet ligger på
+     * @return returnerer en array list af de oprettede flasker
+     */
     public static ArrayList<WhiskyPåFlaske> createWhiskyPåFlaske(Whisky whisky, int antal, double fortyndelseIML, Lager lager) {
         ArrayList<WhiskyPåFlaske> whiskyPåFlasker = whisky.hældWhiskyPåFlaskeRekursivMetode(antal, fortyndelseIML);
         for(WhiskyPåFlaske wpf : whiskyPåFlasker) {
@@ -198,14 +214,27 @@ public class Controller {
         System.out.println(whiskyPåFlasker);
         return whiskyPåFlasker;
     }
+
+    /**
+     * Angiver hvor flaskerne skal være på lager
+     * @param flasker flaskerne der ønskes opmagasineret
+     * @param lager lageret der ønskes at bruges
+     */
     public static void setWhiskyPåFlaskePåLager(ArrayList<WhiskyPåFlaske> flasker, Lager lager) {
         for (WhiskyPåFlaske wpf : flasker) {
             wpf.setLager(lager);
         }
     }
+    public static void deleteWhisky(Whisky whisky){Storage.removeWhisky(whisky);}
     //endregion
 
     //region Historik
+
+    /**
+     * Metode som bruges til at udskrive en Whisky-flaskes fulde historik fra korn til produkt
+     * @param whiskyPåFlaske flasken der ønskes historik fra
+     * @return String - Historikken
+     */
     public static String getHistorik(WhiskyPåFlaske whiskyPåFlaske) {
         return whiskyPåFlaske.getHistorik();
     }

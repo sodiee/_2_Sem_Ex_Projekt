@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Destillat {
-
+    //region Global Variables
     private int objectNummer;
     private static int destillatNr = 0;
     private String medarbejder;
@@ -17,7 +17,18 @@ public class Destillat {
     private String beskrivelse;
     private boolean isDone;
     private ArrayList<Fad> fade = new ArrayList<>();
+    //endregion
 
+    /**
+     * Destillat Model-Objekt, som oprettes ud fra de givne parametre
+     * @param medarbejder Navnet på medarbjederen som producerer destillatet
+     * @param liter Antal Liter der er produceret
+     * @param alkoholProcent Alkohol koncentrationen
+     * @param datoForPåhldningPåFad Dagen destillatet blev oprettet på
+     * @param kornSort Typen af korn alkohollen er oprettet af
+     * @param beskrivelse Diverse beskrivelse af destilleringen
+     * @param rygeMateriale Materialet brugt til at ryge destilleringen
+     */
     public Destillat(String medarbejder, double liter, double alkoholProcent, LocalDate datoForPåhldningPåFad, String kornSort, String beskrivelse, String rygeMateriale) {
         this.medarbejder = medarbejder;
         this.liter = liter;
@@ -32,12 +43,20 @@ public class Destillat {
         this.rygeMateriale = rygeMateriale;
     }
 
+    /**
+     * tilknytter et fad til destillat, så man kan se hvilke tønder indholdet er lagt ud på
+     * @param fad fadet som tilknyttes
+     */
     public void addFad(Fad fad){
         if(!fade.contains(fad)){
         fade.add(fad);
         fad.setDestillat(this);
     }}
 
+    /**
+     * Overfører indholdet fra destillat over på et givent fad, så længe der er plads.
+     * @param fad fadet som opfyldes
+     */
     public void hældDestillatPåfad(Fad fad){
         while(liter > 0) {
             addFad(fad);

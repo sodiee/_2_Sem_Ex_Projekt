@@ -13,6 +13,13 @@ public class WhiskyPåFlaske {
 
     private Lager lager;
 
+    /**
+     * Opretter et whisky model-objekt, ud fra de angivne parametre
+     * @param nummer nummeret på flasken
+     * @param totalNummer nummer af hvor mange flasker eksisterer
+     * @param fortyndelseIML fortyndelse i ml
+     * @param whisky whiskien der aftappes fra
+     */
     public WhiskyPåFlaske(int nummer, int totalNummer, double fortyndelseIML, Whisky whisky) {
         this.nummer = nummer;
         this.totalNummer = totalNummer;
@@ -57,6 +64,10 @@ public class WhiskyPåFlaske {
 
     public double getAlkoholProcent() {return AlkoholProcent;}
 
+    /**
+     * En metode som kan give historik og al information vedrørende en whiskyflaske
+     * @return En streng af alle informationer. Meget lang
+     */
     public String getHistorik() {
         String navn = whisky.getNavn() + " ";
         String nummer = String.valueOf(getNummer()) + "";
@@ -74,6 +85,10 @@ public class WhiskyPåFlaske {
         return "****" + "\nNavn: " + navn + "\nNummer: " + nummer + "/" + totalNummer + "\nAlkoholprocent: " + alkoholProcent + "\nBeskrivelse: " + beskrivelse + "\nLiter: " + liter + "\nFortyndelse i ML: " + fortyndelseIML + "\nRygemateriale: " + rygeMateriale + "\nKornsort: " + kornSort + "\nFad: " + fad + "\nLeverandør: " + leverandør + "\n" + "LiterPåOprindeligDestillat: " + literPåOprindeligDestillat + "\n******";
     }
 
+    /**
+     *
+     * @return "Flaske numer: + nummer + / + totalNummer
+     */
     @Override
     public String toString() {
         return "Flaske nummer " + nummer + "/" + totalNummer;
