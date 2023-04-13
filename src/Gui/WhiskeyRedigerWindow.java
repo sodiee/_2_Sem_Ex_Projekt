@@ -71,7 +71,6 @@ public class WhiskeyRedigerWindow extends Stage {
 
     }
     private void godkendAction(){
-        //TODO:
     }
     private void annullerAction(){
         this.hide();

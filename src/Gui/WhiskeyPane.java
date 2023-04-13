@@ -127,7 +127,6 @@ public class WhiskeyPane extends BorderPane {
         cbxWhisky.getItems().setAll(Storage.getWhiskyArrayList());
         cbxWhisky.getSelectionModel().selectFirst();
 
-        //tag whiskiens nummer 1-5, derefter reset int og tag billeder 1-5 igen
         ObservableList<Image> images = FXCollections.observableArrayList(image1, image2, image3, image4, image5);
 
         int imgselect = cbxWhisky.getSelectionModel().getSelectedIndex();
@@ -159,9 +158,6 @@ public class WhiskeyPane extends BorderPane {
             lblAlkProValue.setText(String.valueOf(whiskyPåFlaske.getWhisky().getAlkoholProcent()));
             lblBeskrivelseValue.setText(whiskyPåFlaske.getWhisky().getBeskrivelse());
             if(whiskyPåFlaske.getLager() != null){lblLagerValue.setText(whiskyPåFlaske.getLager().toString());}
-        }
-        else{
-            //hvis hvis der ikke er nogen flasker oprettet af whiskien
         }
     }
     private void clearFields(){

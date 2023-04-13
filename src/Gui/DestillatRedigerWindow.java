@@ -109,7 +109,6 @@ public class DestillatRedigerWindow extends Stage {
 
     private void redigerAction() {
 
-        //OBS: pas på vedr redigering at den er opdateret korret som med eller uden røg
         String stringValue = txfMedarbejder.getText();
         String fieldName = lblMedarbejder.getText();
         Boolean allowSpace = true;

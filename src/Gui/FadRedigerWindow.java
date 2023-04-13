@@ -33,7 +33,6 @@ public class FadRedigerWindow extends Stage {
         this.setScene(scene);
         this.fad = fad;
         this.initData();
-        //this.setHeight(300);
     }
 
     private void initContent(GridPane pane) {

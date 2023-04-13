@@ -33,7 +33,6 @@ public class DestillatPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
         initGUI();
-
     }
     private void initGUI(){
 
@@ -131,7 +130,6 @@ public class DestillatPane extends GridPane {
             lvwDestilleringer.getItems().clear();
         }
 
-
         if(cbxStatus.getSelectionModel().getSelectedItem() == "Historiske Destillater"){
             for(Destillat destillat : Controller.getDestillat()){
                 if(destillat.isDone()){
@@ -155,7 +153,6 @@ public class DestillatPane extends GridPane {
 
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
 
-        //indsæt information omkring valgte destillat
         if (destillat != null){
             lblNr2.setText(String.valueOf(destillat.getObjectNummer()));
             lblMedarbejder2.setText(destillat.getMedarbejder());
@@ -173,7 +170,6 @@ public class DestillatPane extends GridPane {
             lblIsDone2.setText(String.valueOf(destillat.isDone()));
         }
 
-        //aktiver buttons, da de er disabled fra start
         btnSletDestillering.setDisable(false);
         btnRedigerDestillering.setDisable(false);
         btnOpretDestillering.setDisable(false);
@@ -222,7 +218,6 @@ public class DestillatPane extends GridPane {
         if(!destillat.isDone()){
             DestillatFærdiggørWindow destillatFærdiggørWindow = new DestillatFærdiggørWindow(destillat);
             destillatFærdiggørWindow.showAndWait();
-            //lvwDestilleringer.getItems().setAll(Controller.getDestillat());
             updateControls();
             selectedStateChanged();
             lvwDestilleringer.getSelectionModel().selectFirst();

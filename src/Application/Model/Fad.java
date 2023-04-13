@@ -190,4 +190,5 @@ public class Fad {
     public String toString() {
         return "#" + tøndeNummer + " " + " fra " + leverandør + "     " + opfyldtLiter + " / " + størrelseLiter + " L";
     }
+
 }

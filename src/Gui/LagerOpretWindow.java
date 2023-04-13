@@ -26,10 +26,8 @@ public class LagerOpretWindow extends Stage {
         this.setTitle("Opret Lager");
         GridPane pane = new GridPane();
         this.initGUI(pane);
-
         Scene scene = new Scene(pane);
         this.setScene(scene);
-
     }
 
     public void initGUI(GridPane pane) {

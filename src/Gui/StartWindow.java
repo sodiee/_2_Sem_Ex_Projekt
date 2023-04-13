@@ -70,6 +70,7 @@ public class StartWindow extends Application {
         tabWhisky.setContent(whiskeyPane);
         tabWhisky.setOnSelectionChanged(event -> whiskeyPane.updateControls());
 
+        //WhiskyFlaskePane
         Tab tabWhiskyFlasker = new Tab("Whisky Flasker");
         tabPane.getTabs().add(tabWhiskyFlasker);
         WhiskeyPåFlaskePane whiskeyPåFlaskePane = new WhiskeyPåFlaskePane();

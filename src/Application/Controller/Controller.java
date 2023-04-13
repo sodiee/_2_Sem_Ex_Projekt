@@ -118,7 +118,6 @@ public class Controller {
     //endregion
 
     //region Destillat
-
     /**
      * Opretter et destillat objekt, der kan lagres på fad indtil det kan konverteres til whisky,
      * og lagres på Storage

@@ -35,7 +35,6 @@ public class FadMixWindow extends Stage {
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
         this.setScene(scene);
-
         this.fad = fad;
         this.resterendeLiter = fad.getOpfyldtLiter();
         this.initGUI(pane);
@@ -49,9 +48,7 @@ public class FadMixWindow extends Stage {
         lvwFad = new ListView<>();
         pane.add(lvwFad, 1, 1);
         for (Fad fad : Storage.getFadArrayList()){
-
             lvwFad.getItems().add(fad);
-
         }
 
         ChangeListener<Fad> listener1 = (ov, oldCompny, newCompany) -> this.selectedFadChanged();
@@ -99,9 +96,7 @@ public class FadMixWindow extends Stage {
         }
     }
 
-    private void selectedFadChanged(){
-
-    }
+    private void selectedFadChanged(){}
 
     private void btnGodkendAction(){this.hide();}
 

@@ -126,8 +126,5 @@ public class DestillatFærdiggørWindow extends Stage{
         } else {
 
         }
-
     }
-
-
 }

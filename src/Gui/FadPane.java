@@ -153,7 +153,7 @@ public class FadPane extends GridPane {
 
         LblTidligereIndholdValue.setText(selectedFad.getTidligereIndhold());
         lblAntalGangeBrugtValue.setText(String.valueOf(selectedFad.getAntalGangeBrugt()));
-        //lblLagerValue.setText(selectedFad.getLager().toString());
+        //lblLagerValue.setText(Controller.findLagerAfFad(selectedFad).toString());
         lblAlderValue.setText(String.valueOf(selectedFad.getAlder()));
         if (selectedFad.getDestillat() != null) {
             lblDestillatValue.setText("Destillat #" + String.valueOf(selectedFad.getDestillat().getObjectNummer()));
@@ -277,9 +277,8 @@ public class FadPane extends GridPane {
                 alertTom.setHeaderText("Dit angivet navn er tomt. Destillatet bliver ikke konverteret");
                 alertTom.showAndWait()
                 ;return;}
-            //Result present => OK was pressed
+
             Controller.convertToWhisky(lvwFad.getSelectionModel().getSelectedItem(), result.get());
-            //lvwFad.getSelectionModel().getSelectedItem().removeDestillat(txfWhiskyNavnValue.getText());
             lvwFad.getItems().clear();
             lvwFad.getItems().addAll(Storage.getFadArrayList());
         }

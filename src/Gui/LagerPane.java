@@ -74,8 +74,6 @@ public class LagerPane extends GridPane {
 
         //region Add nodes
         this.add(cbxLager, 0, 1);
-//        this.add(lblReol, 0, 2);
-//        this.add(lblFadInfo, 1, 5);
         this.add(hbxButtons, 0, 6);
         //endregion
 

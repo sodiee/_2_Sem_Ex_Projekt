@@ -34,7 +34,6 @@ public class FadOpretWindow extends Stage {
         this.initContent(pane);
         Scene scene = new Scene(pane);
         this.setScene(scene);
-        //this.setHeight(300);
     }
 
     private void initContent(GridPane pane) {
@@ -90,14 +89,9 @@ public class FadOpretWindow extends Stage {
 
         cbxReol = new ComboBox<>();
         pane.add(cbxReol, 1, 5);
-
-
-
     }
 
-    private void onLagerChanged(){
-        cbxReol.getItems().setAll(cbbLager.getSelectionModel().getSelectedItem().getReoler());
-    }
+    private void onLagerChanged(){cbxReol.getItems().setAll(cbbLager.getSelectionModel().getSelectedItem().getReoler());}
 
     private void canAction() {
         this.hide();
