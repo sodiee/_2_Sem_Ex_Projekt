@@ -47,7 +47,6 @@ public class FadPane extends GridPane {
         this.initData();
     }
     private void initGUI() {
-        //TODO: listview kun så stor som antallet af tidligere destillater (lav prioritet)
         //region image
         try{
             InputStream stream = new FileInputStream("resources/barrel.png");
@@ -280,7 +279,6 @@ public class FadPane extends GridPane {
                 ;return;}
             //Result present => OK was pressed
             Controller.convertToWhisky(lvwFad.getSelectionModel().getSelectedItem(), result.get());
-            //TODO: skal nedenstående være udkommateret? (mellem prioritet)
             //lvwFad.getSelectionModel().getSelectedItem().removeDestillat(txfWhiskyNavnValue.getText());
             lvwFad.getItems().clear();
             lvwFad.getItems().addAll(Storage.getFadArrayList());

@@ -96,7 +96,6 @@ public class WhiskeyPåFlaskeOpretWindow extends Stage {
 
     }
     private void godkendAction(){
-        //TODO:
     }
     private void annullerAction(){
         this.hide();

@@ -35,8 +35,6 @@ public class DestillatPane extends GridPane {
         initGUI();
 
     }
-
-    //TODO: Gør således at beskrivelsesfeltet laver ny linje, i stedet for at køre uendeligt til højre
     private void initGUI(){
 
         cbxStatus = new ComboBox(cbxValues);
@@ -179,17 +177,6 @@ public class DestillatPane extends GridPane {
         btnSletDestillering.setDisable(false);
         btnRedigerDestillering.setDisable(false);
         btnOpretDestillering.setDisable(false);
-
-        //Gør således man ikke kan trykke "Færdiggør" eller "Redigér" på et destillat der allerede er fordelt på fad
-        //TODO: skal man ikke kunne slette færdiggørede destillater?
-        /**if (!destillat.isDone() && destillat != null){
-            btnDone.setDisable(true);
-            btnRedigerDestillering.setDisable(true);
-        }
-        else if (destillat.isDone()){
-            btnDone.setDisable(false);
-            btnRedigerDestillering.setDisable(false);
-        }**/
     }
 
 
@@ -230,7 +217,6 @@ public class DestillatPane extends GridPane {
     }
 
     private void btnDoneAction(){
-        //TODO: Evt gøre så "færdgjort bliver rettet uden at skulle markere igen
         Destillat destillat = lvwDestilleringer.getSelectionModel().getSelectedItem();
         if(destillat == null){return;}
         if(!destillat.isDone()){

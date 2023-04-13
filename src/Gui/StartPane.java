@@ -61,8 +61,6 @@ public class StartPane extends GridPane {
 
         this.add(imageView, 0, 0);
         this.add(imageView2, 0, 1);
-
-        //TODO: måske fjern "DMS", eller gør det en anden font, eller et eller andet
     }
 
     public void updateControls() {

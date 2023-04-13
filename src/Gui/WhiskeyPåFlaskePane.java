@@ -160,7 +160,6 @@ public class WhiskeyPåFlaskePane extends GridPane {
     private void  cbxWhiskyChanged(){
         if(cbxWhisky.getSelectionModel().getSelectedItem() == null){return;}
         if(lvwFlasker == null){return;}
-        //TODO: gør så de kun viser flasker fra den rigtige whisky
 
         ArrayList<FlaskeListCell> nyeFlasker = new ArrayList<>();
 
@@ -232,8 +231,6 @@ public class WhiskeyPåFlaskePane extends GridPane {
             this.setStyle("-fx-background-color: transparent");
 
             TilePane node = new TilePane(Orientation.VERTICAL, 55, 50, imageView, lblNr, lblAlkPro, lblFortyndelse, lblStørrelse);
-
-            //TODO: centrering virker ikke (lav prioritet)
             TilePane.setAlignment(node, Pos.BASELINE_CENTER);
             setGraphic(node);
         }

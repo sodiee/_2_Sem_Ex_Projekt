@@ -103,12 +103,6 @@ public class FadMixWindow extends Stage {
 
     }
 
-    private void btnGodkendAction(){
-
-        //TODO: Hæld whiskien over på et andet fad
-
-            this.hide();
-
-    }
+    private void btnGodkendAction(){this.hide();}
 
 }

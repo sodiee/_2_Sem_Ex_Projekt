@@ -39,7 +39,6 @@ public class Controller {
      * @return Lager objekt if not null
      */
     public static Lager findLagerAfFad(Fad fad){
-        //TODO: virker ikke, returns null
         for(int i = 0; i < Storage.getLagerArrayList().size(); i++){
             if(Storage.getLagerArrayList().get(i).getReoler().contains(fad.getReol())){
                 return Storage.getLagerArrayList().get(i);
@@ -72,7 +71,6 @@ public class Controller {
     }
 
     public static void deleteLager(Lager lager){
-        //TODO: få den til at gøre noget ved alle de ting som har lageret associeret?
         Storage.getLagerArrayList().remove(lager);
     }
 

@@ -17,7 +17,6 @@ public class StartWindow extends Application {
     }
     @Override
     public void start(Stage stage) {
-        //TODO: Nogengange starter programmet med forkert størrelse? (Høj prioritet)
         stage.setTitle("Sall Whisky");
         BorderPane pane = new BorderPane();
         this.initContent(pane);

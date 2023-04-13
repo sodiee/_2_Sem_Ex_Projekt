@@ -66,7 +66,6 @@ public class DestillatFærdiggørWindow extends Stage{
         ChangeListener<Fad> listener1 = (ov, oldCompny, newCompany) -> this.selectedFadChanged();
         lvwFad.getSelectionModel().selectedItemProperty().addListener(listener1);
         lvwFad.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        //TODO: klikker man bare på et element, eller skal man holde shift nede?
 
         lblResterende = new Label("Resterende Liter:");
         lblResterende.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
