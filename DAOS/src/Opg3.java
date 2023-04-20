@@ -49,7 +49,8 @@ public class Opg3 {
             statement.executeUpdate();
             System.out.println("Fad er sat på hylde " + hylde);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            if (e.getErrorCode() == 50000)
+            System.out.println("Denne hylde er desværre fyldt.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
