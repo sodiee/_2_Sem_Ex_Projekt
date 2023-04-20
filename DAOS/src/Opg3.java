@@ -38,8 +38,6 @@ public class Opg3 {
             String alder = inLine.readLine();
             System.out.print("Indtast hyldenummer: ");
             String hylde = inLine.readLine();
-            System.out.print("Indtast status på fad(Skal være 'Tomt', 'Destillat' eller 'Whisky': ");
-            String status = inLine.readLine();
 
             // Execute Statement
             statement.setString(1, leverandør.trim());
@@ -48,12 +46,8 @@ public class Opg3 {
             statement.setInt(4, Integer.parseInt(opfyldtLiter.trim()));
             statement.setInt(5, Integer.parseInt(alder.trim()));
             statement.setInt(6, Integer.parseInt(hylde.trim()));
-            statement.setString(7, status.trim());
-            ResultSet rs = statement.executeQuery(sql);
-            int hyldeIndsat = rs.getInt("hyldeNr");
-            int reolIndsat = rs.getInt("reolNr");
-            System.out.println("Fad indsat på reol " + reolIndsat + "hylde " + hyldeIndsat + ".");
-
+            statement.executeUpdate();
+            System.out.println("Fad er sat på hylde " + hylde);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
