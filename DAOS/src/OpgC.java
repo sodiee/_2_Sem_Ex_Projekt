@@ -3,10 +3,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Opg3 {
+public class OpgC {
     //6. Denne opgave består af tre delopgaver.
     /*Programmerne skal indeholde adgang til databasen via JDBC og en meget simpel brugergrænseflade
     (denne brugergrænseflade vil dog ikke være genstand for bedømmelse – det tilrådes meget, meget stærkt at lave en konsol-applikation).

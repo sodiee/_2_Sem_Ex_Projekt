@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 
-public class Opg2 {
+public class OpgB {
     //6. Denne opgave består af tre delopgaver.
     /*Programmerne skal indeholde adgang til databasen via JDBC og en meget simpel brugergrænseflade
     (denne brugergrænseflade vil dog ikke være genstand for bedømmelse – det tilrådes meget, meget stærkt at lave en konsol-applikation).
