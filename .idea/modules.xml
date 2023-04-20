@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DAOS/DAOS.iml" filepath="$PROJECT_DIR$/DAOS/DAOS.iml" />
       <module fileurl="file://$PROJECT_DIR$/_2_Sem_Ex_Projekt.iml" filepath="$PROJECT_DIR$/_2_Sem_Ex_Projekt.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
