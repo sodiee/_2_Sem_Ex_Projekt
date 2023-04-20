@@ -21,7 +21,7 @@ public class Opg2 {
             BufferedReader inLine = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Hvilket medarbejderId vil du søge efter?");
             String ønsketMedarbejderId = inLine.readLine();
-            String sql = "SELECT M.medarbejderId, COUNT(Dling.newMakenummer) AS antalDestilleringer, SUM(Dling.liter) AS samletLiter FROM Medarbejder M INNER JOIN DestilleringMedarbejder DM ON M.medarbejderId = DM.medarbejderId INNER JOIN Destillering Dling ON Dling.newMakenummer = DM.newMakenummer WHERE M.medarbejderId = " + ønsketMedarbejderId + " GROUP BY M.medarbejderId";
+            String sql = "SELECT M.medarbejderId, COUNT(Dling.newMakenummer) AS antalDestilleringer, SUM(Dling.liter) AS samletLiter FROM Medarbejder M INNER JOIN Destillering Dling ON Dling.medarbejderId = M.medarbejderId WHERE M.medarbejderId = " + ønsketMedarbejderId +  "GROUP BY M.medarbejderId";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -38,9 +38,15 @@ public class Opg2 {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (e.getErrorCode() == 50000) {
+                System.out.println(e.getMessage());
+            } else if (e.getErrorCode() == 547) {
+                System.out.println("Fejl: 547 " + e.getMessage());
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Fejl:  " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Fejl: Forkert indtastet input, det skal være et tal " + e.getMessage());
         }
     }
 }

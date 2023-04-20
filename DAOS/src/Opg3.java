@@ -49,10 +49,15 @@ public class Opg3 {
             statement.executeUpdate();
             System.out.println("Fad er sat på hylde " + hylde);
         } catch (SQLException e) {
-            if (e.getErrorCode() == 50000)
-            System.out.println("Denne hylde er desværre fyldt.");
+            if (e.getErrorCode() == 50000) {
+                System.out.println(e.getMessage());
+            } else if (e.getErrorCode() == 547) {
+                System.out.println("Fejl: 547 " + e.getMessage());
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Fejl:  " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Fejl: Forkert indtastet input, det skal være et tal " + e.getMessage());
         }
 
     }
